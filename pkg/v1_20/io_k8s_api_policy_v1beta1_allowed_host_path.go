@@ -20,10 +20,10 @@ type IoK8sAPIPolicyV1beta1AllowedHostPath struct {
 	// pathPrefix is the path prefix that the host volume must match. It does not support `*`. Trailing slashes are trimmed when validating the path prefix with a host path.
 	//
 	// Examples: `/foo` would allow `/foo`, `/foo/` and `/foo/bar` `/foo` would not allow `/food` or `/etc/foo`
-	PathPrefix string `json:"pathPrefix,omitempty"`
+	PathPrefix string `json:"pathPrefix,omitempty" json,yaml:"pathPrefix,omitempty"`
 
 	// when set to true, will allow host volumes matching the pathPrefix only if all volume mounts are readOnly.
-	ReadOnly bool `json:"readOnly,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" json,yaml:"readOnly,omitempty"`
 }
 
 // Validate validates this io k8s api policy v1beta1 allowed host path

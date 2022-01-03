@@ -20,11 +20,11 @@ import (
 type IoK8sAPICoreV1TCPSocketAction struct {
 
 	// Optional: Host name to connect to, defaults to the pod IP.
-	Host string `json:"host,omitempty"`
+	Host string `json:"host,omitempty" json,yaml:"host,omitempty"`
 
 	// Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.
 	// Required: true
-	Port *IoK8sApimachineryPkgUtilIntstrIntOrString `json:"port"`
+	Port *IoK8sApimachineryPkgUtilIntstrIntOrString `json:"port" json,yaml:"port"`
 }
 
 // Validate validates this io k8s api core v1 TCP socket action

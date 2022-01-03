@@ -19,7 +19,7 @@ import (
 type IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceValidation struct {
 
 	// openAPIV3Schema is the OpenAPI v3 schema to use for validation and pruning.
-	OpenAPIV3Schema *IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaProps `json:"openAPIV3Schema,omitempty"`
+	OpenAPIV3Schema *IoK8sApiextensionsApiserverPkgApisApiextensionsV1JSONSchemaProps `json:"openAPIV3Schema,omitempty" json,yaml:"openAPIV3Schema,omitempty"`
 }
 
 // Validate validates this io k8s apiextensions apiserver pkg apis apiextensions v1 custom resource validation

@@ -21,17 +21,17 @@ type IoK8sAPIAutoscalingV2beta1ContainerResourceMetricSource struct {
 
 	// container is the name of the container in the pods of the scaling target
 	// Required: true
-	Container *string `json:"container"`
+	Container *string `json:"container" json,yaml:"container"`
 
 	// name is the name of the resource in question.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 
 	// targetAverageUtilization is the target value of the average of the resource metric across all relevant pods, represented as a percentage of the requested value of the resource for the pods.
-	TargetAverageUtilization int32 `json:"targetAverageUtilization,omitempty"`
+	TargetAverageUtilization int32 `json:"targetAverageUtilization,omitempty" json,yaml:"targetAverageUtilization,omitempty"`
 
 	// targetAverageValue is the target value of the average of the resource metric across all relevant pods, as a raw value (instead of as a percentage of the request), similar to the "pods" metric source type.
-	TargetAverageValue IoK8sApimachineryPkgAPIResourceQuantity `json:"targetAverageValue,omitempty"`
+	TargetAverageValue IoK8sApimachineryPkgAPIResourceQuantity `json:"targetAverageValue,omitempty" json,yaml:"targetAverageValue,omitempty"`
 }
 
 // Validate validates this io k8s api autoscaling v2beta1 container resource metric source

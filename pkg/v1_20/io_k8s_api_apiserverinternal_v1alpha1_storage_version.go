@@ -21,21 +21,21 @@ import (
 type IoK8sAPIApiserverinternalV1alpha1StorageVersion struct {
 
 	// APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-	APIVersion string `json:"apiVersion,omitempty"`
+	APIVersion string `json:"apiVersion,omitempty" json,yaml:"apiVersion,omitempty"`
 
 	// Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-	Kind string `json:"kind,omitempty"`
+	Kind string `json:"kind,omitempty" json,yaml:"kind,omitempty"`
 
 	// The name is <group>.<resource>.
-	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty"`
+	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty" json,yaml:"metadata,omitempty"`
 
 	// Spec is an empty spec. It is here to comply with Kubernetes API style.
 	// Required: true
-	Spec IoK8sAPIApiserverinternalV1alpha1StorageVersionSpec `json:"spec"`
+	Spec IoK8sAPIApiserverinternalV1alpha1StorageVersionSpec `json:"spec" json,yaml:"spec"`
 
 	// API server instances report the version they can decode and the version they encode objects to when persisting objects in the backend.
 	// Required: true
-	Status *IoK8sAPIApiserverinternalV1alpha1StorageVersionStatus `json:"status"`
+	Status *IoK8sAPIApiserverinternalV1alpha1StorageVersionStatus `json:"status" json,yaml:"status"`
 }
 
 // Validate validates this io k8s api apiserverinternal v1alpha1 storage version

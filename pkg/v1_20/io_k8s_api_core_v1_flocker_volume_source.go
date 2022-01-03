@@ -18,10 +18,10 @@ import (
 type IoK8sAPICoreV1FlockerVolumeSource struct {
 
 	// Name of the dataset stored as metadata -> name on the dataset for Flocker should be considered as deprecated
-	DatasetName string `json:"datasetName,omitempty"`
+	DatasetName string `json:"datasetName,omitempty" json,yaml:"datasetName,omitempty"`
 
 	// UUID of the dataset. This is unique identifier of a Flocker dataset
-	DatasetUUID string `json:"datasetUUID,omitempty"`
+	DatasetUUID string `json:"datasetUUID,omitempty" json,yaml:"datasetUUID,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 flocker volume source

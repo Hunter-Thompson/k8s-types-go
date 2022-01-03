@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -21,25 +20,19 @@ import (
 type IoK8sAPICoreV1Taint struct {
 
 	// Required. The effect of the taint on pods that do not tolerate the taint. Valid effects are NoSchedule, PreferNoSchedule and NoExecute.
-	//
-	// Possible enum values:
-	//  - `"NoExecute"` Evict any already-running pods that do not tolerate the taint. Currently enforced by NodeController.
-	//  - `"NoSchedule"` Do not allow new pods to schedule onto the node unless they tolerate the taint, but allow all pods submitted to Kubelet without going through the scheduler to start, and allow all already-running pods to continue running. Enforced by the scheduler.
-	//  - `"PreferNoSchedule"` Like TaintEffectNoSchedule, but the scheduler tries not to schedule new pods onto the node, rather than prohibiting new pods from scheduling onto the node entirely. Enforced by the scheduler.
 	// Required: true
-	// Enum: [NoExecute NoSchedule PreferNoSchedule]
-	Effect *string `json:"effect"`
+	Effect *string `json:"effect" json,yaml:"effect"`
 
 	// Required. The taint key to be applied to a node.
 	// Required: true
-	Key *string `json:"key"`
+	Key *string `json:"key" json,yaml:"key"`
 
 	// TimeAdded represents the time at which the taint was added. It is only written for NoExecute taints.
 	// Format: date-time
-	TimeAdded IoK8sApimachineryPkgApisMetaV1Time `json:"timeAdded,omitempty"`
+	TimeAdded IoK8sApimachineryPkgApisMetaV1Time `json:"timeAdded,omitempty" json,yaml:"timeAdded,omitempty"`
 
 	// The taint value corresponding to the taint key.
-	Value string `json:"value,omitempty"`
+	Value string `json:"value,omitempty" json,yaml:"value,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 taint
@@ -64,46 +57,9 @@ func (m *IoK8sAPICoreV1Taint) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var ioK8sApiCoreV1TaintTypeEffectPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["NoExecute","NoSchedule","PreferNoSchedule"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1TaintTypeEffectPropEnum = append(ioK8sApiCoreV1TaintTypeEffectPropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1TaintEffectNoExecute captures enum value "NoExecute"
-	IoK8sAPICoreV1TaintEffectNoExecute string = "NoExecute"
-
-	// IoK8sAPICoreV1TaintEffectNoSchedule captures enum value "NoSchedule"
-	IoK8sAPICoreV1TaintEffectNoSchedule string = "NoSchedule"
-
-	// IoK8sAPICoreV1TaintEffectPreferNoSchedule captures enum value "PreferNoSchedule"
-	IoK8sAPICoreV1TaintEffectPreferNoSchedule string = "PreferNoSchedule"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1Taint) validateEffectEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1TaintTypeEffectPropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *IoK8sAPICoreV1Taint) validateEffect(formats strfmt.Registry) error {
 
 	if err := validate.Required("effect", "body", m.Effect); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateEffectEnum("effect", "body", *m.Effect); err != nil {
 		return err
 	}
 

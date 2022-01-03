@@ -20,11 +20,11 @@ import (
 type IoK8sAPICoreV1PhotonPersistentDiskVolumeSource struct {
 
 	// Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
-	FsType string `json:"fsType,omitempty"`
+	FsType string `json:"fsType,omitempty" json,yaml:"fsType,omitempty"`
 
 	// ID that identifies Photon Controller persistent disk
 	// Required: true
-	PdID *string `json:"pdID"`
+	PdID *string `json:"pdID" json,yaml:"pdID"`
 }
 
 // Validate validates this io k8s api core v1 photon persistent disk volume source

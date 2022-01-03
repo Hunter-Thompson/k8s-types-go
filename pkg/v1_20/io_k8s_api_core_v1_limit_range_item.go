@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -21,29 +20,23 @@ import (
 type IoK8sAPICoreV1LimitRangeItem struct {
 
 	// Default resource requirement limit value by resource name if resource limit is omitted.
-	Default map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"default,omitempty"`
+	Default map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"default,omitempty" json,yaml:"default,omitempty"`
 
 	// DefaultRequest is the default resource requirement request value by resource name if resource request is omitted.
-	DefaultRequest map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"defaultRequest,omitempty"`
+	DefaultRequest map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"defaultRequest,omitempty" json,yaml:"defaultRequest,omitempty"`
 
 	// Max usage constraints on this kind by resource name.
-	Max map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"max,omitempty"`
+	Max map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"max,omitempty" json,yaml:"max,omitempty"`
 
 	// MaxLimitRequestRatio if specified, the named resource must have a request and limit that are both non-zero where limit divided by request is less than or equal to the enumerated value; this represents the max burst for the named resource.
-	MaxLimitRequestRatio map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"maxLimitRequestRatio,omitempty"`
+	MaxLimitRequestRatio map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"maxLimitRequestRatio,omitempty" json,yaml:"maxLimitRequestRatio,omitempty"`
 
 	// Min usage constraints on this kind by resource name.
-	Min map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"min,omitempty"`
+	Min map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"min,omitempty" json,yaml:"min,omitempty"`
 
 	// Type of resource that this limit applies to.
-	//
-	// Possible enum values:
-	//  - `"Container"` Limit that applies to all containers in a namespace
-	//  - `"PersistentVolumeClaim"` Limit that applies to all persistent volume claims in a namespace
-	//  - `"Pod"` Limit that applies to all pods in a namespace
 	// Required: true
-	// Enum: [Container PersistentVolumeClaim Pod]
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s api core v1 limit range item
@@ -170,46 +163,9 @@ func (m *IoK8sAPICoreV1LimitRangeItem) validateMin(formats strfmt.Registry) erro
 	return nil
 }
 
-var ioK8sApiCoreV1LimitRangeItemTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["Container","PersistentVolumeClaim","Pod"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1LimitRangeItemTypeTypePropEnum = append(ioK8sApiCoreV1LimitRangeItemTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1LimitRangeItemTypeContainer captures enum value "Container"
-	IoK8sAPICoreV1LimitRangeItemTypeContainer string = "Container"
-
-	// IoK8sAPICoreV1LimitRangeItemTypePersistentVolumeClaim captures enum value "PersistentVolumeClaim"
-	IoK8sAPICoreV1LimitRangeItemTypePersistentVolumeClaim string = "PersistentVolumeClaim"
-
-	// IoK8sAPICoreV1LimitRangeItemTypePod captures enum value "Pod"
-	IoK8sAPICoreV1LimitRangeItemTypePod string = "Pod"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1LimitRangeItem) validateTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1LimitRangeItemTypeTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *IoK8sAPICoreV1LimitRangeItem) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

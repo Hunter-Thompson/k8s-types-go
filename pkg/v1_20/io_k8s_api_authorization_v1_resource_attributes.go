@@ -18,25 +18,25 @@ import (
 type IoK8sAPIAuthorizationV1ResourceAttributes struct {
 
 	// Group is the API Group of the Resource.  "*" means all.
-	Group string `json:"group,omitempty"`
+	Group string `json:"group,omitempty" json,yaml:"group,omitempty"`
 
 	// Name is the name of the resource being requested for a "get" or deleted for a "delete". "" (empty) means all.
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" json,yaml:"name,omitempty"`
 
 	// Namespace is the namespace of the action being requested.  Currently, there is no distinction between no namespace and all namespaces "" (empty) is defaulted for LocalSubjectAccessReviews "" (empty) is empty for cluster-scoped resources "" (empty) means "all" for namespace scoped resources from a SubjectAccessReview or SelfSubjectAccessReview
-	Namespace string `json:"namespace,omitempty"`
+	Namespace string `json:"namespace,omitempty" json,yaml:"namespace,omitempty"`
 
 	// Resource is one of the existing resource types.  "*" means all.
-	Resource string `json:"resource,omitempty"`
+	Resource string `json:"resource,omitempty" json,yaml:"resource,omitempty"`
 
 	// Subresource is one of the existing resource types.  "" means none.
-	Subresource string `json:"subresource,omitempty"`
+	Subresource string `json:"subresource,omitempty" json,yaml:"subresource,omitempty"`
 
 	// Verb is a kubernetes resource API verb, like: get, list, watch, create, update, delete, proxy.  "*" means all.
-	Verb string `json:"verb,omitempty"`
+	Verb string `json:"verb,omitempty" json,yaml:"verb,omitempty"`
 
 	// Version is the API Version of the Resource.  "*" means all.
-	Version string `json:"version,omitempty"`
+	Version string `json:"version,omitempty" json,yaml:"version,omitempty"`
 }
 
 // Validate validates this io k8s api authorization v1 resource attributes

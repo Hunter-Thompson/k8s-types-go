@@ -21,7 +21,7 @@ type IoK8sAPIPolicyV1beta1AllowedCSIDriver struct {
 
 	// Name is the registered name of the CSI driver
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 }
 
 // Validate validates this io k8s api policy v1beta1 allowed c s i driver

@@ -21,7 +21,7 @@ type IoK8sAPICoreV1DaemonEndpoint struct {
 
 	// Port number of the given endpoint.
 	// Required: true
-	Port *int32 `json:"Port"`
+	Port *int32 `json:"Port" json,yaml:"Port"`
 }
 
 // Validate validates this io k8s api core v1 daemon endpoint

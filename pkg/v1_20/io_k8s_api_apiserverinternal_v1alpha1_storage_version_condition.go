@@ -21,25 +21,25 @@ type IoK8sAPIApiserverinternalV1alpha1StorageVersionCondition struct {
 
 	// Last time the condition transitioned from one status to another.
 	// Format: date-time
-	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty"`
+	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty" json,yaml:"lastTransitionTime,omitempty"`
 
 	// A human readable message indicating details about the transition.
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// If set, this represents the .metadata.generation that the condition was set based upon.
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" json,yaml:"observedGeneration,omitempty"`
 
 	// The reason for the condition's last transition.
 	// Required: true
-	Reason *string `json:"reason"`
+	Reason *string `json:"reason" json,yaml:"reason"`
 
 	// Status of the condition, one of True, False, Unknown.
 	// Required: true
-	Status *string `json:"status"`
+	Status *string `json:"status" json,yaml:"status"`
 
 	// Type of the condition.
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s api apiserverinternal v1alpha1 storage version condition

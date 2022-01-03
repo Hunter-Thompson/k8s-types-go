@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -22,25 +21,20 @@ import (
 type IoK8sAPICoreV1HTTPGetAction struct {
 
 	// Host name to connect to, defaults to the pod IP. You probably want to set "Host" in httpHeaders instead.
-	Host string `json:"host,omitempty"`
+	Host string `json:"host,omitempty" json,yaml:"host,omitempty"`
 
 	// Custom headers to set in the request. HTTP allows repeated headers.
-	HTTPHeaders []*IoK8sAPICoreV1HTTPHeader `json:"httpHeaders"`
+	HTTPHeaders []*IoK8sAPICoreV1HTTPHeader `json:"httpHeaders" json,yaml:"httpHeaders"`
 
 	// Path to access on the HTTP server.
-	Path string `json:"path,omitempty"`
+	Path string `json:"path,omitempty" json,yaml:"path,omitempty"`
 
 	// Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.
 	// Required: true
-	Port *IoK8sApimachineryPkgUtilIntstrIntOrString `json:"port"`
+	Port *IoK8sApimachineryPkgUtilIntstrIntOrString `json:"port" json,yaml:"port"`
 
 	// Scheme to use for connecting to the host. Defaults to HTTP.
-	//
-	// Possible enum values:
-	//  - `"HTTP"` means that the scheme used will be http://
-	//  - `"HTTPS"` means that the scheme used will be https://
-	// Enum: [HTTP HTTPS]
-	Scheme string `json:"scheme,omitempty"`
+	Scheme string `json:"scheme,omitempty" json,yaml:"scheme,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 HTTP get action
@@ -52,10 +46,6 @@ func (m *IoK8sAPICoreV1HTTPGetAction) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePort(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateScheme(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -110,48 +100,6 @@ func (m *IoK8sAPICoreV1HTTPGetAction) validatePort(formats strfmt.Registry) erro
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-var ioK8sApiCoreV1HttpGetActionTypeSchemePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["HTTP","HTTPS"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1HttpGetActionTypeSchemePropEnum = append(ioK8sApiCoreV1HttpGetActionTypeSchemePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1HTTPGetActionSchemeHTTP captures enum value "HTTP"
-	IoK8sAPICoreV1HTTPGetActionSchemeHTTP string = "HTTP"
-
-	// IoK8sAPICoreV1HTTPGetActionSchemeHTTPS captures enum value "HTTPS"
-	IoK8sAPICoreV1HTTPGetActionSchemeHTTPS string = "HTTPS"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1HTTPGetAction) validateSchemeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1HttpGetActionTypeSchemePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *IoK8sAPICoreV1HTTPGetAction) validateScheme(formats strfmt.Registry) error {
-	if swag.IsZero(m.Scheme) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateSchemeEnum("scheme", "body", m.Scheme); err != nil {
-		return err
 	}
 
 	return nil

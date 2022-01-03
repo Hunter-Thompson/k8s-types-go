@@ -21,14 +21,14 @@ import (
 type IoK8sAPIFlowcontrolV1beta1PolicyRulesWithSubjects struct {
 
 	// `nonResourceRules` is a list of NonResourcePolicyRules that identify matching requests according to their verb and the target non-resource URL.
-	NonResourceRules []*IoK8sAPIFlowcontrolV1beta1NonResourcePolicyRule `json:"nonResourceRules"`
+	NonResourceRules []*IoK8sAPIFlowcontrolV1beta1NonResourcePolicyRule `json:"nonResourceRules" json,yaml:"nonResourceRules"`
 
 	// `resourceRules` is a slice of ResourcePolicyRules that identify matching requests according to their verb and the target resource. At least one of `resourceRules` and `nonResourceRules` has to be non-empty.
-	ResourceRules []*IoK8sAPIFlowcontrolV1beta1ResourcePolicyRule `json:"resourceRules"`
+	ResourceRules []*IoK8sAPIFlowcontrolV1beta1ResourcePolicyRule `json:"resourceRules" json,yaml:"resourceRules"`
 
 	// subjects is the list of normal user, serviceaccount, or group that this rule cares about. There must be at least one member in this slice. A slice that includes both the system:authenticated and system:unauthenticated user groups matches every request. Required.
 	// Required: true
-	Subjects []*IoK8sAPIFlowcontrolV1beta1Subject `json:"subjects"`
+	Subjects []*IoK8sAPIFlowcontrolV1beta1Subject `json:"subjects" json,yaml:"subjects"`
 }
 
 // Validate validates this io k8s api flowcontrol v1beta1 policy rules with subjects

@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -22,25 +21,19 @@ type IoK8sAPICoreV1ContainerPort struct {
 
 	// Number of port to expose on the pod's IP address. This must be a valid port number, 0 < x < 65536.
 	// Required: true
-	ContainerPort *int32 `json:"containerPort"`
+	ContainerPort *int32 `json:"containerPort" json,yaml:"containerPort"`
 
 	// What host IP to bind the external port to.
-	HostIP string `json:"hostIP,omitempty"`
+	HostIP string `json:"hostIP,omitempty" json,yaml:"hostIP,omitempty"`
 
 	// Number of port to expose on the host. If specified, this must be a valid port number, 0 < x < 65536. If HostNetwork is specified, this must match ContainerPort. Most containers do not need this.
-	HostPort int32 `json:"hostPort,omitempty"`
+	HostPort int32 `json:"hostPort,omitempty" json,yaml:"hostPort,omitempty"`
 
 	// If specified, this must be an IANA_SVC_NAME and unique within the pod. Each named port in a pod must have a unique name. Name for the port that can be referred to by services.
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" json,yaml:"name,omitempty"`
 
 	// Protocol for port. Must be UDP, TCP, or SCTP. Defaults to "TCP".
-	//
-	// Possible enum values:
-	//  - `"SCTP"` is the SCTP protocol.
-	//  - `"TCP"` is the TCP protocol.
-	//  - `"UDP"` is the UDP protocol.
-	// Enum: [SCTP TCP UDP]
-	Protocol string `json:"protocol,omitempty"`
+	Protocol string `json:"protocol,omitempty" json,yaml:"protocol,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 container port
@@ -48,10 +41,6 @@ func (m *IoK8sAPICoreV1ContainerPort) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateContainerPort(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateProtocol(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -64,51 +53,6 @@ func (m *IoK8sAPICoreV1ContainerPort) Validate(formats strfmt.Registry) error {
 func (m *IoK8sAPICoreV1ContainerPort) validateContainerPort(formats strfmt.Registry) error {
 
 	if err := validate.Required("containerPort", "body", m.ContainerPort); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var ioK8sApiCoreV1ContainerPortTypeProtocolPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["SCTP","TCP","UDP"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1ContainerPortTypeProtocolPropEnum = append(ioK8sApiCoreV1ContainerPortTypeProtocolPropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1ContainerPortProtocolSCTP captures enum value "SCTP"
-	IoK8sAPICoreV1ContainerPortProtocolSCTP string = "SCTP"
-
-	// IoK8sAPICoreV1ContainerPortProtocolTCP captures enum value "TCP"
-	IoK8sAPICoreV1ContainerPortProtocolTCP string = "TCP"
-
-	// IoK8sAPICoreV1ContainerPortProtocolUDP captures enum value "UDP"
-	IoK8sAPICoreV1ContainerPortProtocolUDP string = "UDP"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1ContainerPort) validateProtocolEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1ContainerPortTypeProtocolPropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *IoK8sAPICoreV1ContainerPort) validateProtocol(formats strfmt.Registry) error {
-	if swag.IsZero(m.Protocol) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateProtocolEnum("protocol", "body", m.Protocol); err != nil {
 		return err
 	}
 

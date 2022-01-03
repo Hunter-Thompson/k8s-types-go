@@ -19,10 +19,10 @@ import (
 type IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresources struct {
 
 	// scale indicates the custom resource should serve a `/scale` subresource that returns an `autoscaling/v1` Scale object.
-	Scale *IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresourceScale `json:"scale,omitempty"`
+	Scale *IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresourceScale `json:"scale,omitempty" json,yaml:"scale,omitempty"`
 
 	// status indicates the custom resource should serve a `/status` subresource. When enabled: 1. requests to the custom resource primary endpoint ignore changes to the `status` stanza of the object. 2. requests to the custom resource `/status` subresource ignore changes to anything other than the `status` stanza of the object.
-	Status IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresourceStatus `json:"status,omitempty"`
+	Status IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresourceStatus `json:"status,omitempty" json,yaml:"status,omitempty"`
 }
 
 // Validate validates this io k8s apiextensions apiserver pkg apis apiextensions v1 custom resource subresources

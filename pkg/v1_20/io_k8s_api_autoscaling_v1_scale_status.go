@@ -21,10 +21,10 @@ type IoK8sAPIAutoscalingV1ScaleStatus struct {
 
 	// actual number of observed instances of the scaled object.
 	// Required: true
-	Replicas *int32 `json:"replicas"`
+	Replicas *int32 `json:"replicas" json,yaml:"replicas"`
 
 	// label query over pods that should match the replicas count. This is same as the label selector but in the string format to avoid introspection by clients. The string will be in the same format as the query-param syntax. More info about label selectors: http://kubernetes.io/docs/user-guide/labels#label-selectors
-	Selector string `json:"selector,omitempty"`
+	Selector string `json:"selector,omitempty" json,yaml:"selector,omitempty"`
 }
 
 // Validate validates this io k8s api autoscaling v1 scale status

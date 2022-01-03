@@ -20,11 +20,11 @@ import (
 type IoK8sAPIAuthorizationV1NonResourceRule struct {
 
 	// NonResourceURLs is a set of partial urls that a user should have access to.  *s are allowed, but only as the full, final step in the path.  "*" means all.
-	NonResourceURLs []string `json:"nonResourceURLs"`
+	NonResourceURLs []string `json:"nonResourceURLs" json,yaml:"nonResourceURLs"`
 
 	// Verb is a list of kubernetes non-resource API verbs, like: get, post, put, delete, patch, head, options.  "*" means all.
 	// Required: true
-	Verbs []string `json:"verbs"`
+	Verbs []string `json:"verbs" json,yaml:"verbs"`
 }
 
 // Validate validates this io k8s api authorization v1 non resource rule

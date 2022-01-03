@@ -21,10 +21,10 @@ type IoK8sAPINetworkingV1HTTPIngressPath struct {
 
 	// Backend defines the referenced service endpoint to which the traffic will be forwarded to.
 	// Required: true
-	Backend *IoK8sAPINetworkingV1IngressBackend `json:"backend"`
+	Backend *IoK8sAPINetworkingV1IngressBackend `json:"backend" json,yaml:"backend"`
 
-	// Path is matched against the path of an incoming request. Currently it can contain characters disallowed from the conventional "path" part of a URL as defined by RFC 3986. Paths must begin with a '/' and must be present when using PathType with value "Exact" or "Prefix".
-	Path string `json:"path,omitempty"`
+	// Path is matched against the path of an incoming request. Currently it can contain characters disallowed from the conventional "path" part of a URL as defined by RFC 3986. Paths must begin with a '/'. When unspecified, all paths from incoming requests are matched.
+	Path string `json:"path,omitempty" json,yaml:"path,omitempty"`
 
 	// PathType determines the interpretation of the Path matching. PathType can be one of the following values: * Exact: Matches the URL path exactly. * Prefix: Matches based on a URL path prefix split by '/'. Matching is
 	//   done on a path element by element basis. A path element refers is the
@@ -37,8 +37,7 @@ type IoK8sAPINetworkingV1HTTPIngressPath struct {
 	//   the IngressClass. Implementations can treat this as a separate PathType
 	//   or treat it identically to Prefix or Exact path types.
 	// Implementations are required to support all path types.
-	// Required: true
-	PathType *string `json:"pathType"`
+	PathType string `json:"pathType,omitempty" json,yaml:"pathType,omitempty"`
 }
 
 // Validate validates this io k8s api networking v1 HTTP ingress path
@@ -46,10 +45,6 @@ func (m *IoK8sAPINetworkingV1HTTPIngressPath) Validate(formats strfmt.Registry) 
 	var res []error
 
 	if err := m.validateBackend(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validatePathType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -74,15 +69,6 @@ func (m *IoK8sAPINetworkingV1HTTPIngressPath) validateBackend(formats strfmt.Reg
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *IoK8sAPINetworkingV1HTTPIngressPath) validatePathType(formats strfmt.Registry) error {
-
-	if err := validate.Required("pathType", "body", m.PathType); err != nil {
-		return err
 	}
 
 	return nil

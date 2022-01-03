@@ -18,13 +18,13 @@ import (
 type IoK8sAPIApiserverinternalV1alpha1ServerStorageVersion struct {
 
 	// The ID of the reporting API server.
-	APIServerID string `json:"apiServerID,omitempty"`
+	APIServerID string `json:"apiServerID,omitempty" json,yaml:"apiServerID,omitempty"`
 
 	// The API server can decode objects encoded in these versions. The encodingVersion must be included in the decodableVersions.
-	DecodableVersions []string `json:"decodableVersions"`
+	DecodableVersions []string `json:"decodableVersions" json,yaml:"decodableVersions"`
 
 	// The API server encodes the object to this version when persisting it in the backend (e.g., etcd).
-	EncodingVersion string `json:"encodingVersion,omitempty"`
+	EncodingVersion string `json:"encodingVersion,omitempty" json,yaml:"encodingVersion,omitempty"`
 }
 
 // Validate validates this io k8s api apiserverinternal v1alpha1 server storage version

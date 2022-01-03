@@ -21,7 +21,7 @@ type IoK8sAPIFlowcontrolV1beta1UserSubject struct {
 
 	// `name` is the username that matches, or "*" to match all usernames. Required.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 }
 
 // Validate validates this io k8s api flowcontrol v1beta1 user subject

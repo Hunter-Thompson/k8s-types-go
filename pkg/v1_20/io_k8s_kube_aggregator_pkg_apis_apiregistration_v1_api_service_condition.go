@@ -21,21 +21,21 @@ type IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceCondition struct {
 
 	// Last time the condition transitioned from one status to another.
 	// Format: date-time
-	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty"`
+	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty" json,yaml:"lastTransitionTime,omitempty"`
 
 	// Human-readable message indicating details about last transition.
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// Unique, one-word, CamelCase reason for the condition's last transition.
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty" json,yaml:"reason,omitempty"`
 
 	// Status is the status of the condition. Can be True, False, Unknown.
 	// Required: true
-	Status *string `json:"status"`
+	Status *string `json:"status" json,yaml:"status"`
 
 	// Type is the type of the condition.
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s kube aggregator pkg apis apiregistration v1 API service condition

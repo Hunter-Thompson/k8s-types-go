@@ -21,21 +21,21 @@ type IoK8sAPICoreV1ReplicationControllerCondition struct {
 
 	// The last time the condition transitioned from one status to another.
 	// Format: date-time
-	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty"`
+	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty" json,yaml:"lastTransitionTime,omitempty"`
 
 	// A human readable message indicating details about the transition.
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// The reason for the condition's last transition.
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty" json,yaml:"reason,omitempty"`
 
 	// Status of the condition, one of True, False, Unknown.
 	// Required: true
-	Status *string `json:"status"`
+	Status *string `json:"status" json,yaml:"status"`
 
 	// Type of replication controller condition.
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s api core v1 replication controller condition

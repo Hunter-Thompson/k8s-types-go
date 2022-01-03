@@ -20,24 +20,24 @@ import (
 type IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionNames struct {
 
 	// categories is a list of grouped resources this custom resource belongs to (e.g. 'all'). This is published in API discovery documents, and used by clients to support invocations like `kubectl get all`.
-	Categories []string `json:"categories"`
+	Categories []string `json:"categories" json,yaml:"categories"`
 
 	// kind is the serialized kind of the resource. It is normally CamelCase and singular. Custom resource instances will use this value as the `kind` attribute in API calls.
 	// Required: true
-	Kind *string `json:"kind"`
+	Kind *string `json:"kind" json,yaml:"kind"`
 
 	// listKind is the serialized kind of the list for this resource. Defaults to "`kind`List".
-	ListKind string `json:"listKind,omitempty"`
+	ListKind string `json:"listKind,omitempty" json,yaml:"listKind,omitempty"`
 
 	// plural is the plural name of the resource to serve. The custom resources are served under `/apis/<group>/<version>/.../<plural>`. Must match the name of the CustomResourceDefinition (in the form `<names.plural>.<group>`). Must be all lowercase.
 	// Required: true
-	Plural *string `json:"plural"`
+	Plural *string `json:"plural" json,yaml:"plural"`
 
 	// shortNames are short names for the resource, exposed in API discovery documents, and used by clients to support invocations like `kubectl get <shortname>`. It must be all lowercase.
-	ShortNames []string `json:"shortNames"`
+	ShortNames []string `json:"shortNames" json,yaml:"shortNames"`
 
 	// singular is the singular name of the resource. It must be all lowercase. Defaults to lowercased `kind`.
-	Singular string `json:"singular,omitempty"`
+	Singular string `json:"singular,omitempty" json,yaml:"singular,omitempty"`
 }
 
 // Validate validates this io k8s apiextensions apiserver pkg apis apiextensions v1 custom resource definition names

@@ -18,16 +18,16 @@ import (
 type IoK8sAPIAuthenticationV1BoundObjectReference struct {
 
 	// API version of the referent.
-	APIVersion string `json:"apiVersion,omitempty"`
+	APIVersion string `json:"apiVersion,omitempty" json,yaml:"apiVersion,omitempty"`
 
 	// Kind of the referent. Valid kinds are 'Pod' and 'Secret'.
-	Kind string `json:"kind,omitempty"`
+	Kind string `json:"kind,omitempty" json,yaml:"kind,omitempty"`
 
 	// Name of the referent.
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" json,yaml:"name,omitempty"`
 
 	// UID of the referent.
-	UID string `json:"uid,omitempty"`
+	UID string `json:"uid,omitempty" json,yaml:"uid,omitempty"`
 }
 
 // Validate validates this io k8s api authentication v1 bound object reference

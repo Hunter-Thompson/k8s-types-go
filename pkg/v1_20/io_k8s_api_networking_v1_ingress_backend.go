@@ -19,10 +19,10 @@ import (
 type IoK8sAPINetworkingV1IngressBackend struct {
 
 	// Resource is an ObjectRef to another Kubernetes resource in the namespace of the Ingress object. If resource is specified, a service.Name and service.Port must not be specified. This is a mutually exclusive setting with "Service".
-	Resource *IoK8sAPICoreV1TypedLocalObjectReference `json:"resource,omitempty"`
+	Resource *IoK8sAPICoreV1TypedLocalObjectReference `json:"resource,omitempty" json,yaml:"resource,omitempty"`
 
 	// Service references a Service as a Backend. This is a mutually exclusive setting with "Resource".
-	Service *IoK8sAPINetworkingV1IngressServiceBackend `json:"service,omitempty"`
+	Service *IoK8sAPINetworkingV1IngressServiceBackend `json:"service,omitempty" json,yaml:"service,omitempty"`
 }
 
 // Validate validates this io k8s api networking v1 ingress backend

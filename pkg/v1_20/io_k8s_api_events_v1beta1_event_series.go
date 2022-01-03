@@ -21,12 +21,12 @@ type IoK8sAPIEventsV1beta1EventSeries struct {
 
 	// count is the number of occurrences in this series up to the last heartbeat time.
 	// Required: true
-	Count *int32 `json:"count"`
+	Count *int32 `json:"count" json,yaml:"count"`
 
 	// lastObservedTime is the time when last Event from the series was seen before last heartbeat.
 	// Required: true
 	// Format: date-time
-	LastObservedTime *IoK8sApimachineryPkgApisMetaV1MicroTime `json:"lastObservedTime"`
+	LastObservedTime *IoK8sApimachineryPkgApisMetaV1MicroTime `json:"lastObservedTime" json,yaml:"lastObservedTime"`
 }
 
 // Validate validates this io k8s api events v1beta1 event series

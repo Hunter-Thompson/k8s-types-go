@@ -21,17 +21,17 @@ type IoK8sAPIAdmissionregistrationV1ServiceReference struct {
 
 	// `name` is the name of the service. Required
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 
 	// `namespace` is the namespace of the service. Required
 	// Required: true
-	Namespace *string `json:"namespace"`
+	Namespace *string `json:"namespace" json,yaml:"namespace"`
 
 	// `path` is an optional URL path which will be sent in any request to this service.
-	Path string `json:"path,omitempty"`
+	Path string `json:"path,omitempty" json,yaml:"path,omitempty"`
 
 	// If specified, the port on the service that hosting webhook. Default to 443 for backward compatibility. `port` should be a valid port number (1-65535, inclusive).
-	Port int32 `json:"port,omitempty"`
+	Port int32 `json:"port,omitempty" json,yaml:"port,omitempty"`
 }
 
 // Validate validates this io k8s api admissionregistration v1 service reference

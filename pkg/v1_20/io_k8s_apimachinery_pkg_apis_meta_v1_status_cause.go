@@ -22,13 +22,13 @@ type IoK8sApimachineryPkgApisMetaV1StatusCause struct {
 	// Examples:
 	//   "name" - the field "name" on the current resource
 	//   "items[0].name" - the field "name" on the first array entry in "items"
-	Field string `json:"field,omitempty"`
+	Field string `json:"field,omitempty" json,yaml:"field,omitempty"`
 
 	// A human-readable description of the cause of the error.  This field may be presented as-is to a reader.
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// A machine-readable description of the cause of the error. If this value is empty there is no information available.
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty" json,yaml:"reason,omitempty"`
 }
 
 // Validate validates this io k8s apimachinery pkg apis meta v1 status cause

@@ -19,10 +19,10 @@ import (
 type IoK8sAPICoreV1PodTemplateSpec struct {
 
 	// Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty"`
+	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty" json,yaml:"metadata,omitempty"`
 
 	// Specification of the desired behavior of the pod. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-	Spec *IoK8sAPICoreV1PodSpec `json:"spec,omitempty"`
+	Spec *IoK8sAPICoreV1PodSpec `json:"spec,omitempty" json,yaml:"spec,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 pod template spec

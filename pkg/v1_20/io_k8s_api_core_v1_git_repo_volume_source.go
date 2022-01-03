@@ -22,14 +22,14 @@ import (
 type IoK8sAPICoreV1GitRepoVolumeSource struct {
 
 	// Target directory name. Must not contain or start with '..'.  If '.' is supplied, the volume directory will be the git repository.  Otherwise, if specified, the volume will contain the git repository in the subdirectory with the given name.
-	Directory string `json:"directory,omitempty"`
+	Directory string `json:"directory,omitempty" json,yaml:"directory,omitempty"`
 
 	// Repository URL
 	// Required: true
-	Repository *string `json:"repository"`
+	Repository *string `json:"repository" json,yaml:"repository"`
 
 	// Commit hash for the specified revision.
-	Revision string `json:"revision,omitempty"`
+	Revision string `json:"revision,omitempty" json,yaml:"revision,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 git repo volume source

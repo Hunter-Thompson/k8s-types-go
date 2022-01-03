@@ -21,11 +21,11 @@ type IoK8sAPIPolicyV1beta1HostPortRange struct {
 
 	// max is the end of the range, inclusive.
 	// Required: true
-	Max *int32 `json:"max"`
+	Max *int32 `json:"max" json,yaml:"max"`
 
 	// min is the start of the range, inclusive.
 	// Required: true
-	Min *int32 `json:"min"`
+	Min *int32 `json:"min" json,yaml:"min"`
 }
 
 // Validate validates this io k8s api policy v1beta1 host port range

@@ -19,7 +19,7 @@ import (
 type IoK8sAPICoreV1NodeDaemonEndpoints struct {
 
 	// Endpoint on which Kubelet is listening.
-	KubeletEndpoint *IoK8sAPICoreV1DaemonEndpoint `json:"kubeletEndpoint,omitempty"`
+	KubeletEndpoint *IoK8sAPICoreV1DaemonEndpoint `json:"kubeletEndpoint,omitempty" json,yaml:"kubeletEndpoint,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 node daemon endpoints

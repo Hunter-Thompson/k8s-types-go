@@ -21,31 +21,31 @@ import (
 type IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionVersion struct {
 
 	// additionalPrinterColumns specifies additional columns returned in Table output. See https://kubernetes.io/docs/reference/using-api/api-concepts/#receiving-resources-as-tables for details. If no columns are specified, a single column displaying the age of the custom resource is used.
-	AdditionalPrinterColumns []*IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceColumnDefinition `json:"additionalPrinterColumns"`
+	AdditionalPrinterColumns []*IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceColumnDefinition `json:"additionalPrinterColumns" json,yaml:"additionalPrinterColumns"`
 
 	// deprecated indicates this version of the custom resource API is deprecated. When set to true, API requests to this version receive a warning header in the server response. Defaults to false.
-	Deprecated bool `json:"deprecated,omitempty"`
+	Deprecated bool `json:"deprecated,omitempty" json,yaml:"deprecated,omitempty"`
 
 	// deprecationWarning overrides the default warning returned to API clients. May only be set when `deprecated` is true. The default warning indicates this version is deprecated and recommends use of the newest served version of equal or greater stability, if one exists.
-	DeprecationWarning string `json:"deprecationWarning,omitempty"`
+	DeprecationWarning string `json:"deprecationWarning,omitempty" json,yaml:"deprecationWarning,omitempty"`
 
 	// name is the version name, e.g. “v1”, “v2beta1”, etc. The custom resources are served under this version at `/apis/<group>/<version>/...` if `served` is true.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 
 	// schema describes the schema used for validation, pruning, and defaulting of this version of the custom resource.
-	Schema *IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceValidation `json:"schema,omitempty"`
+	Schema *IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceValidation `json:"schema,omitempty" json,yaml:"schema,omitempty"`
 
 	// served is a flag enabling/disabling this version from being served via REST APIs
 	// Required: true
-	Served *bool `json:"served"`
+	Served *bool `json:"served" json,yaml:"served"`
 
 	// storage indicates this version should be used when persisting custom resources to storage. There must be exactly one version with storage=true.
 	// Required: true
-	Storage *bool `json:"storage"`
+	Storage *bool `json:"storage" json,yaml:"storage"`
 
 	// subresources specify what subresources this version of the defined custom resource have.
-	Subresources *IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresources `json:"subresources,omitempty"`
+	Subresources *IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceSubresources `json:"subresources,omitempty" json,yaml:"subresources,omitempty"`
 }
 
 // Validate validates this io k8s apiextensions apiserver pkg apis apiextensions v1 custom resource definition version

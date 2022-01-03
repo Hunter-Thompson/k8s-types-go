@@ -19,10 +19,10 @@ import (
 type IoK8sAPIBatchV1beta1JobTemplateSpec struct {
 
 	// Standard object's metadata of the jobs created from this template. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty"`
+	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty" json,yaml:"metadata,omitempty"`
 
 	// Specification of the desired behavior of the job. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-	Spec *IoK8sAPIBatchV1JobSpec `json:"spec,omitempty"`
+	Spec *IoK8sAPIBatchV1JobSpec `json:"spec,omitempty" json,yaml:"spec,omitempty"`
 }
 
 // Validate validates this io k8s api batch v1beta1 job template spec

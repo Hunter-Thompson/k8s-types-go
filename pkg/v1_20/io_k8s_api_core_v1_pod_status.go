@@ -7,13 +7,11 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // IoK8sAPICoreV1PodStatus PodStatus represents information about the status of a pod. Status may trail the actual state of a system, especially if the node that hosts the pod cannot contact the control plane.
@@ -22,62 +20,48 @@ import (
 type IoK8sAPICoreV1PodStatus struct {
 
 	// Current service state of pod. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions
-	Conditions []*IoK8sAPICoreV1PodCondition `json:"conditions"`
+	Conditions []*IoK8sAPICoreV1PodCondition `json:"conditions" json,yaml:"conditions"`
 
 	// The list has one entry per container in the manifest. Each entry is currently the output of `docker inspect`. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
-	ContainerStatuses []*IoK8sAPICoreV1ContainerStatus `json:"containerStatuses"`
+	ContainerStatuses []*IoK8sAPICoreV1ContainerStatus `json:"containerStatuses" json,yaml:"containerStatuses"`
 
-	// Status for any ephemeral containers that have run in this pod. This field is beta-level and available on clusters that haven't disabled the EphemeralContainers feature gate.
-	EphemeralContainerStatuses []*IoK8sAPICoreV1ContainerStatus `json:"ephemeralContainerStatuses"`
+	// Status for any ephemeral containers that have run in this pod. This field is alpha-level and is only populated by servers that enable the EphemeralContainers feature.
+	EphemeralContainerStatuses []*IoK8sAPICoreV1ContainerStatus `json:"ephemeralContainerStatuses" json,yaml:"ephemeralContainerStatuses"`
 
 	// IP address of the host to which the pod is assigned. Empty if not yet scheduled.
-	HostIP string `json:"hostIP,omitempty"`
+	HostIP string `json:"hostIP,omitempty" json,yaml:"hostIP,omitempty"`
 
 	// The list has one entry per init container in the manifest. The most recent successful init container will have ready = true, the most recently started container will have startTime set. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
-	InitContainerStatuses []*IoK8sAPICoreV1ContainerStatus `json:"initContainerStatuses"`
+	InitContainerStatuses []*IoK8sAPICoreV1ContainerStatus `json:"initContainerStatuses" json,yaml:"initContainerStatuses"`
 
 	// A human readable message indicating details about why the pod is in this condition.
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// nominatedNodeName is set only when this pod preempts other pods on the node, but it cannot be scheduled right away as preemption victims receive their graceful termination periods. This field does not guarantee that the pod will be scheduled on this node. Scheduler may decide to place the pod elsewhere if other nodes become available sooner. Scheduler may also decide to give the resources on this node to a higher priority pod that is created after preemption. As a result, this field may be different than PodSpec.nodeName when the pod is scheduled.
-	NominatedNodeName string `json:"nominatedNodeName,omitempty"`
+	NominatedNodeName string `json:"nominatedNodeName,omitempty" json,yaml:"nominatedNodeName,omitempty"`
 
 	// The phase of a Pod is a simple, high-level summary of where the Pod is in its lifecycle. The conditions array, the reason and message fields, and the individual container status arrays contain more detail about the pod's status. There are five possible phase values:
 	//
 	// Pending: The pod has been accepted by the Kubernetes system, but one or more of the container images has not been created. This includes time before being scheduled as well as time spent downloading images over the network, which could take a while. Running: The pod has been bound to a node, and all of the containers have been created. At least one container is still running, or is in the process of starting or restarting. Succeeded: All containers in the pod have terminated in success, and will not be restarted. Failed: All containers in the pod have terminated, and at least one container has terminated in failure. The container either exited with non-zero status or was terminated by the system. Unknown: For some reason the state of the pod could not be obtained, typically due to an error in communicating with the host of the pod.
 	//
 	// More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-phase
-	//
-	// Possible enum values:
-	//  - `"Failed"` means that all containers in the pod have terminated, and at least one container has terminated in a failure (exited with a non-zero exit code or was stopped by the system).
-	//  - `"Pending"` means the pod has been accepted by the system, but one or more of the containers has not been started. This includes time before being bound to a node, as well as time spent pulling images onto the host.
-	//  - `"Running"` means the pod has been bound to a node and all of the containers have been started. At least one container is still running or is in the process of being restarted.
-	//  - `"Succeeded"` means that all containers in the pod have voluntarily terminated with a container exit code of 0, and the system is not going to restart any of these containers.
-	//  - `"Unknown"` means that for some reason the state of the pod could not be obtained, typically due to an error in communicating with the host of the pod. Deprecated: It isn't being set since 2015 (74da3b14b0c0f658b3bb8d2def5094686d0e9095)
-	// Enum: [Failed Pending Running Succeeded Unknown]
-	Phase string `json:"phase,omitempty"`
+	Phase string `json:"phase,omitempty" json,yaml:"phase,omitempty"`
 
 	// IP address allocated to the pod. Routable at least within the cluster. Empty if not yet allocated.
-	PodIP string `json:"podIP,omitempty"`
+	PodIP string `json:"podIP,omitempty" json,yaml:"podIP,omitempty"`
 
 	// podIPs holds the IP addresses allocated to the pod. If this field is specified, the 0th entry must match the podIP field. Pods may be allocated at most 1 value for each of IPv4 and IPv6. This list is empty if no IPs have been allocated yet.
-	PodIPs []*IoK8sAPICoreV1PodIP `json:"podIPs"`
+	PodIPs []*IoK8sAPICoreV1PodIP `json:"podIPs" json,yaml:"podIPs"`
 
 	// The Quality of Service (QOS) classification assigned to the pod based on resource requirements See PodQOSClass type for available QOS classes More info: https://git.k8s.io/community/contributors/design-proposals/node/resource-qos.md
-	//
-	// Possible enum values:
-	//  - `"BestEffort"` is the BestEffort qos class.
-	//  - `"Burstable"` is the Burstable qos class.
-	//  - `"Guaranteed"` is the Guaranteed qos class.
-	// Enum: [BestEffort Burstable Guaranteed]
-	QosClass string `json:"qosClass,omitempty"`
+	QosClass string `json:"qosClass,omitempty" json,yaml:"qosClass,omitempty"`
 
 	// A brief CamelCase message indicating details about why the pod is in this state. e.g. 'Evicted'
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty" json,yaml:"reason,omitempty"`
 
 	// RFC 3339 date and time at which the object was acknowledged by the Kubelet. This is before the Kubelet pulled the container image(s) for the pod.
 	// Format: date-time
-	StartTime IoK8sApimachineryPkgApisMetaV1Time `json:"startTime,omitempty"`
+	StartTime IoK8sApimachineryPkgApisMetaV1Time `json:"startTime,omitempty" json,yaml:"startTime,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 pod status
@@ -100,15 +84,7 @@ func (m *IoK8sAPICoreV1PodStatus) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validatePhase(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validatePodIPs(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateQosClass(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -226,57 +202,6 @@ func (m *IoK8sAPICoreV1PodStatus) validateInitContainerStatuses(formats strfmt.R
 	return nil
 }
 
-var ioK8sApiCoreV1PodStatusTypePhasePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["Failed","Pending","Running","Succeeded","Unknown"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1PodStatusTypePhasePropEnum = append(ioK8sApiCoreV1PodStatusTypePhasePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1PodStatusPhaseFailed captures enum value "Failed"
-	IoK8sAPICoreV1PodStatusPhaseFailed string = "Failed"
-
-	// IoK8sAPICoreV1PodStatusPhasePending captures enum value "Pending"
-	IoK8sAPICoreV1PodStatusPhasePending string = "Pending"
-
-	// IoK8sAPICoreV1PodStatusPhaseRunning captures enum value "Running"
-	IoK8sAPICoreV1PodStatusPhaseRunning string = "Running"
-
-	// IoK8sAPICoreV1PodStatusPhaseSucceeded captures enum value "Succeeded"
-	IoK8sAPICoreV1PodStatusPhaseSucceeded string = "Succeeded"
-
-	// IoK8sAPICoreV1PodStatusPhaseUnknown captures enum value "Unknown"
-	IoK8sAPICoreV1PodStatusPhaseUnknown string = "Unknown"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1PodStatus) validatePhaseEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1PodStatusTypePhasePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *IoK8sAPICoreV1PodStatus) validatePhase(formats strfmt.Registry) error {
-	if swag.IsZero(m.Phase) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validatePhaseEnum("phase", "body", m.Phase); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *IoK8sAPICoreV1PodStatus) validatePodIPs(formats strfmt.Registry) error {
 	if swag.IsZero(m.PodIPs) { // not required
 		return nil
@@ -298,51 +223,6 @@ func (m *IoK8sAPICoreV1PodStatus) validatePodIPs(formats strfmt.Registry) error 
 			}
 		}
 
-	}
-
-	return nil
-}
-
-var ioK8sApiCoreV1PodStatusTypeQosClassPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["BestEffort","Burstable","Guaranteed"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1PodStatusTypeQosClassPropEnum = append(ioK8sApiCoreV1PodStatusTypeQosClassPropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1PodStatusQosClassBestEffort captures enum value "BestEffort"
-	IoK8sAPICoreV1PodStatusQosClassBestEffort string = "BestEffort"
-
-	// IoK8sAPICoreV1PodStatusQosClassBurstable captures enum value "Burstable"
-	IoK8sAPICoreV1PodStatusQosClassBurstable string = "Burstable"
-
-	// IoK8sAPICoreV1PodStatusQosClassGuaranteed captures enum value "Guaranteed"
-	IoK8sAPICoreV1PodStatusQosClassGuaranteed string = "Guaranteed"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1PodStatus) validateQosClassEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1PodStatusTypeQosClassPropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *IoK8sAPICoreV1PodStatus) validateQosClass(formats strfmt.Registry) error {
-	if swag.IsZero(m.QosClass) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateQosClassEnum("qosClass", "body", m.QosClass); err != nil {
-		return err
 	}
 
 	return nil

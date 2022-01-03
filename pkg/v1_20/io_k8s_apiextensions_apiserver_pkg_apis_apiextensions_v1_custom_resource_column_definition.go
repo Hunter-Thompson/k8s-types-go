@@ -20,25 +20,25 @@ import (
 type IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceColumnDefinition struct {
 
 	// description is a human readable description of this column.
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" json,yaml:"description,omitempty"`
 
 	// format is an optional OpenAPI type definition for this column. The 'name' format is applied to the primary identifier column to assist in clients identifying column is the resource name. See https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types for details.
-	Format string `json:"format,omitempty"`
+	Format string `json:"format,omitempty" json,yaml:"format,omitempty"`
 
 	// jsonPath is a simple JSON path (i.e. with array notation) which is evaluated against each custom resource to produce the value for this column.
 	// Required: true
-	JSONPath *string `json:"jsonPath"`
+	JSONPath *string `json:"jsonPath" json,yaml:"jsonPath"`
 
 	// name is a human readable name for the column.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 
 	// priority is an integer defining the relative importance of this column compared to others. Lower numbers are considered higher priority. Columns that may be omitted in limited space scenarios should be given a priority greater than 0.
-	Priority int32 `json:"priority,omitempty"`
+	Priority int32 `json:"priority,omitempty" json,yaml:"priority,omitempty"`
 
 	// type is an OpenAPI type definition for this column. See https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types for details.
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s apiextensions apiserver pkg apis apiextensions v1 custom resource column definition

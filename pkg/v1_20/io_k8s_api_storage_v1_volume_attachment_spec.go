@@ -21,15 +21,15 @@ type IoK8sAPIStorageV1VolumeAttachmentSpec struct {
 
 	// Attacher indicates the name of the volume driver that MUST handle this request. This is the name returned by GetPluginName().
 	// Required: true
-	Attacher *string `json:"attacher"`
+	Attacher *string `json:"attacher" json,yaml:"attacher"`
 
 	// The node that the volume should be attached to.
 	// Required: true
-	NodeName *string `json:"nodeName"`
+	NodeName *string `json:"nodeName" json,yaml:"nodeName"`
 
 	// Source represents the volume that should be attached.
 	// Required: true
-	Source *IoK8sAPIStorageV1VolumeAttachmentSource `json:"source"`
+	Source *IoK8sAPIStorageV1VolumeAttachmentSource `json:"source" json,yaml:"source"`
 }
 
 // Validate validates this io k8s api storage v1 volume attachment spec

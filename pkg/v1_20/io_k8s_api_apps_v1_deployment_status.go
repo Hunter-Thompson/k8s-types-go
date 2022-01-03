@@ -20,28 +20,28 @@ import (
 type IoK8sAPIAppsV1DeploymentStatus struct {
 
 	// Total number of available pods (ready for at least minReadySeconds) targeted by this deployment.
-	AvailableReplicas int32 `json:"availableReplicas,omitempty"`
+	AvailableReplicas int32 `json:"availableReplicas,omitempty" json,yaml:"availableReplicas,omitempty"`
 
 	// Count of hash collisions for the Deployment. The Deployment controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ReplicaSet.
-	CollisionCount int32 `json:"collisionCount,omitempty"`
+	CollisionCount int32 `json:"collisionCount,omitempty" json,yaml:"collisionCount,omitempty"`
 
 	// Represents the latest available observations of a deployment's current state.
-	Conditions []*IoK8sAPIAppsV1DeploymentCondition `json:"conditions"`
+	Conditions []*IoK8sAPIAppsV1DeploymentCondition `json:"conditions" json,yaml:"conditions"`
 
 	// The generation observed by the deployment controller.
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" json,yaml:"observedGeneration,omitempty"`
 
-	// readyReplicas is the number of pods targeted by this Deployment with a Ready Condition.
-	ReadyReplicas int32 `json:"readyReplicas,omitempty"`
+	// Total number of ready pods targeted by this deployment.
+	ReadyReplicas int32 `json:"readyReplicas,omitempty" json,yaml:"readyReplicas,omitempty"`
 
 	// Total number of non-terminated pods targeted by this deployment (their labels match the selector).
-	Replicas int32 `json:"replicas,omitempty"`
+	Replicas int32 `json:"replicas,omitempty" json,yaml:"replicas,omitempty"`
 
 	// Total number of unavailable pods targeted by this deployment. This is the total number of pods that are still required for the deployment to have 100% available capacity. They may either be pods that are running but not yet available or pods that still have not been created.
-	UnavailableReplicas int32 `json:"unavailableReplicas,omitempty"`
+	UnavailableReplicas int32 `json:"unavailableReplicas,omitempty" json,yaml:"unavailableReplicas,omitempty"`
 
 	// Total number of non-terminated pods targeted by this deployment that have the desired template spec.
-	UpdatedReplicas int32 `json:"updatedReplicas,omitempty"`
+	UpdatedReplicas int32 `json:"updatedReplicas,omitempty" json,yaml:"updatedReplicas,omitempty"`
 }
 
 // Validate validates this io k8s api apps v1 deployment status

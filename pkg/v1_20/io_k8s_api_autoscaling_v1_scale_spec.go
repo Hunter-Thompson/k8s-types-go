@@ -18,7 +18,7 @@ import (
 type IoK8sAPIAutoscalingV1ScaleSpec struct {
 
 	// desired number of instances for the scaled object.
-	Replicas int32 `json:"replicas,omitempty"`
+	Replicas int32 `json:"replicas,omitempty" json,yaml:"replicas,omitempty"`
 }
 
 // Validate validates this io k8s api autoscaling v1 scale spec

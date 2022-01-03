@@ -20,7 +20,7 @@ import (
 type IoK8sAPICoreV1ScopeSelector struct {
 
 	// A list of scope selector requirements by scope of the resources.
-	MatchExpressions []*IoK8sAPICoreV1ScopedResourceSelectorRequirement `json:"matchExpressions"`
+	MatchExpressions []*IoK8sAPICoreV1ScopedResourceSelectorRequirement `json:"matchExpressions" json,yaml:"matchExpressions"`
 }
 
 // Validate validates this io k8s api core v1 scope selector

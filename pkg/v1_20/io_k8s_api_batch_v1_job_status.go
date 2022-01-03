@@ -19,41 +19,25 @@ import (
 // swagger:model io.k8s.api.batch.v1.JobStatus
 type IoK8sAPIBatchV1JobStatus struct {
 
-	// The number of pending and running pods.
-	Active int32 `json:"active,omitempty"`
-
-	// CompletedIndexes holds the completed indexes when .spec.completionMode = "Indexed" in a text format. The indexes are represented as decimal integers separated by commas. The numbers are listed in increasing order. Three or more consecutive numbers are compressed and represented by the first and last element of the series, separated by a hyphen. For example, if the completed indexes are 1, 3, 4, 5 and 7, they are represented as "1,3-5,7".
-	CompletedIndexes string `json:"completedIndexes,omitempty"`
+	// The number of actively running pods.
+	Active int32 `json:"active,omitempty" json,yaml:"active,omitempty"`
 
 	// Represents time when the job was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC. The completion time is only set when the job finishes successfully.
 	// Format: date-time
-	CompletionTime IoK8sApimachineryPkgApisMetaV1Time `json:"completionTime,omitempty"`
+	CompletionTime IoK8sApimachineryPkgApisMetaV1Time `json:"completionTime,omitempty" json,yaml:"completionTime,omitempty"`
 
-	// The latest available observations of an object's current state. When a Job fails, one of the conditions will have type "Failed" and status true. When a Job is suspended, one of the conditions will have type "Suspended" and status true; when the Job is resumed, the status of this condition will become false. When a Job is completed, one of the conditions will have type "Complete" and status true. More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/
-	Conditions []*IoK8sAPIBatchV1JobCondition `json:"conditions"`
+	// The latest available observations of an object's current state. When a job fails, one of the conditions will have type == "Failed". More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/
+	Conditions []*IoK8sAPIBatchV1JobCondition `json:"conditions" json,yaml:"conditions"`
 
 	// The number of pods which reached phase Failed.
-	Failed int32 `json:"failed,omitempty"`
+	Failed int32 `json:"failed,omitempty" json,yaml:"failed,omitempty"`
 
-	// The number of pods which have a Ready condition.
-	//
-	// This field is alpha-level. The job controller populates the field when the feature gate JobReadyPods is enabled (disabled by default).
-	Ready int32 `json:"ready,omitempty"`
-
-	// Represents time when the job controller started processing a job. When a Job is created in the suspended state, this field is not set until the first time it is resumed. This field is reset every time a Job is resumed from suspension. It is represented in RFC3339 form and is in UTC.
+	// Represents time when the job was acknowledged by the job controller. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.
 	// Format: date-time
-	StartTime IoK8sApimachineryPkgApisMetaV1Time `json:"startTime,omitempty"`
+	StartTime IoK8sApimachineryPkgApisMetaV1Time `json:"startTime,omitempty" json,yaml:"startTime,omitempty"`
 
 	// The number of pods which reached phase Succeeded.
-	Succeeded int32 `json:"succeeded,omitempty"`
-
-	// UncountedTerminatedPods holds the UIDs of Pods that have terminated but the job controller hasn't yet accounted for in the status counters.
-	//
-	// The job controller creates pods with a finalizer. When a pod terminates (succeeded or failed), the controller does three steps to account for it in the job status: (1) Add the pod UID to the arrays in this field. (2) Remove the pod finalizer. (3) Remove the pod UID from the arrays while increasing the corresponding
-	//     counter.
-	//
-	// This field is beta-level. The job controller only makes use of this field when the feature gate JobTrackingWithFinalizers is enabled (enabled by default). Old jobs might not be tracked using this field, in which case the field remains null.
-	UncountedTerminatedPods *IoK8sAPIBatchV1UncountedTerminatedPods `json:"uncountedTerminatedPods,omitempty"`
+	Succeeded int32 `json:"succeeded,omitempty" json,yaml:"succeeded,omitempty"`
 }
 
 // Validate validates this io k8s api batch v1 job status
@@ -69,10 +53,6 @@ func (m *IoK8sAPIBatchV1JobStatus) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateStartTime(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateUncountedTerminatedPods(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -142,25 +122,6 @@ func (m *IoK8sAPIBatchV1JobStatus) validateStartTime(formats strfmt.Registry) er
 	return nil
 }
 
-func (m *IoK8sAPIBatchV1JobStatus) validateUncountedTerminatedPods(formats strfmt.Registry) error {
-	if swag.IsZero(m.UncountedTerminatedPods) { // not required
-		return nil
-	}
-
-	if m.UncountedTerminatedPods != nil {
-		if err := m.UncountedTerminatedPods.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("uncountedTerminatedPods")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("uncountedTerminatedPods")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this io k8s api batch v1 job status based on the context it is used
 func (m *IoK8sAPIBatchV1JobStatus) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -174,10 +135,6 @@ func (m *IoK8sAPIBatchV1JobStatus) ContextValidate(ctx context.Context, formats 
 	}
 
 	if err := m.contextValidateStartTime(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateUncountedTerminatedPods(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -230,22 +187,6 @@ func (m *IoK8sAPIBatchV1JobStatus) contextValidateStartTime(ctx context.Context,
 			return ce.ValidateName("startTime")
 		}
 		return err
-	}
-
-	return nil
-}
-
-func (m *IoK8sAPIBatchV1JobStatus) contextValidateUncountedTerminatedPods(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.UncountedTerminatedPods != nil {
-		if err := m.UncountedTerminatedPods.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("uncountedTerminatedPods")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("uncountedTerminatedPods")
-			}
-			return err
-		}
 	}
 
 	return nil

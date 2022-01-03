@@ -21,11 +21,11 @@ type IoK8sAPICoreV1WeightedPodAffinityTerm struct {
 
 	// Required. A pod affinity term, associated with the corresponding weight.
 	// Required: true
-	PodAffinityTerm *IoK8sAPICoreV1PodAffinityTerm `json:"podAffinityTerm"`
+	PodAffinityTerm *IoK8sAPICoreV1PodAffinityTerm `json:"podAffinityTerm" json,yaml:"podAffinityTerm"`
 
 	// weight associated with matching the corresponding podAffinityTerm, in the range 1-100.
 	// Required: true
-	Weight *int32 `json:"weight"`
+	Weight *int32 `json:"weight" json,yaml:"weight"`
 }
 
 // Validate validates this io k8s api core v1 weighted pod affinity term

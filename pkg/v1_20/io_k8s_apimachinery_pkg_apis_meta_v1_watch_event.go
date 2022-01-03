@@ -25,11 +25,11 @@ type IoK8sApimachineryPkgApisMetaV1WatchEvent struct {
 	//  * If Type is Error: *Status is recommended; other types may make sense
 	//    depending on context.
 	// Required: true
-	Object IoK8sApimachineryPkgRuntimeRawExtension `json:"object"`
+	Object IoK8sApimachineryPkgRuntimeRawExtension `json:"object" json,yaml:"object"`
 
 	// type
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s apimachinery pkg apis meta v1 watch event

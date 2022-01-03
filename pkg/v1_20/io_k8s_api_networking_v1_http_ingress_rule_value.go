@@ -22,7 +22,7 @@ type IoK8sAPINetworkingV1HTTPIngressRuleValue struct {
 
 	// A collection of paths that map requests to backends.
 	// Required: true
-	Paths []*IoK8sAPINetworkingV1HTTPIngressPath `json:"paths"`
+	Paths []*IoK8sAPINetworkingV1HTTPIngressPath `json:"paths" json,yaml:"paths"`
 }
 
 // Validate validates this io k8s api networking v1 HTTP ingress rule value

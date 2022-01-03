@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -22,33 +21,25 @@ type IoK8sAPICoreV1NodeCondition struct {
 
 	// Last time we got an update on a given condition.
 	// Format: date-time
-	LastHeartbeatTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastHeartbeatTime,omitempty"`
+	LastHeartbeatTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastHeartbeatTime,omitempty" json,yaml:"lastHeartbeatTime,omitempty"`
 
 	// Last time the condition transit from one status to another.
 	// Format: date-time
-	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty"`
+	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty" json,yaml:"lastTransitionTime,omitempty"`
 
 	// Human readable message indicating details about last transition.
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// (brief) reason for the condition's last transition.
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty" json,yaml:"reason,omitempty"`
 
 	// Status of the condition, one of True, False, Unknown.
 	// Required: true
-	Status *string `json:"status"`
+	Status *string `json:"status" json,yaml:"status"`
 
 	// Type of node condition.
-	//
-	// Possible enum values:
-	//  - `"DiskPressure"` means the kubelet is under pressure due to insufficient available disk.
-	//  - `"MemoryPressure"` means the kubelet is under pressure due to insufficient available memory.
-	//  - `"NetworkUnavailable"` means that network for the node is not correctly configured.
-	//  - `"PIDPressure"` means the kubelet is under pressure due to insufficient available PID.
-	//  - `"Ready"` means kubelet is healthy and ready to accept pods.
 	// Required: true
-	// Enum: [DiskPressure MemoryPressure NetworkUnavailable PIDPressure Ready]
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s api core v1 node condition
@@ -120,52 +111,9 @@ func (m *IoK8sAPICoreV1NodeCondition) validateStatus(formats strfmt.Registry) er
 	return nil
 }
 
-var ioK8sApiCoreV1NodeConditionTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["DiskPressure","MemoryPressure","NetworkUnavailable","PIDPressure","Ready"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1NodeConditionTypeTypePropEnum = append(ioK8sApiCoreV1NodeConditionTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1NodeConditionTypeDiskPressure captures enum value "DiskPressure"
-	IoK8sAPICoreV1NodeConditionTypeDiskPressure string = "DiskPressure"
-
-	// IoK8sAPICoreV1NodeConditionTypeMemoryPressure captures enum value "MemoryPressure"
-	IoK8sAPICoreV1NodeConditionTypeMemoryPressure string = "MemoryPressure"
-
-	// IoK8sAPICoreV1NodeConditionTypeNetworkUnavailable captures enum value "NetworkUnavailable"
-	IoK8sAPICoreV1NodeConditionTypeNetworkUnavailable string = "NetworkUnavailable"
-
-	// IoK8sAPICoreV1NodeConditionTypePIDPressure captures enum value "PIDPressure"
-	IoK8sAPICoreV1NodeConditionTypePIDPressure string = "PIDPressure"
-
-	// IoK8sAPICoreV1NodeConditionTypeReady captures enum value "Ready"
-	IoK8sAPICoreV1NodeConditionTypeReady string = "Ready"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1NodeCondition) validateTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1NodeConditionTypeTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *IoK8sAPICoreV1NodeCondition) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

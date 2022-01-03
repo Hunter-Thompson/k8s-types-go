@@ -21,15 +21,15 @@ type IoK8sAPIAutoscalingV2beta2HPAScalingPolicy struct {
 
 	// PeriodSeconds specifies the window of time for which the policy should hold true. PeriodSeconds must be greater than zero and less than or equal to 1800 (30 min).
 	// Required: true
-	PeriodSeconds *int32 `json:"periodSeconds"`
+	PeriodSeconds *int32 `json:"periodSeconds" json,yaml:"periodSeconds"`
 
 	// Type is used to specify the scaling policy.
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 
 	// Value contains the amount of change which is permitted by the policy. It must be greater than zero
 	// Required: true
-	Value *int32 `json:"value"`
+	Value *int32 `json:"value" json,yaml:"value"`
 }
 
 // Validate validates this io k8s api autoscaling v2beta2 h p a scaling policy

@@ -18,10 +18,10 @@ import (
 type IoK8sAPIAuthenticationV1TokenReviewSpec struct {
 
 	// Audiences is a list of the identifiers that the resource server presented with the token identifies as. Audience-aware token authenticators will verify that the token was intended for at least one of the audiences in this list. If no audiences are provided, the audience will default to the audience of the Kubernetes apiserver.
-	Audiences []string `json:"audiences"`
+	Audiences []string `json:"audiences" json,yaml:"audiences"`
 
 	// Token is the opaque bearer token.
-	Token string `json:"token,omitempty"`
+	Token string `json:"token,omitempty" json,yaml:"token,omitempty"`
 }
 
 // Validate validates this io k8s api authentication v1 token review spec

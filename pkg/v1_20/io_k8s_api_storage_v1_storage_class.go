@@ -23,35 +23,35 @@ import (
 type IoK8sAPIStorageV1StorageClass struct {
 
 	// AllowVolumeExpansion shows whether the storage class allow volume expand
-	AllowVolumeExpansion bool `json:"allowVolumeExpansion,omitempty"`
+	AllowVolumeExpansion bool `json:"allowVolumeExpansion,omitempty" json,yaml:"allowVolumeExpansion,omitempty"`
 
 	// Restrict the node topologies where volumes can be dynamically provisioned. Each volume plugin defines its own supported topology specifications. An empty TopologySelectorTerm list means there is no topology restriction. This field is only honored by servers that enable the VolumeScheduling feature.
-	AllowedTopologies []*IoK8sAPICoreV1TopologySelectorTerm `json:"allowedTopologies"`
+	AllowedTopologies []*IoK8sAPICoreV1TopologySelectorTerm `json:"allowedTopologies" json,yaml:"allowedTopologies"`
 
 	// APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-	APIVersion string `json:"apiVersion,omitempty"`
+	APIVersion string `json:"apiVersion,omitempty" json,yaml:"apiVersion,omitempty"`
 
 	// Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-	Kind string `json:"kind,omitempty"`
+	Kind string `json:"kind,omitempty" json,yaml:"kind,omitempty"`
 
 	// Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty"`
+	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty" json,yaml:"metadata,omitempty"`
 
 	// Dynamically provisioned PersistentVolumes of this storage class are created with these mountOptions, e.g. ["ro", "soft"]. Not validated - mount of the PVs will simply fail if one is invalid.
-	MountOptions []string `json:"mountOptions"`
+	MountOptions []string `json:"mountOptions" json,yaml:"mountOptions"`
 
 	// Parameters holds the parameters for the provisioner that should create volumes of this storage class.
-	Parameters map[string]string `json:"parameters,omitempty"`
+	Parameters map[string]string `json:"parameters,omitempty" json,yaml:"parameters,omitempty"`
 
 	// Provisioner indicates the type of the provisioner.
 	// Required: true
-	Provisioner *string `json:"provisioner"`
+	Provisioner *string `json:"provisioner" json,yaml:"provisioner"`
 
 	// Dynamically provisioned PersistentVolumes of this storage class are created with this reclaimPolicy. Defaults to Delete.
-	ReclaimPolicy string `json:"reclaimPolicy,omitempty"`
+	ReclaimPolicy string `json:"reclaimPolicy,omitempty" json,yaml:"reclaimPolicy,omitempty"`
 
 	// VolumeBindingMode indicates how PersistentVolumeClaims should be provisioned and bound.  When unset, VolumeBindingImmediate is used. This field is only honored by servers that enable the VolumeScheduling feature.
-	VolumeBindingMode string `json:"volumeBindingMode,omitempty"`
+	VolumeBindingMode string `json:"volumeBindingMode,omitempty" json,yaml:"volumeBindingMode,omitempty"`
 }
 
 // Validate validates this io k8s api storage v1 storage class

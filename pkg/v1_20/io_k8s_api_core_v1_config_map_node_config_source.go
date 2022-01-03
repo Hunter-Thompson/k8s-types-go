@@ -14,28 +14,28 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// IoK8sAPICoreV1ConfigMapNodeConfigSource ConfigMapNodeConfigSource contains the information to reference a ConfigMap as a config source for the Node. This API is deprecated since 1.22: https://git.k8s.io/enhancements/keps/sig-node/281-dynamic-kubelet-configuration
+// IoK8sAPICoreV1ConfigMapNodeConfigSource ConfigMapNodeConfigSource contains the information to reference a ConfigMap as a config source for the Node.
 //
 // swagger:model io.k8s.api.core.v1.ConfigMapNodeConfigSource
 type IoK8sAPICoreV1ConfigMapNodeConfigSource struct {
 
 	// KubeletConfigKey declares which key of the referenced ConfigMap corresponds to the KubeletConfiguration structure This field is required in all cases.
 	// Required: true
-	KubeletConfigKey *string `json:"kubeletConfigKey"`
+	KubeletConfigKey *string `json:"kubeletConfigKey" json,yaml:"kubeletConfigKey"`
 
 	// Name is the metadata.name of the referenced ConfigMap. This field is required in all cases.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 
 	// Namespace is the metadata.namespace of the referenced ConfigMap. This field is required in all cases.
 	// Required: true
-	Namespace *string `json:"namespace"`
+	Namespace *string `json:"namespace" json,yaml:"namespace"`
 
 	// ResourceVersion is the metadata.ResourceVersion of the referenced ConfigMap. This field is forbidden in Node.Spec, and required in Node.Status.
-	ResourceVersion string `json:"resourceVersion,omitempty"`
+	ResourceVersion string `json:"resourceVersion,omitempty" json,yaml:"resourceVersion,omitempty"`
 
 	// UID is the metadata.UID of the referenced ConfigMap. This field is forbidden in Node.Spec, and required in Node.Status.
-	UID string `json:"uid,omitempty"`
+	UID string `json:"uid,omitempty" json,yaml:"uid,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 config map node config source

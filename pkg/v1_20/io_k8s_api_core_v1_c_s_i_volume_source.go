@@ -21,19 +21,19 @@ type IoK8sAPICoreV1CSIVolumeSource struct {
 
 	// Driver is the name of the CSI driver that handles this volume. Consult with your admin for the correct name as registered in the cluster.
 	// Required: true
-	Driver *string `json:"driver"`
+	Driver *string `json:"driver" json,yaml:"driver"`
 
 	// Filesystem type to mount. Ex. "ext4", "xfs", "ntfs". If not provided, the empty value is passed to the associated CSI driver which will determine the default filesystem to apply.
-	FsType string `json:"fsType,omitempty"`
+	FsType string `json:"fsType,omitempty" json,yaml:"fsType,omitempty"`
 
 	// NodePublishSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI NodePublishVolume and NodeUnpublishVolume calls. This field is optional, and  may be empty if no secret is required. If the secret object contains more than one secret, all secret references are passed.
-	NodePublishSecretRef *IoK8sAPICoreV1LocalObjectReference `json:"nodePublishSecretRef,omitempty"`
+	NodePublishSecretRef *IoK8sAPICoreV1LocalObjectReference `json:"nodePublishSecretRef,omitempty" json,yaml:"nodePublishSecretRef,omitempty"`
 
 	// Specifies a read-only configuration for the volume. Defaults to false (read/write).
-	ReadOnly bool `json:"readOnly,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" json,yaml:"readOnly,omitempty"`
 
 	// VolumeAttributes stores driver-specific properties that are passed to the CSI driver. Consult your driver's documentation for supported values.
-	VolumeAttributes map[string]string `json:"volumeAttributes,omitempty"`
+	VolumeAttributes map[string]string `json:"volumeAttributes,omitempty" json,yaml:"volumeAttributes,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 c s i volume source

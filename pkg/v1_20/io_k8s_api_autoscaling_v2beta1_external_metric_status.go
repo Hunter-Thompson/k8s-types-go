@@ -20,18 +20,18 @@ import (
 type IoK8sAPIAutoscalingV2beta1ExternalMetricStatus struct {
 
 	// currentAverageValue is the current value of metric averaged over autoscaled pods.
-	CurrentAverageValue IoK8sApimachineryPkgAPIResourceQuantity `json:"currentAverageValue,omitempty"`
+	CurrentAverageValue IoK8sApimachineryPkgAPIResourceQuantity `json:"currentAverageValue,omitempty" json,yaml:"currentAverageValue,omitempty"`
 
 	// currentValue is the current value of the metric (as a quantity)
 	// Required: true
-	CurrentValue *IoK8sApimachineryPkgAPIResourceQuantity `json:"currentValue"`
+	CurrentValue *IoK8sApimachineryPkgAPIResourceQuantity `json:"currentValue" json,yaml:"currentValue"`
 
 	// metricName is the name of a metric used for autoscaling in metric system.
 	// Required: true
-	MetricName *string `json:"metricName"`
+	MetricName *string `json:"metricName" json,yaml:"metricName"`
 
 	// metricSelector is used to identify a specific time series within a given metric.
-	MetricSelector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"metricSelector,omitempty"`
+	MetricSelector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"metricSelector,omitempty" json,yaml:"metricSelector,omitempty"`
 }
 
 // Validate validates this io k8s api autoscaling v2beta1 external metric status

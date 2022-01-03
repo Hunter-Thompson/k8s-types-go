@@ -20,59 +20,60 @@ import (
 type IoK8sAPIEventsV1Event struct {
 
 	// action is what action was taken/failed regarding to the regarding object. It is machine-readable. This field cannot be empty for new Events and it can have at most 128 characters.
-	Action string `json:"action,omitempty"`
+	Action string `json:"action,omitempty" json,yaml:"action,omitempty"`
 
 	// APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-	APIVersion string `json:"apiVersion,omitempty"`
+	APIVersion string `json:"apiVersion,omitempty" json,yaml:"apiVersion,omitempty"`
 
 	// deprecatedCount is the deprecated field assuring backward compatibility with core.v1 Event type.
-	DeprecatedCount int32 `json:"deprecatedCount,omitempty"`
+	DeprecatedCount int32 `json:"deprecatedCount,omitempty" json,yaml:"deprecatedCount,omitempty"`
 
 	// deprecatedFirstTimestamp is the deprecated field assuring backward compatibility with core.v1 Event type.
 	// Format: date-time
-	DeprecatedFirstTimestamp IoK8sApimachineryPkgApisMetaV1Time `json:"deprecatedFirstTimestamp,omitempty"`
+	DeprecatedFirstTimestamp IoK8sApimachineryPkgApisMetaV1Time `json:"deprecatedFirstTimestamp,omitempty" json,yaml:"deprecatedFirstTimestamp,omitempty"`
 
 	// deprecatedLastTimestamp is the deprecated field assuring backward compatibility with core.v1 Event type.
 	// Format: date-time
-	DeprecatedLastTimestamp IoK8sApimachineryPkgApisMetaV1Time `json:"deprecatedLastTimestamp,omitempty"`
+	DeprecatedLastTimestamp IoK8sApimachineryPkgApisMetaV1Time `json:"deprecatedLastTimestamp,omitempty" json,yaml:"deprecatedLastTimestamp,omitempty"`
 
 	// deprecatedSource is the deprecated field assuring backward compatibility with core.v1 Event type.
-	DeprecatedSource *IoK8sAPICoreV1EventSource `json:"deprecatedSource,omitempty"`
+	DeprecatedSource *IoK8sAPICoreV1EventSource `json:"deprecatedSource,omitempty" json,yaml:"deprecatedSource,omitempty"`
 
 	// eventTime is the time when this Event was first observed. It is required.
 	// Required: true
 	// Format: date-time
-	EventTime *IoK8sApimachineryPkgApisMetaV1MicroTime `json:"eventTime"`
+	EventTime *IoK8sApimachineryPkgApisMetaV1MicroTime `json:"eventTime" json,yaml:"eventTime"`
 
 	// Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-	Kind string `json:"kind,omitempty"`
+	Kind string `json:"kind,omitempty" json,yaml:"kind,omitempty"`
 
-	// Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty"`
+	// metadata
+	// Required: true
+	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata" json,yaml:"metadata"`
 
 	// note is a human-readable description of the status of this operation. Maximal length of the note is 1kB, but libraries should be prepared to handle values up to 64kB.
-	Note string `json:"note,omitempty"`
+	Note string `json:"note,omitempty" json,yaml:"note,omitempty"`
 
 	// reason is why the action was taken. It is human-readable. This field cannot be empty for new Events and it can have at most 128 characters.
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty" json,yaml:"reason,omitempty"`
 
 	// regarding contains the object this Event is about. In most cases it's an Object reporting controller implements, e.g. ReplicaSetController implements ReplicaSets and this event is emitted because it acts on some changes in a ReplicaSet object.
-	Regarding *IoK8sAPICoreV1ObjectReference `json:"regarding,omitempty"`
+	Regarding *IoK8sAPICoreV1ObjectReference `json:"regarding,omitempty" json,yaml:"regarding,omitempty"`
 
 	// related is the optional secondary object for more complex actions. E.g. when regarding object triggers a creation or deletion of related object.
-	Related *IoK8sAPICoreV1ObjectReference `json:"related,omitempty"`
+	Related *IoK8sAPICoreV1ObjectReference `json:"related,omitempty" json,yaml:"related,omitempty"`
 
 	// reportingController is the name of the controller that emitted this Event, e.g. `kubernetes.io/kubelet`. This field cannot be empty for new Events.
-	ReportingController string `json:"reportingController,omitempty"`
+	ReportingController string `json:"reportingController,omitempty" json,yaml:"reportingController,omitempty"`
 
 	// reportingInstance is the ID of the controller instance, e.g. `kubelet-xyzf`. This field cannot be empty for new Events and it can have at most 128 characters.
-	ReportingInstance string `json:"reportingInstance,omitempty"`
+	ReportingInstance string `json:"reportingInstance,omitempty" json,yaml:"reportingInstance,omitempty"`
 
 	// series is data about the Event series this event represents or nil if it's a singleton Event.
-	Series *IoK8sAPIEventsV1EventSeries `json:"series,omitempty"`
+	Series *IoK8sAPIEventsV1EventSeries `json:"series,omitempty" json,yaml:"series,omitempty"`
 
 	// type is the type of this event (Normal, Warning), new types could be added in the future. It is machine-readable. This field cannot be empty for new Events.
-	Type string `json:"type,omitempty"`
+	Type string `json:"type,omitempty" json,yaml:"type,omitempty"`
 }
 
 // Validate validates this io k8s api events v1 event
@@ -195,8 +196,9 @@ func (m *IoK8sAPIEventsV1Event) validateEventTime(formats strfmt.Registry) error
 }
 
 func (m *IoK8sAPIEventsV1Event) validateMetadata(formats strfmt.Registry) error {
-	if swag.IsZero(m.Metadata) { // not required
-		return nil
+
+	if err := validate.Required("metadata", "body", m.Metadata); err != nil {
+		return err
 	}
 
 	if m.Metadata != nil {

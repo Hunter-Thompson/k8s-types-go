@@ -21,14 +21,14 @@ type IoK8sApimachineryPkgApisMetaV1LabelSelectorRequirement struct {
 
 	// key is the label key that the selector applies to.
 	// Required: true
-	Key *string `json:"key"`
+	Key *string `json:"key" json,yaml:"key"`
 
 	// operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
 	// Required: true
-	Operator *string `json:"operator"`
+	Operator *string `json:"operator" json,yaml:"operator"`
 
 	// values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
-	Values []string `json:"values"`
+	Values []string `json:"values" json,yaml:"values"`
 }
 
 // Validate validates this io k8s apimachinery pkg apis meta v1 label selector requirement

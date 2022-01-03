@@ -21,19 +21,19 @@ import (
 type IoK8sAPIAuthorizationV1SubjectRulesReviewStatus struct {
 
 	// EvaluationError can appear in combination with Rules. It indicates an error occurred during rule evaluation, such as an authorizer that doesn't support rule evaluation, and that ResourceRules and/or NonResourceRules may be incomplete.
-	EvaluationError string `json:"evaluationError,omitempty"`
+	EvaluationError string `json:"evaluationError,omitempty" json,yaml:"evaluationError,omitempty"`
 
 	// Incomplete is true when the rules returned by this call are incomplete. This is most commonly encountered when an authorizer, such as an external authorizer, doesn't support rules evaluation.
 	// Required: true
-	Incomplete *bool `json:"incomplete"`
+	Incomplete *bool `json:"incomplete" json,yaml:"incomplete"`
 
 	// NonResourceRules is the list of actions the subject is allowed to perform on non-resources. The list ordering isn't significant, may contain duplicates, and possibly be incomplete.
 	// Required: true
-	NonResourceRules []*IoK8sAPIAuthorizationV1NonResourceRule `json:"nonResourceRules"`
+	NonResourceRules []*IoK8sAPIAuthorizationV1NonResourceRule `json:"nonResourceRules" json,yaml:"nonResourceRules"`
 
 	// ResourceRules is the list of actions the subject is allowed to perform on resources. The list ordering isn't significant, may contain duplicates, and possibly be incomplete.
 	// Required: true
-	ResourceRules []*IoK8sAPIAuthorizationV1ResourceRule `json:"resourceRules"`
+	ResourceRules []*IoK8sAPIAuthorizationV1ResourceRule `json:"resourceRules" json,yaml:"resourceRules"`
 }
 
 // Validate validates this io k8s api authorization v1 subject rules review status

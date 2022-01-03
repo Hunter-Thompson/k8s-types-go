@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -21,15 +20,8 @@ import (
 type IoK8sAPICoreV1PodReadinessGate struct {
 
 	// ConditionType refers to a condition in the pod's condition list with matching type.
-	//
-	// Possible enum values:
-	//  - `"ContainersReady"` indicates whether all containers in the pod are ready.
-	//  - `"Initialized"` means that all init containers in the pod have started successfully.
-	//  - `"PodScheduled"` represents status of the scheduling process for this pod.
-	//  - `"Ready"` means the pod is able to service requests and should be added to the load balancing pools of all matching services.
 	// Required: true
-	// Enum: [ContainersReady Initialized PodScheduled Ready]
-	ConditionType *string `json:"conditionType"`
+	ConditionType *string `json:"conditionType" json,yaml:"conditionType"`
 }
 
 // Validate validates this io k8s api core v1 pod readiness gate
@@ -46,49 +38,9 @@ func (m *IoK8sAPICoreV1PodReadinessGate) Validate(formats strfmt.Registry) error
 	return nil
 }
 
-var ioK8sApiCoreV1PodReadinessGateTypeConditionTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["ContainersReady","Initialized","PodScheduled","Ready"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1PodReadinessGateTypeConditionTypePropEnum = append(ioK8sApiCoreV1PodReadinessGateTypeConditionTypePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1PodReadinessGateConditionTypeContainersReady captures enum value "ContainersReady"
-	IoK8sAPICoreV1PodReadinessGateConditionTypeContainersReady string = "ContainersReady"
-
-	// IoK8sAPICoreV1PodReadinessGateConditionTypeInitialized captures enum value "Initialized"
-	IoK8sAPICoreV1PodReadinessGateConditionTypeInitialized string = "Initialized"
-
-	// IoK8sAPICoreV1PodReadinessGateConditionTypePodScheduled captures enum value "PodScheduled"
-	IoK8sAPICoreV1PodReadinessGateConditionTypePodScheduled string = "PodScheduled"
-
-	// IoK8sAPICoreV1PodReadinessGateConditionTypeReady captures enum value "Ready"
-	IoK8sAPICoreV1PodReadinessGateConditionTypeReady string = "Ready"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1PodReadinessGate) validateConditionTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1PodReadinessGateTypeConditionTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *IoK8sAPICoreV1PodReadinessGate) validateConditionType(formats strfmt.Registry) error {
 
 	if err := validate.Required("conditionType", "body", m.ConditionType); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateConditionTypeEnum("conditionType", "body", *m.ConditionType); err != nil {
 		return err
 	}
 

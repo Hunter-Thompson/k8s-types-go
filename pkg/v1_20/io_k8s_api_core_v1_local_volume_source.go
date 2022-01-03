@@ -19,12 +19,12 @@ import (
 // swagger:model io.k8s.api.core.v1.LocalVolumeSource
 type IoK8sAPICoreV1LocalVolumeSource struct {
 
-	// Filesystem type to mount. It applies only when the Path is a block device. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". The default value is to auto-select a filesystem if unspecified.
-	FsType string `json:"fsType,omitempty"`
+	// Filesystem type to mount. It applies only when the Path is a block device. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". The default value is to auto-select a fileystem if unspecified.
+	FsType string `json:"fsType,omitempty" json,yaml:"fsType,omitempty"`
 
 	// The full path to the volume on the node. It can be either a directory or block device (disk, partition, ...).
 	// Required: true
-	Path *string `json:"path"`
+	Path *string `json:"path" json,yaml:"path"`
 }
 
 // Validate validates this io k8s api core v1 local volume source

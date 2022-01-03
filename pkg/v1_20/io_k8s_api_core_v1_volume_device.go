@@ -21,11 +21,11 @@ type IoK8sAPICoreV1VolumeDevice struct {
 
 	// devicePath is the path inside of the container that the device will be mapped to.
 	// Required: true
-	DevicePath *string `json:"devicePath"`
+	DevicePath *string `json:"devicePath" json,yaml:"devicePath"`
 
 	// name must match the name of a persistentVolumeClaim in the pod
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 }
 
 // Validate validates this io k8s api core v1 volume device

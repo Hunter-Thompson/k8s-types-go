@@ -20,7 +20,7 @@ import (
 type IoK8sAPIRbacV1AggregationRule struct {
 
 	// ClusterRoleSelectors holds a list of selectors which will be used to find ClusterRoles and create the rules. If any of the selectors match, then the ClusterRole's permissions will be added
-	ClusterRoleSelectors []*IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"clusterRoleSelectors"`
+	ClusterRoleSelectors []*IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"clusterRoleSelectors" json,yaml:"clusterRoleSelectors"`
 }
 
 // Validate validates this io k8s api rbac v1 aggregation rule

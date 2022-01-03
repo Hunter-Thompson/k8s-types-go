@@ -20,11 +20,11 @@ import (
 type IoK8sAPICoreV1PersistentVolumeClaimTemplate struct {
 
 	// May contain labels and annotations that will be copied into the PVC when creating it. No other fields are allowed and will be rejected during validation.
-	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty"`
+	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty" json,yaml:"metadata,omitempty"`
 
 	// The specification for the PersistentVolumeClaim. The entire content is copied unchanged into the PVC that gets created from this template. The same fields as in a PersistentVolumeClaim are also valid here.
 	// Required: true
-	Spec *IoK8sAPICoreV1PersistentVolumeClaimSpec `json:"spec"`
+	Spec *IoK8sAPICoreV1PersistentVolumeClaimSpec `json:"spec" json,yaml:"spec"`
 }
 
 // Validate validates this io k8s api core v1 persistent volume claim template

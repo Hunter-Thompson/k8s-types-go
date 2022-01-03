@@ -21,7 +21,7 @@ type IoK8sAPIFlowcontrolV1beta1GroupSubject struct {
 
 	// name is the user group that matches, or "*" to match all user groups. See https://github.com/kubernetes/apiserver/blob/master/pkg/authentication/user/user.go for some well-known group names. Required.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 }
 
 // Validate validates this io k8s api flowcontrol v1beta1 group subject

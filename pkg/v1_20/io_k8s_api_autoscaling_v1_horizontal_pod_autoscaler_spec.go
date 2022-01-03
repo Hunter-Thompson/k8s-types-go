@@ -21,17 +21,17 @@ type IoK8sAPIAutoscalingV1HorizontalPodAutoscalerSpec struct {
 
 	// upper limit for the number of pods that can be set by the autoscaler; cannot be smaller than MinReplicas.
 	// Required: true
-	MaxReplicas *int32 `json:"maxReplicas"`
+	MaxReplicas *int32 `json:"maxReplicas" json,yaml:"maxReplicas"`
 
 	// minReplicas is the lower limit for the number of replicas to which the autoscaler can scale down.  It defaults to 1 pod.  minReplicas is allowed to be 0 if the alpha feature gate HPAScaleToZero is enabled and at least one Object or External metric is configured.  Scaling is active as long as at least one metric value is available.
-	MinReplicas int32 `json:"minReplicas,omitempty"`
+	MinReplicas int32 `json:"minReplicas,omitempty" json,yaml:"minReplicas,omitempty"`
 
 	// reference to scaled resource; horizontal pod autoscaler will learn the current resource consumption and will set the desired number of pods by using its Scale subresource.
 	// Required: true
-	ScaleTargetRef *IoK8sAPIAutoscalingV1CrossVersionObjectReference `json:"scaleTargetRef"`
+	ScaleTargetRef *IoK8sAPIAutoscalingV1CrossVersionObjectReference `json:"scaleTargetRef" json,yaml:"scaleTargetRef"`
 
 	// target average CPU utilization (represented as a percentage of requested CPU) over all the pods; if not specified the default autoscaling policy will be used.
-	TargetCPUUtilizationPercentage int32 `json:"targetCPUUtilizationPercentage,omitempty"`
+	TargetCPUUtilizationPercentage int32 `json:"targetCPUUtilizationPercentage,omitempty" json,yaml:"targetCPUUtilizationPercentage,omitempty"`
 }
 
 // Validate validates this io k8s api autoscaling v1 horizontal pod autoscaler spec

@@ -20,7 +20,7 @@ import (
 type IoK8sAPIFlowcontrolV1beta1PriorityLevelConfigurationStatus struct {
 
 	// `conditions` is the current state of "request-priority".
-	Conditions []*IoK8sAPIFlowcontrolV1beta1PriorityLevelConfigurationCondition `json:"conditions"`
+	Conditions []*IoK8sAPIFlowcontrolV1beta1PriorityLevelConfigurationCondition `json:"conditions" json,yaml:"conditions"`
 }
 
 // Validate validates this io k8s api flowcontrol v1beta1 priority level configuration status

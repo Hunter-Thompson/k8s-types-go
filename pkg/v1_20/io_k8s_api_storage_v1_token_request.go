@@ -21,10 +21,10 @@ type IoK8sAPIStorageV1TokenRequest struct {
 
 	// Audience is the intended audience of the token in "TokenRequestSpec". It will default to the audiences of kube apiserver.
 	// Required: true
-	Audience *string `json:"audience"`
+	Audience *string `json:"audience" json,yaml:"audience"`
 
 	// ExpirationSeconds is the duration of validity of the token in "TokenRequestSpec". It has the same default value of "ExpirationSeconds" in "TokenRequestSpec".
-	ExpirationSeconds int64 `json:"expirationSeconds,omitempty"`
+	ExpirationSeconds int64 `json:"expirationSeconds,omitempty" json,yaml:"expirationSeconds,omitempty"`
 }
 
 // Validate validates this io k8s api storage v1 token request

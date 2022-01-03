@@ -18,16 +18,16 @@ import (
 type IoK8sAPIAuthenticationV1UserInfo struct {
 
 	// Any additional information provided by the authenticator.
-	Extra map[string][]string `json:"extra,omitempty"`
+	Extra map[string][]string `json:"extra,omitempty" json,yaml:"extra,omitempty"`
 
 	// The names of groups this user is a part of.
-	Groups []string `json:"groups"`
+	Groups []string `json:"groups" json,yaml:"groups"`
 
 	// A unique value that identifies this user across time. If this user is deleted and another user by the same name is added, they will have different UIDs.
-	UID string `json:"uid,omitempty"`
+	UID string `json:"uid,omitempty" json,yaml:"uid,omitempty"`
 
 	// The name that uniquely identifies this user among all active users.
-	Username string `json:"username,omitempty"`
+	Username string `json:"username,omitempty" json,yaml:"username,omitempty"`
 }
 
 // Validate validates this io k8s api authentication v1 user info

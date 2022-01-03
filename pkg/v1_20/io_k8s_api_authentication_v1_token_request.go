@@ -20,20 +20,20 @@ import (
 type IoK8sAPIAuthenticationV1TokenRequest struct {
 
 	// APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-	APIVersion string `json:"apiVersion,omitempty"`
+	APIVersion string `json:"apiVersion,omitempty" json,yaml:"apiVersion,omitempty"`
 
 	// Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-	Kind string `json:"kind,omitempty"`
+	Kind string `json:"kind,omitempty" json,yaml:"kind,omitempty"`
 
-	// Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty"`
+	// metadata
+	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty" json,yaml:"metadata,omitempty"`
 
-	// Spec holds information about the request being evaluated
+	// spec
 	// Required: true
-	Spec *IoK8sAPIAuthenticationV1TokenRequestSpec `json:"spec"`
+	Spec *IoK8sAPIAuthenticationV1TokenRequestSpec `json:"spec" json,yaml:"spec"`
 
-	// Status is filled in by the server and indicates whether the token can be authenticated.
-	Status *IoK8sAPIAuthenticationV1TokenRequestStatus `json:"status,omitempty"`
+	// status
+	Status *IoK8sAPIAuthenticationV1TokenRequestStatus `json:"status,omitempty" json,yaml:"status,omitempty"`
 }
 
 // Validate validates this io k8s api authentication v1 token request

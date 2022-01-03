@@ -21,23 +21,23 @@ type IoK8sAPICoreV1VolumeMount struct {
 
 	// Path within the container at which the volume should be mounted.  Must not contain ':'.
 	// Required: true
-	MountPath *string `json:"mountPath"`
+	MountPath *string `json:"mountPath" json,yaml:"mountPath"`
 
 	// mountPropagation determines how mounts are propagated from the host to container and the other way around. When not set, MountPropagationNone is used. This field is beta in 1.10.
-	MountPropagation string `json:"mountPropagation,omitempty"`
+	MountPropagation string `json:"mountPropagation,omitempty" json,yaml:"mountPropagation,omitempty"`
 
 	// This must match the Name of a Volume.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 
 	// Mounted read-only if true, read-write otherwise (false or unspecified). Defaults to false.
-	ReadOnly bool `json:"readOnly,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" json,yaml:"readOnly,omitempty"`
 
 	// Path within the volume from which the container's volume should be mounted. Defaults to "" (volume's root).
-	SubPath string `json:"subPath,omitempty"`
+	SubPath string `json:"subPath,omitempty" json,yaml:"subPath,omitempty"`
 
 	// Expanded path within the volume from which the container's volume should be mounted. Behaves similarly to SubPath but environment variable references $(VAR_NAME) are expanded using the container's environment. Defaults to "" (volume's root). SubPathExpr and SubPath are mutually exclusive.
-	SubPathExpr string `json:"subPathExpr,omitempty"`
+	SubPathExpr string `json:"subPathExpr,omitempty" json,yaml:"subPathExpr,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 volume mount

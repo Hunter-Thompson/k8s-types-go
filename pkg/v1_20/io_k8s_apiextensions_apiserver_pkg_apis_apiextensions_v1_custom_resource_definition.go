@@ -20,20 +20,20 @@ import (
 type IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinition struct {
 
 	// APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-	APIVersion string `json:"apiVersion,omitempty"`
+	APIVersion string `json:"apiVersion,omitempty" json,yaml:"apiVersion,omitempty"`
 
 	// Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-	Kind string `json:"kind,omitempty"`
+	Kind string `json:"kind,omitempty" json,yaml:"kind,omitempty"`
 
-	// Standard object's metadata More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty"`
+	// metadata
+	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty" json,yaml:"metadata,omitempty"`
 
 	// spec describes how the user wants the resources to appear
 	// Required: true
-	Spec *IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionSpec `json:"spec"`
+	Spec *IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionSpec `json:"spec" json,yaml:"spec"`
 
 	// status indicates the actual state of the CustomResourceDefinition
-	Status *IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionStatus `json:"status,omitempty"`
+	Status *IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionStatus `json:"status,omitempty" json,yaml:"status,omitempty"`
 }
 
 // Validate validates this io k8s apiextensions apiserver pkg apis apiextensions v1 custom resource definition

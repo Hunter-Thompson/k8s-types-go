@@ -19,19 +19,19 @@ import (
 type IoK8sAPICoreV1PersistentVolumeClaim struct {
 
 	// APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-	APIVersion string `json:"apiVersion,omitempty"`
+	APIVersion string `json:"apiVersion,omitempty" json,yaml:"apiVersion,omitempty"`
 
 	// Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-	Kind string `json:"kind,omitempty"`
+	Kind string `json:"kind,omitempty" json,yaml:"kind,omitempty"`
 
 	// Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty"`
+	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata,omitempty" json,yaml:"metadata,omitempty"`
 
 	// Spec defines the desired characteristics of a volume requested by a pod author. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
-	Spec *IoK8sAPICoreV1PersistentVolumeClaimSpec `json:"spec,omitempty"`
+	Spec *IoK8sAPICoreV1PersistentVolumeClaimSpec `json:"spec,omitempty" json,yaml:"spec,omitempty"`
 
 	// Status represents the current information/status of a persistent volume claim. Read-only. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
-	Status *IoK8sAPICoreV1PersistentVolumeClaimStatus `json:"status,omitempty"`
+	Status *IoK8sAPICoreV1PersistentVolumeClaimStatus `json:"status,omitempty" json,yaml:"status,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 persistent volume claim

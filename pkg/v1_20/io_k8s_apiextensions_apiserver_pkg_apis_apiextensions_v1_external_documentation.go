@@ -18,10 +18,10 @@ import (
 type IoK8sApiextensionsApiserverPkgApisApiextensionsV1ExternalDocumentation struct {
 
 	// description
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" json,yaml:"description,omitempty"`
 
 	// url
-	URL string `json:"url,omitempty"`
+	URL string `json:"url,omitempty" json,yaml:"url,omitempty"`
 }
 
 // Validate validates this io k8s apiextensions apiserver pkg apis apiextensions v1 external documentation

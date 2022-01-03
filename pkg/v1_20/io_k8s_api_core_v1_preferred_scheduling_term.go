@@ -21,11 +21,11 @@ type IoK8sAPICoreV1PreferredSchedulingTerm struct {
 
 	// A node selector term, associated with the corresponding weight.
 	// Required: true
-	Preference *IoK8sAPICoreV1NodeSelectorTerm `json:"preference"`
+	Preference *IoK8sAPICoreV1NodeSelectorTerm `json:"preference" json,yaml:"preference"`
 
 	// Weight associated with matching the corresponding nodeSelectorTerm, in the range 1-100.
 	// Required: true
-	Weight *int32 `json:"weight"`
+	Weight *int32 `json:"weight" json,yaml:"weight"`
 }
 
 // Validate validates this io k8s api core v1 preferred scheduling term

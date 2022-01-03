@@ -20,23 +20,23 @@ import (
 type IoK8sAPIAutoscalingV2beta1MetricStatus struct {
 
 	// container resource refers to a resource metric (such as those specified in requests and limits) known to Kubernetes describing a single container in each pod in the current scale target (e.g. CPU or memory). Such metrics are built in to Kubernetes, and have special scaling options on top of those available to normal per-pod metrics using the "pods" source.
-	ContainerResource *IoK8sAPIAutoscalingV2beta1ContainerResourceMetricStatus `json:"containerResource,omitempty"`
+	ContainerResource *IoK8sAPIAutoscalingV2beta1ContainerResourceMetricStatus `json:"containerResource,omitempty" json,yaml:"containerResource,omitempty"`
 
 	// external refers to a global metric that is not associated with any Kubernetes object. It allows autoscaling based on information coming from components running outside of cluster (for example length of queue in cloud messaging service, or QPS from loadbalancer running outside of cluster).
-	External *IoK8sAPIAutoscalingV2beta1ExternalMetricStatus `json:"external,omitempty"`
+	External *IoK8sAPIAutoscalingV2beta1ExternalMetricStatus `json:"external,omitempty" json,yaml:"external,omitempty"`
 
 	// object refers to a metric describing a single kubernetes object (for example, hits-per-second on an Ingress object).
-	Object *IoK8sAPIAutoscalingV2beta1ObjectMetricStatus `json:"object,omitempty"`
+	Object *IoK8sAPIAutoscalingV2beta1ObjectMetricStatus `json:"object,omitempty" json,yaml:"object,omitempty"`
 
 	// pods refers to a metric describing each pod in the current scale target (for example, transactions-processed-per-second).  The values will be averaged together before being compared to the target value.
-	Pods *IoK8sAPIAutoscalingV2beta1PodsMetricStatus `json:"pods,omitempty"`
+	Pods *IoK8sAPIAutoscalingV2beta1PodsMetricStatus `json:"pods,omitempty" json,yaml:"pods,omitempty"`
 
 	// resource refers to a resource metric (such as those specified in requests and limits) known to Kubernetes describing each pod in the current scale target (e.g. CPU or memory). Such metrics are built in to Kubernetes, and have special scaling options on top of those available to normal per-pod metrics using the "pods" source.
-	Resource *IoK8sAPIAutoscalingV2beta1ResourceMetricStatus `json:"resource,omitempty"`
+	Resource *IoK8sAPIAutoscalingV2beta1ResourceMetricStatus `json:"resource,omitempty" json,yaml:"resource,omitempty"`
 
 	// type is the type of metric source.  It will be one of "ContainerResource", "External", "Object", "Pods" or "Resource", each corresponds to a matching field in the object. Note: "ContainerResource" type is available on when the feature-gate HPAContainerMetrics is enabled
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s api autoscaling v2beta1 metric status

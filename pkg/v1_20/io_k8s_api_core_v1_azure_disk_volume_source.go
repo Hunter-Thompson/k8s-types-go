@@ -20,24 +20,24 @@ import (
 type IoK8sAPICoreV1AzureDiskVolumeSource struct {
 
 	// Host Caching mode: None, Read Only, Read Write.
-	CachingMode string `json:"cachingMode,omitempty"`
+	CachingMode string `json:"cachingMode,omitempty" json,yaml:"cachingMode,omitempty"`
 
 	// The Name of the data disk in the blob storage
 	// Required: true
-	DiskName *string `json:"diskName"`
+	DiskName *string `json:"diskName" json,yaml:"diskName"`
 
 	// The URI the data disk in the blob storage
 	// Required: true
-	DiskURI *string `json:"diskURI"`
+	DiskURI *string `json:"diskURI" json,yaml:"diskURI"`
 
 	// Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
-	FsType string `json:"fsType,omitempty"`
+	FsType string `json:"fsType,omitempty" json,yaml:"fsType,omitempty"`
 
 	// Expected values Shared: multiple blob disks per storage account  Dedicated: single blob disk per storage account  Managed: azure managed data disk (only in managed availability set). defaults to shared
-	Kind string `json:"kind,omitempty"`
+	Kind string `json:"kind,omitempty" json,yaml:"kind,omitempty"`
 
 	// Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
-	ReadOnly bool `json:"readOnly,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" json,yaml:"readOnly,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 azure disk volume source

@@ -7,12 +7,10 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // IoK8sAPICoreV1PersistentVolumeSpec PersistentVolumeSpec is the specification of a persistent volume.
@@ -21,100 +19,94 @@ import (
 type IoK8sAPICoreV1PersistentVolumeSpec struct {
 
 	// AccessModes contains all ways the volume can be mounted. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes
-	AccessModes []string `json:"accessModes"`
+	AccessModes []string `json:"accessModes" json,yaml:"accessModes"`
 
 	// AWSElasticBlockStore represents an AWS Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
-	AwsElasticBlockStore *IoK8sAPICoreV1AWSElasticBlockStoreVolumeSource `json:"awsElasticBlockStore,omitempty"`
+	AwsElasticBlockStore *IoK8sAPICoreV1AWSElasticBlockStoreVolumeSource `json:"awsElasticBlockStore,omitempty" json,yaml:"awsElasticBlockStore,omitempty"`
 
 	// AzureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
-	AzureDisk *IoK8sAPICoreV1AzureDiskVolumeSource `json:"azureDisk,omitempty"`
+	AzureDisk *IoK8sAPICoreV1AzureDiskVolumeSource `json:"azureDisk,omitempty" json,yaml:"azureDisk,omitempty"`
 
 	// AzureFile represents an Azure File Service mount on the host and bind mount to the pod.
-	AzureFile *IoK8sAPICoreV1AzureFilePersistentVolumeSource `json:"azureFile,omitempty"`
+	AzureFile *IoK8sAPICoreV1AzureFilePersistentVolumeSource `json:"azureFile,omitempty" json,yaml:"azureFile,omitempty"`
 
 	// A description of the persistent volume's resources and capacity. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
-	Capacity map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"capacity,omitempty"`
+	Capacity map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"capacity,omitempty" json,yaml:"capacity,omitempty"`
 
 	// CephFS represents a Ceph FS mount on the host that shares a pod's lifetime
-	Cephfs *IoK8sAPICoreV1CephFSPersistentVolumeSource `json:"cephfs,omitempty"`
+	Cephfs *IoK8sAPICoreV1CephFSPersistentVolumeSource `json:"cephfs,omitempty" json,yaml:"cephfs,omitempty"`
 
 	// Cinder represents a cinder volume attached and mounted on kubelets host machine. More info: https://examples.k8s.io/mysql-cinder-pd/README.md
-	Cinder *IoK8sAPICoreV1CinderPersistentVolumeSource `json:"cinder,omitempty"`
+	Cinder *IoK8sAPICoreV1CinderPersistentVolumeSource `json:"cinder,omitempty" json,yaml:"cinder,omitempty"`
 
 	// ClaimRef is part of a bi-directional binding between PersistentVolume and PersistentVolumeClaim. Expected to be non-nil when bound. claim.VolumeName is the authoritative bind between PV and PVC. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#binding
-	ClaimRef *IoK8sAPICoreV1ObjectReference `json:"claimRef,omitempty"`
+	ClaimRef *IoK8sAPICoreV1ObjectReference `json:"claimRef,omitempty" json,yaml:"claimRef,omitempty"`
 
 	// CSI represents storage that is handled by an external CSI driver (Beta feature).
-	Csi *IoK8sAPICoreV1CSIPersistentVolumeSource `json:"csi,omitempty"`
+	Csi *IoK8sAPICoreV1CSIPersistentVolumeSource `json:"csi,omitempty" json,yaml:"csi,omitempty"`
 
 	// FC represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod.
-	Fc *IoK8sAPICoreV1FCVolumeSource `json:"fc,omitempty"`
+	Fc *IoK8sAPICoreV1FCVolumeSource `json:"fc,omitempty" json,yaml:"fc,omitempty"`
 
 	// FlexVolume represents a generic volume resource that is provisioned/attached using an exec based plugin.
-	FlexVolume *IoK8sAPICoreV1FlexPersistentVolumeSource `json:"flexVolume,omitempty"`
+	FlexVolume *IoK8sAPICoreV1FlexPersistentVolumeSource `json:"flexVolume,omitempty" json,yaml:"flexVolume,omitempty"`
 
 	// Flocker represents a Flocker volume attached to a kubelet's host machine and exposed to the pod for its usage. This depends on the Flocker control service being running
-	Flocker *IoK8sAPICoreV1FlockerVolumeSource `json:"flocker,omitempty"`
+	Flocker *IoK8sAPICoreV1FlockerVolumeSource `json:"flocker,omitempty" json,yaml:"flocker,omitempty"`
 
 	// GCEPersistentDisk represents a GCE Disk resource that is attached to a kubelet's host machine and then exposed to the pod. Provisioned by an admin. More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
-	GcePersistentDisk *IoK8sAPICoreV1GCEPersistentDiskVolumeSource `json:"gcePersistentDisk,omitempty"`
+	GcePersistentDisk *IoK8sAPICoreV1GCEPersistentDiskVolumeSource `json:"gcePersistentDisk,omitempty" json,yaml:"gcePersistentDisk,omitempty"`
 
 	// Glusterfs represents a Glusterfs volume that is attached to a host and exposed to the pod. Provisioned by an admin. More info: https://examples.k8s.io/volumes/glusterfs/README.md
-	Glusterfs *IoK8sAPICoreV1GlusterfsPersistentVolumeSource `json:"glusterfs,omitempty"`
+	Glusterfs *IoK8sAPICoreV1GlusterfsPersistentVolumeSource `json:"glusterfs,omitempty" json,yaml:"glusterfs,omitempty"`
 
 	// HostPath represents a directory on the host. Provisioned by a developer or tester. This is useful for single-node development and testing only! On-host storage is not supported in any way and WILL NOT WORK in a multi-node cluster. More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath
-	HostPath *IoK8sAPICoreV1HostPathVolumeSource `json:"hostPath,omitempty"`
+	HostPath *IoK8sAPICoreV1HostPathVolumeSource `json:"hostPath,omitempty" json,yaml:"hostPath,omitempty"`
 
 	// ISCSI represents an ISCSI Disk resource that is attached to a kubelet's host machine and then exposed to the pod. Provisioned by an admin.
-	Iscsi *IoK8sAPICoreV1ISCSIPersistentVolumeSource `json:"iscsi,omitempty"`
+	Iscsi *IoK8sAPICoreV1ISCSIPersistentVolumeSource `json:"iscsi,omitempty" json,yaml:"iscsi,omitempty"`
 
 	// Local represents directly-attached storage with node affinity
-	Local *IoK8sAPICoreV1LocalVolumeSource `json:"local,omitempty"`
+	Local *IoK8sAPICoreV1LocalVolumeSource `json:"local,omitempty" json,yaml:"local,omitempty"`
 
 	// A list of mount options, e.g. ["ro", "soft"]. Not validated - mount will simply fail if one is invalid. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options
-	MountOptions []string `json:"mountOptions"`
+	MountOptions []string `json:"mountOptions" json,yaml:"mountOptions"`
 
 	// NFS represents an NFS mount on the host. Provisioned by an admin. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs
-	Nfs *IoK8sAPICoreV1NFSVolumeSource `json:"nfs,omitempty"`
+	Nfs *IoK8sAPICoreV1NFSVolumeSource `json:"nfs,omitempty" json,yaml:"nfs,omitempty"`
 
 	// NodeAffinity defines constraints that limit what nodes this volume can be accessed from. This field influences the scheduling of pods that use this volume.
-	NodeAffinity *IoK8sAPICoreV1VolumeNodeAffinity `json:"nodeAffinity,omitempty"`
+	NodeAffinity *IoK8sAPICoreV1VolumeNodeAffinity `json:"nodeAffinity,omitempty" json,yaml:"nodeAffinity,omitempty"`
 
 	// What happens to a persistent volume when released from its claim. Valid options are Retain (default for manually created PersistentVolumes), Delete (default for dynamically provisioned PersistentVolumes), and Recycle (deprecated). Recycle must be supported by the volume plugin underlying this PersistentVolume. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming
-	//
-	// Possible enum values:
-	//  - `"Delete"` means the volume will be deleted from Kubernetes on release from its claim. The volume plugin must support Deletion.
-	//  - `"Recycle"` means the volume will be recycled back into the pool of unbound persistent volumes on release from its claim. The volume plugin must support Recycling.
-	//  - `"Retain"` means the volume will be left in its current phase (Released) for manual reclamation by the administrator. The default policy is Retain.
-	// Enum: [Delete Recycle Retain]
-	PersistentVolumeReclaimPolicy string `json:"persistentVolumeReclaimPolicy,omitempty"`
+	PersistentVolumeReclaimPolicy string `json:"persistentVolumeReclaimPolicy,omitempty" json,yaml:"persistentVolumeReclaimPolicy,omitempty"`
 
 	// PhotonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine
-	PhotonPersistentDisk *IoK8sAPICoreV1PhotonPersistentDiskVolumeSource `json:"photonPersistentDisk,omitempty"`
+	PhotonPersistentDisk *IoK8sAPICoreV1PhotonPersistentDiskVolumeSource `json:"photonPersistentDisk,omitempty" json,yaml:"photonPersistentDisk,omitempty"`
 
 	// PortworxVolume represents a portworx volume attached and mounted on kubelets host machine
-	PortworxVolume *IoK8sAPICoreV1PortworxVolumeSource `json:"portworxVolume,omitempty"`
+	PortworxVolume *IoK8sAPICoreV1PortworxVolumeSource `json:"portworxVolume,omitempty" json,yaml:"portworxVolume,omitempty"`
 
 	// Quobyte represents a Quobyte mount on the host that shares a pod's lifetime
-	Quobyte *IoK8sAPICoreV1QuobyteVolumeSource `json:"quobyte,omitempty"`
+	Quobyte *IoK8sAPICoreV1QuobyteVolumeSource `json:"quobyte,omitempty" json,yaml:"quobyte,omitempty"`
 
 	// RBD represents a Rados Block Device mount on the host that shares a pod's lifetime. More info: https://examples.k8s.io/volumes/rbd/README.md
-	Rbd *IoK8sAPICoreV1RBDPersistentVolumeSource `json:"rbd,omitempty"`
+	Rbd *IoK8sAPICoreV1RBDPersistentVolumeSource `json:"rbd,omitempty" json,yaml:"rbd,omitempty"`
 
 	// ScaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
-	ScaleIO *IoK8sAPICoreV1ScaleIOPersistentVolumeSource `json:"scaleIO,omitempty"`
+	ScaleIO *IoK8sAPICoreV1ScaleIOPersistentVolumeSource `json:"scaleIO,omitempty" json,yaml:"scaleIO,omitempty"`
 
 	// Name of StorageClass to which this persistent volume belongs. Empty value means that this volume does not belong to any StorageClass.
-	StorageClassName string `json:"storageClassName,omitempty"`
+	StorageClassName string `json:"storageClassName,omitempty" json,yaml:"storageClassName,omitempty"`
 
 	// StorageOS represents a StorageOS volume that is attached to the kubelet's host machine and mounted into the pod More info: https://examples.k8s.io/volumes/storageos/README.md
-	Storageos *IoK8sAPICoreV1StorageOSPersistentVolumeSource `json:"storageos,omitempty"`
+	Storageos *IoK8sAPICoreV1StorageOSPersistentVolumeSource `json:"storageos,omitempty" json,yaml:"storageos,omitempty"`
 
 	// volumeMode defines if a volume is intended to be used with a formatted filesystem or to remain in raw block state. Value of Filesystem is implied when not included in spec.
-	VolumeMode string `json:"volumeMode,omitempty"`
+	VolumeMode string `json:"volumeMode,omitempty" json,yaml:"volumeMode,omitempty"`
 
 	// VsphereVolume represents a vSphere volume attached and mounted on kubelets host machine
-	VsphereVolume *IoK8sAPICoreV1VsphereVirtualDiskVolumeSource `json:"vsphereVolume,omitempty"`
+	VsphereVolume *IoK8sAPICoreV1VsphereVirtualDiskVolumeSource `json:"vsphereVolume,omitempty" json,yaml:"vsphereVolume,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 persistent volume spec
@@ -190,10 +182,6 @@ func (m *IoK8sAPICoreV1PersistentVolumeSpec) Validate(formats strfmt.Registry) e
 	}
 
 	if err := m.validateNodeAffinity(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validatePersistentVolumeReclaimPolicy(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -567,51 +555,6 @@ func (m *IoK8sAPICoreV1PersistentVolumeSpec) validateNodeAffinity(formats strfmt
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-var ioK8sApiCoreV1PersistentVolumeSpecTypePersistentVolumeReclaimPolicyPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["Delete","Recycle","Retain"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1PersistentVolumeSpecTypePersistentVolumeReclaimPolicyPropEnum = append(ioK8sApiCoreV1PersistentVolumeSpecTypePersistentVolumeReclaimPolicyPropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1PersistentVolumeSpecPersistentVolumeReclaimPolicyDelete captures enum value "Delete"
-	IoK8sAPICoreV1PersistentVolumeSpecPersistentVolumeReclaimPolicyDelete string = "Delete"
-
-	// IoK8sAPICoreV1PersistentVolumeSpecPersistentVolumeReclaimPolicyRecycle captures enum value "Recycle"
-	IoK8sAPICoreV1PersistentVolumeSpecPersistentVolumeReclaimPolicyRecycle string = "Recycle"
-
-	// IoK8sAPICoreV1PersistentVolumeSpecPersistentVolumeReclaimPolicyRetain captures enum value "Retain"
-	IoK8sAPICoreV1PersistentVolumeSpecPersistentVolumeReclaimPolicyRetain string = "Retain"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1PersistentVolumeSpec) validatePersistentVolumeReclaimPolicyEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1PersistentVolumeSpecTypePersistentVolumeReclaimPolicyPropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *IoK8sAPICoreV1PersistentVolumeSpec) validatePersistentVolumeReclaimPolicy(formats strfmt.Registry) error {
-	if swag.IsZero(m.PersistentVolumeReclaimPolicy) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validatePersistentVolumeReclaimPolicyEnum("persistentVolumeReclaimPolicy", "body", m.PersistentVolumeReclaimPolicy); err != nil {
-		return err
 	}
 
 	return nil

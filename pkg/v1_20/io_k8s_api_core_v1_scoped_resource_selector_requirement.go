@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -21,31 +20,15 @@ import (
 type IoK8sAPICoreV1ScopedResourceSelectorRequirement struct {
 
 	// Represents a scope's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist.
-	//
-	// Possible enum values:
-	//  - `"DoesNotExist"`
-	//  - `"Exists"`
-	//  - `"In"`
-	//  - `"NotIn"`
 	// Required: true
-	// Enum: [DoesNotExist Exists In NotIn]
-	Operator *string `json:"operator"`
+	Operator *string `json:"operator" json,yaml:"operator"`
 
 	// The name of the scope that the selector applies to.
-	//
-	// Possible enum values:
-	//  - `"BestEffort"` Match all pod objects that have best effort quality of service
-	//  - `"CrossNamespacePodAffinity"` Match all pod objects that have cross-namespace pod (anti)affinity mentioned. This is a beta feature enabled by the PodAffinityNamespaceSelector feature flag.
-	//  - `"NotBestEffort"` Match all pod objects that do not have best effort quality of service
-	//  - `"NotTerminating"` Match all pod objects where spec.activeDeadlineSeconds is nil
-	//  - `"PriorityClass"` Match all pod objects that have priority class mentioned
-	//  - `"Terminating"` Match all pod objects where spec.activeDeadlineSeconds >=0
 	// Required: true
-	// Enum: [BestEffort CrossNamespacePodAffinity NotBestEffort NotTerminating PriorityClass Terminating]
-	ScopeName *string `json:"scopeName"`
+	ScopeName *string `json:"scopeName" json,yaml:"scopeName"`
 
 	// An array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
-	Values []string `json:"values"`
+	Values []string `json:"values" json,yaml:"values"`
 }
 
 // Validate validates this io k8s api core v1 scoped resource selector requirement
@@ -66,104 +49,18 @@ func (m *IoK8sAPICoreV1ScopedResourceSelectorRequirement) Validate(formats strfm
 	return nil
 }
 
-var ioK8sApiCoreV1ScopedResourceSelectorRequirementTypeOperatorPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["DoesNotExist","Exists","In","NotIn"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1ScopedResourceSelectorRequirementTypeOperatorPropEnum = append(ioK8sApiCoreV1ScopedResourceSelectorRequirementTypeOperatorPropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1ScopedResourceSelectorRequirementOperatorDoesNotExist captures enum value "DoesNotExist"
-	IoK8sAPICoreV1ScopedResourceSelectorRequirementOperatorDoesNotExist string = "DoesNotExist"
-
-	// IoK8sAPICoreV1ScopedResourceSelectorRequirementOperatorExists captures enum value "Exists"
-	IoK8sAPICoreV1ScopedResourceSelectorRequirementOperatorExists string = "Exists"
-
-	// IoK8sAPICoreV1ScopedResourceSelectorRequirementOperatorIn captures enum value "In"
-	IoK8sAPICoreV1ScopedResourceSelectorRequirementOperatorIn string = "In"
-
-	// IoK8sAPICoreV1ScopedResourceSelectorRequirementOperatorNotIn captures enum value "NotIn"
-	IoK8sAPICoreV1ScopedResourceSelectorRequirementOperatorNotIn string = "NotIn"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1ScopedResourceSelectorRequirement) validateOperatorEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1ScopedResourceSelectorRequirementTypeOperatorPropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *IoK8sAPICoreV1ScopedResourceSelectorRequirement) validateOperator(formats strfmt.Registry) error {
 
 	if err := validate.Required("operator", "body", m.Operator); err != nil {
 		return err
 	}
 
-	// value enum
-	if err := m.validateOperatorEnum("operator", "body", *m.Operator); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var ioK8sApiCoreV1ScopedResourceSelectorRequirementTypeScopeNamePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["BestEffort","CrossNamespacePodAffinity","NotBestEffort","NotTerminating","PriorityClass","Terminating"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1ScopedResourceSelectorRequirementTypeScopeNamePropEnum = append(ioK8sApiCoreV1ScopedResourceSelectorRequirementTypeScopeNamePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1ScopedResourceSelectorRequirementScopeNameBestEffort captures enum value "BestEffort"
-	IoK8sAPICoreV1ScopedResourceSelectorRequirementScopeNameBestEffort string = "BestEffort"
-
-	// IoK8sAPICoreV1ScopedResourceSelectorRequirementScopeNameCrossNamespacePodAffinity captures enum value "CrossNamespacePodAffinity"
-	IoK8sAPICoreV1ScopedResourceSelectorRequirementScopeNameCrossNamespacePodAffinity string = "CrossNamespacePodAffinity"
-
-	// IoK8sAPICoreV1ScopedResourceSelectorRequirementScopeNameNotBestEffort captures enum value "NotBestEffort"
-	IoK8sAPICoreV1ScopedResourceSelectorRequirementScopeNameNotBestEffort string = "NotBestEffort"
-
-	// IoK8sAPICoreV1ScopedResourceSelectorRequirementScopeNameNotTerminating captures enum value "NotTerminating"
-	IoK8sAPICoreV1ScopedResourceSelectorRequirementScopeNameNotTerminating string = "NotTerminating"
-
-	// IoK8sAPICoreV1ScopedResourceSelectorRequirementScopeNamePriorityClass captures enum value "PriorityClass"
-	IoK8sAPICoreV1ScopedResourceSelectorRequirementScopeNamePriorityClass string = "PriorityClass"
-
-	// IoK8sAPICoreV1ScopedResourceSelectorRequirementScopeNameTerminating captures enum value "Terminating"
-	IoK8sAPICoreV1ScopedResourceSelectorRequirementScopeNameTerminating string = "Terminating"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1ScopedResourceSelectorRequirement) validateScopeNameEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1ScopedResourceSelectorRequirementTypeScopeNamePropEnum, true); err != nil {
-		return err
-	}
 	return nil
 }
 
 func (m *IoK8sAPICoreV1ScopedResourceSelectorRequirement) validateScopeName(formats strfmt.Registry) error {
 
 	if err := validate.Required("scopeName", "body", m.ScopeName); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateScopeNameEnum("scopeName", "body", *m.ScopeName); err != nil {
 		return err
 	}
 

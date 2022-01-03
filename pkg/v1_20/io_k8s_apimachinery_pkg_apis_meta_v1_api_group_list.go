@@ -21,14 +21,14 @@ import (
 type IoK8sApimachineryPkgApisMetaV1APIGroupList struct {
 
 	// APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-	APIVersion string `json:"apiVersion,omitempty"`
+	APIVersion string `json:"apiVersion,omitempty" json,yaml:"apiVersion,omitempty"`
 
 	// groups is a list of APIGroup.
 	// Required: true
-	Groups []*IoK8sApimachineryPkgApisMetaV1APIGroup `json:"groups"`
+	Groups []*IoK8sApimachineryPkgApisMetaV1APIGroup `json:"groups" json,yaml:"groups"`
 
 	// Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-	Kind string `json:"kind,omitempty"`
+	Kind string `json:"kind,omitempty" json,yaml:"kind,omitempty"`
 }
 
 // Validate validates this io k8s apimachinery pkg apis meta v1 API group list

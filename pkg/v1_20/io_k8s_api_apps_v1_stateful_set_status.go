@@ -20,46 +20,38 @@ import (
 // swagger:model io.k8s.api.apps.v1.StatefulSetStatus
 type IoK8sAPIAppsV1StatefulSetStatus struct {
 
-	// Total number of available pods (ready for at least minReadySeconds) targeted by this statefulset. This is a beta field and enabled/disabled by StatefulSetMinReadySeconds feature gate.
-	// Required: true
-	AvailableReplicas *int32 `json:"availableReplicas"`
-
 	// collisionCount is the count of hash collisions for the StatefulSet. The StatefulSet controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ControllerRevision.
-	CollisionCount int32 `json:"collisionCount,omitempty"`
+	CollisionCount int32 `json:"collisionCount,omitempty" json,yaml:"collisionCount,omitempty"`
 
 	// Represents the latest available observations of a statefulset's current state.
-	Conditions []*IoK8sAPIAppsV1StatefulSetCondition `json:"conditions"`
+	Conditions []*IoK8sAPIAppsV1StatefulSetCondition `json:"conditions" json,yaml:"conditions"`
 
 	// currentReplicas is the number of Pods created by the StatefulSet controller from the StatefulSet version indicated by currentRevision.
-	CurrentReplicas int32 `json:"currentReplicas,omitempty"`
+	CurrentReplicas int32 `json:"currentReplicas,omitempty" json,yaml:"currentReplicas,omitempty"`
 
 	// currentRevision, if not empty, indicates the version of the StatefulSet used to generate Pods in the sequence [0,currentReplicas).
-	CurrentRevision string `json:"currentRevision,omitempty"`
+	CurrentRevision string `json:"currentRevision,omitempty" json,yaml:"currentRevision,omitempty"`
 
 	// observedGeneration is the most recent generation observed for this StatefulSet. It corresponds to the StatefulSet's generation, which is updated on mutation by the API Server.
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" json,yaml:"observedGeneration,omitempty"`
 
-	// readyReplicas is the number of pods created for this StatefulSet with a Ready Condition.
-	ReadyReplicas int32 `json:"readyReplicas,omitempty"`
+	// readyReplicas is the number of Pods created by the StatefulSet controller that have a Ready Condition.
+	ReadyReplicas int32 `json:"readyReplicas,omitempty" json,yaml:"readyReplicas,omitempty"`
 
 	// replicas is the number of Pods created by the StatefulSet controller.
 	// Required: true
-	Replicas *int32 `json:"replicas"`
+	Replicas *int32 `json:"replicas" json,yaml:"replicas"`
 
 	// updateRevision, if not empty, indicates the version of the StatefulSet used to generate Pods in the sequence [replicas-updatedReplicas,replicas)
-	UpdateRevision string `json:"updateRevision,omitempty"`
+	UpdateRevision string `json:"updateRevision,omitempty" json,yaml:"updateRevision,omitempty"`
 
 	// updatedReplicas is the number of Pods created by the StatefulSet controller from the StatefulSet version indicated by updateRevision.
-	UpdatedReplicas int32 `json:"updatedReplicas,omitempty"`
+	UpdatedReplicas int32 `json:"updatedReplicas,omitempty" json,yaml:"updatedReplicas,omitempty"`
 }
 
 // Validate validates this io k8s api apps v1 stateful set status
 func (m *IoK8sAPIAppsV1StatefulSetStatus) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateAvailableReplicas(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateConditions(formats); err != nil {
 		res = append(res, err)
@@ -72,15 +64,6 @@ func (m *IoK8sAPIAppsV1StatefulSetStatus) Validate(formats strfmt.Registry) erro
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *IoK8sAPIAppsV1StatefulSetStatus) validateAvailableReplicas(formats strfmt.Registry) error {
-
-	if err := validate.Required("availableReplicas", "body", m.AvailableReplicas); err != nil {
-		return err
-	}
-
 	return nil
 }
 

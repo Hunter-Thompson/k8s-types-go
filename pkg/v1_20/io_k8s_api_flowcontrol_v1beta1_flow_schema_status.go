@@ -20,7 +20,7 @@ import (
 type IoK8sAPIFlowcontrolV1beta1FlowSchemaStatus struct {
 
 	// `conditions` is a list of the current states of FlowSchema.
-	Conditions []*IoK8sAPIFlowcontrolV1beta1FlowSchemaCondition `json:"conditions"`
+	Conditions []*IoK8sAPIFlowcontrolV1beta1FlowSchemaCondition `json:"conditions" json,yaml:"conditions"`
 }
 
 // Validate validates this io k8s api flowcontrol v1beta1 flow schema status

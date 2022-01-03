@@ -20,7 +20,7 @@ type IoK8sAPICoreV1ContainerStateRunning struct {
 
 	// Time at which the container was last (re-)started
 	// Format: date-time
-	StartedAt IoK8sApimachineryPkgApisMetaV1Time `json:"startedAt,omitempty"`
+	StartedAt IoK8sApimachineryPkgApisMetaV1Time `json:"startedAt,omitempty" json,yaml:"startedAt,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 container state running

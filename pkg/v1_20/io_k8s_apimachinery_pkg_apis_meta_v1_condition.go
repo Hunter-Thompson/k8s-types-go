@@ -22,26 +22,26 @@ type IoK8sApimachineryPkgApisMetaV1Condition struct {
 	// lastTransitionTime is the last time the condition transitioned from one status to another. This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.
 	// Required: true
 	// Format: date-time
-	LastTransitionTime *IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime"`
+	LastTransitionTime *IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime" json,yaml:"lastTransitionTime"`
 
 	// message is a human readable message indicating details about the transition. This may be an empty string.
 	// Required: true
-	Message *string `json:"message"`
+	Message *string `json:"message" json,yaml:"message"`
 
 	// observedGeneration represents the .metadata.generation that the condition was set based upon. For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date with respect to the current state of the instance.
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" json,yaml:"observedGeneration,omitempty"`
 
 	// reason contains a programmatic identifier indicating the reason for the condition's last transition. Producers of specific condition types may define expected values and meanings for this field, and whether the values are considered a guaranteed API. The value should be a CamelCase string. This field may not be empty.
 	// Required: true
-	Reason *string `json:"reason"`
+	Reason *string `json:"reason" json,yaml:"reason"`
 
 	// status of the condition, one of True, False, Unknown.
 	// Required: true
-	Status *string `json:"status"`
+	Status *string `json:"status" json,yaml:"status"`
 
 	// type of condition in CamelCase or in foo.example.com/CamelCase.
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s apimachinery pkg apis meta v1 condition

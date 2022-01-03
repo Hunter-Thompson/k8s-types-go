@@ -19,17 +19,17 @@ import (
 type IoK8sAPINetworkingV1NetworkPolicyPeer struct {
 
 	// IPBlock defines policy on a particular IPBlock. If this field is set then neither of the other fields can be.
-	IPBlock *IoK8sAPINetworkingV1IPBlock `json:"ipBlock,omitempty"`
+	IPBlock *IoK8sAPINetworkingV1IPBlock `json:"ipBlock,omitempty" json,yaml:"ipBlock,omitempty"`
 
 	// Selects Namespaces using cluster-scoped labels. This field follows standard label selector semantics; if present but empty, it selects all namespaces.
 	//
 	// If PodSelector is also set, then the NetworkPolicyPeer as a whole selects the Pods matching PodSelector in the Namespaces selected by NamespaceSelector. Otherwise it selects all Pods in the Namespaces selected by NamespaceSelector.
-	NamespaceSelector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"namespaceSelector,omitempty"`
+	NamespaceSelector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"namespaceSelector,omitempty" json,yaml:"namespaceSelector,omitempty"`
 
 	// This is a label selector which selects Pods. This field follows standard label selector semantics; if present but empty, it selects all pods.
 	//
 	// If NamespaceSelector is also set, then the NetworkPolicyPeer as a whole selects the Pods matching PodSelector in the Namespaces selected by NamespaceSelector. Otherwise it selects the Pods matching PodSelector in the policy's own Namespace.
-	PodSelector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"podSelector,omitempty"`
+	PodSelector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"podSelector,omitempty" json,yaml:"podSelector,omitempty"`
 }
 
 // Validate validates this io k8s api networking v1 network policy peer

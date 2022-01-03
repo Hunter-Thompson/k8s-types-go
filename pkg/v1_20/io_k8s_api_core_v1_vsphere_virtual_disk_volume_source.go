@@ -20,17 +20,17 @@ import (
 type IoK8sAPICoreV1VsphereVirtualDiskVolumeSource struct {
 
 	// Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
-	FsType string `json:"fsType,omitempty"`
+	FsType string `json:"fsType,omitempty" json,yaml:"fsType,omitempty"`
 
 	// Storage Policy Based Management (SPBM) profile ID associated with the StoragePolicyName.
-	StoragePolicyID string `json:"storagePolicyID,omitempty"`
+	StoragePolicyID string `json:"storagePolicyID,omitempty" json,yaml:"storagePolicyID,omitempty"`
 
 	// Storage Policy Based Management (SPBM) profile name.
-	StoragePolicyName string `json:"storagePolicyName,omitempty"`
+	StoragePolicyName string `json:"storagePolicyName,omitempty" json,yaml:"storagePolicyName,omitempty"`
 
 	// Path that identifies vSphere volume vmdk
 	// Required: true
-	VolumePath *string `json:"volumePath"`
+	VolumePath *string `json:"volumePath" json,yaml:"volumePath"`
 }
 
 // Validate validates this io k8s api core v1 vsphere virtual disk volume source

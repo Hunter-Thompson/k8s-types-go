@@ -19,7 +19,7 @@ import (
 type IoK8sAPINodeV1Overhead struct {
 
 	// PodFixed represents the fixed resource overhead associated with running a pod.
-	PodFixed map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"podFixed,omitempty"`
+	PodFixed map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"podFixed,omitempty" json,yaml:"podFixed,omitempty"`
 }
 
 // Validate validates this io k8s api node v1 overhead

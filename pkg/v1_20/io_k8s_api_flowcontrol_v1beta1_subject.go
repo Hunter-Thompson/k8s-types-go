@@ -19,18 +19,18 @@ import (
 // swagger:model io.k8s.api.flowcontrol.v1beta1.Subject
 type IoK8sAPIFlowcontrolV1beta1Subject struct {
 
-	// `group` matches based on user group name.
-	Group *IoK8sAPIFlowcontrolV1beta1GroupSubject `json:"group,omitempty"`
+	// group
+	Group *IoK8sAPIFlowcontrolV1beta1GroupSubject `json:"group,omitempty" json,yaml:"group,omitempty"`
 
-	// `kind` indicates which one of the other fields is non-empty. Required
+	// Required
 	// Required: true
-	Kind *string `json:"kind"`
+	Kind *string `json:"kind" json,yaml:"kind"`
 
-	// `serviceAccount` matches ServiceAccounts.
-	ServiceAccount *IoK8sAPIFlowcontrolV1beta1ServiceAccountSubject `json:"serviceAccount,omitempty"`
+	// service account
+	ServiceAccount *IoK8sAPIFlowcontrolV1beta1ServiceAccountSubject `json:"serviceAccount,omitempty" json,yaml:"serviceAccount,omitempty"`
 
-	// `user` matches based on username.
-	User *IoK8sAPIFlowcontrolV1beta1UserSubject `json:"user,omitempty"`
+	// user
+	User *IoK8sAPIFlowcontrolV1beta1UserSubject `json:"user,omitempty" json,yaml:"user,omitempty"`
 }
 
 // Validate validates this io k8s api flowcontrol v1beta1 subject

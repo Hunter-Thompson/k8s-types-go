@@ -20,7 +20,7 @@ import (
 type IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceStatus struct {
 
 	// Current service state of apiService.
-	Conditions []*IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceCondition `json:"conditions"`
+	Conditions []*IoK8sKubeAggregatorPkgApisApiregistrationV1APIServiceCondition `json:"conditions" json,yaml:"conditions"`
 }
 
 // Validate validates this io k8s kube aggregator pkg apis apiregistration v1 API service status

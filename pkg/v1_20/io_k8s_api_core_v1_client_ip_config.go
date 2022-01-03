@@ -18,7 +18,7 @@ import (
 type IoK8sAPICoreV1ClientIPConfig struct {
 
 	// timeoutSeconds specifies the seconds of ClientIP type session sticky time. The value must be >0 && <=86400(for 1 day) if ServiceAffinity == "ClientIP". Default value is 10800(for 3 hours).
-	TimeoutSeconds int32 `json:"timeoutSeconds,omitempty"`
+	TimeoutSeconds int32 `json:"timeoutSeconds,omitempty" json,yaml:"timeoutSeconds,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 client IP config

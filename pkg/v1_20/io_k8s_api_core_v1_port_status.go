@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -24,21 +23,15 @@ type IoK8sAPICoreV1PortStatus struct {
 	//   CamelCase names
 	// - cloud provider specific error values must have names that comply with the
 	//   format foo.example.com/CamelCase.
-	Error string `json:"error,omitempty"`
+	Error string `json:"error,omitempty" json,yaml:"error,omitempty"`
 
 	// Port is the port number of the service port of which status is recorded here
 	// Required: true
-	Port *int32 `json:"port"`
+	Port *int32 `json:"port" json,yaml:"port"`
 
 	// Protocol is the protocol of the service port of which status is recorded here The supported values are: "TCP", "UDP", "SCTP"
-	//
-	// Possible enum values:
-	//  - `"SCTP"` is the SCTP protocol.
-	//  - `"TCP"` is the TCP protocol.
-	//  - `"UDP"` is the UDP protocol.
 	// Required: true
-	// Enum: [SCTP TCP UDP]
-	Protocol *string `json:"protocol"`
+	Protocol *string `json:"protocol" json,yaml:"protocol"`
 }
 
 // Validate validates this io k8s api core v1 port status
@@ -68,46 +61,9 @@ func (m *IoK8sAPICoreV1PortStatus) validatePort(formats strfmt.Registry) error {
 	return nil
 }
 
-var ioK8sApiCoreV1PortStatusTypeProtocolPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["SCTP","TCP","UDP"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1PortStatusTypeProtocolPropEnum = append(ioK8sApiCoreV1PortStatusTypeProtocolPropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1PortStatusProtocolSCTP captures enum value "SCTP"
-	IoK8sAPICoreV1PortStatusProtocolSCTP string = "SCTP"
-
-	// IoK8sAPICoreV1PortStatusProtocolTCP captures enum value "TCP"
-	IoK8sAPICoreV1PortStatusProtocolTCP string = "TCP"
-
-	// IoK8sAPICoreV1PortStatusProtocolUDP captures enum value "UDP"
-	IoK8sAPICoreV1PortStatusProtocolUDP string = "UDP"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1PortStatus) validateProtocolEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1PortStatusTypeProtocolPropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *IoK8sAPICoreV1PortStatus) validateProtocol(formats strfmt.Registry) error {
 
 	if err := validate.Required("protocol", "body", m.Protocol); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateProtocolEnum("protocol", "body", *m.Protocol); err != nil {
 		return err
 	}
 

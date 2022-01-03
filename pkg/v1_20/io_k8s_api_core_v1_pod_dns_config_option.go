@@ -18,10 +18,10 @@ import (
 type IoK8sAPICoreV1PodDNSConfigOption struct {
 
 	// Required.
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" json,yaml:"name,omitempty"`
 
 	// value
-	Value string `json:"value,omitempty"`
+	Value string `json:"value,omitempty" json,yaml:"value,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 pod DNS config option

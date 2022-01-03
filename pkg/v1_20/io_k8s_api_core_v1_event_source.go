@@ -18,10 +18,10 @@ import (
 type IoK8sAPICoreV1EventSource struct {
 
 	// Component from which the event is generated.
-	Component string `json:"component,omitempty"`
+	Component string `json:"component,omitempty" json,yaml:"component,omitempty"`
 
 	// Node name on which the event is generated.
-	Host string `json:"host,omitempty"`
+	Host string `json:"host,omitempty" json,yaml:"host,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 event source

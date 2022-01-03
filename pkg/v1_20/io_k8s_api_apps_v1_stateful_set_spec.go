@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -21,56 +20,37 @@ import (
 // swagger:model io.k8s.api.apps.v1.StatefulSetSpec
 type IoK8sAPIAppsV1StatefulSetSpec struct {
 
-	// Minimum number of seconds for which a newly created pod should be ready without any of its container crashing for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready) This is an alpha field and requires enabling StatefulSetMinReadySeconds feature gate.
-	MinReadySeconds int32 `json:"minReadySeconds,omitempty"`
-
-	// persistentVolumeClaimRetentionPolicy describes the lifecycle of persistent volume claims created from volumeClaimTemplates. By default, all persistent volume claims are created as needed and retained until manually deleted. This policy allows the lifecycle to be altered, for example by deleting persistent volume claims when their stateful set is deleted, or when their pod is scaled down. This requires the StatefulSetAutoDeletePVC feature gate to be enabled, which is alpha.  +optional
-	PersistentVolumeClaimRetentionPolicy *IoK8sAPIAppsV1StatefulSetPersistentVolumeClaimRetentionPolicy `json:"persistentVolumeClaimRetentionPolicy,omitempty"`
-
 	// podManagementPolicy controls how pods are created during initial scale up, when replacing pods on nodes, or when scaling down. The default policy is `OrderedReady`, where pods are created in increasing order (pod-0, then pod-1, etc) and the controller will wait until each pod is ready before continuing. When scaling down, the pods are removed in the opposite order. The alternative policy is `Parallel` which will create pods in parallel to match the desired scale without waiting, and on scale down will delete all pods at once.
-	//
-	// Possible enum values:
-	//  - `"OrderedReady"` will create pods in strictly increasing order on scale up and strictly decreasing order on scale down, progressing only when the previous pod is ready or terminated. At most one pod will be changed at any time.
-	//  - `"Parallel"` will create and delete pods as soon as the stateful set replica count is changed, and will not wait for pods to be ready or complete termination.
-	// Enum: [OrderedReady Parallel]
-	PodManagementPolicy string `json:"podManagementPolicy,omitempty"`
+	PodManagementPolicy string `json:"podManagementPolicy,omitempty" json,yaml:"podManagementPolicy,omitempty"`
 
 	// replicas is the desired number of replicas of the given Template. These are replicas in the sense that they are instantiations of the same Template, but individual replicas also have a consistent identity. If unspecified, defaults to 1.
-	Replicas int32 `json:"replicas,omitempty"`
+	Replicas int32 `json:"replicas,omitempty" json,yaml:"replicas,omitempty"`
 
 	// revisionHistoryLimit is the maximum number of revisions that will be maintained in the StatefulSet's revision history. The revision history consists of all revisions not represented by a currently applied StatefulSetSpec version. The default value is 10.
-	RevisionHistoryLimit int32 `json:"revisionHistoryLimit,omitempty"`
+	RevisionHistoryLimit int32 `json:"revisionHistoryLimit,omitempty" json,yaml:"revisionHistoryLimit,omitempty"`
 
 	// selector is a label query over pods that should match the replica count. It must match the pod template's labels. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
 	// Required: true
-	Selector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"selector"`
+	Selector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"selector" json,yaml:"selector"`
 
 	// serviceName is the name of the service that governs this StatefulSet. This service must exist before the StatefulSet, and is responsible for the network identity of the set. Pods get DNS/hostnames that follow the pattern: pod-specific-string.serviceName.default.svc.cluster.local where "pod-specific-string" is managed by the StatefulSet controller.
 	// Required: true
-	ServiceName *string `json:"serviceName"`
+	ServiceName *string `json:"serviceName" json,yaml:"serviceName"`
 
 	// template is the object that describes the pod that will be created if insufficient replicas are detected. Each pod stamped out by the StatefulSet will fulfill this Template, but have a unique identity from the rest of the StatefulSet.
 	// Required: true
-	Template *IoK8sAPICoreV1PodTemplateSpec `json:"template"`
+	Template *IoK8sAPICoreV1PodTemplateSpec `json:"template" json,yaml:"template"`
 
 	// updateStrategy indicates the StatefulSetUpdateStrategy that will be employed to update Pods in the StatefulSet when a revision is made to Template.
-	UpdateStrategy *IoK8sAPIAppsV1StatefulSetUpdateStrategy `json:"updateStrategy,omitempty"`
+	UpdateStrategy *IoK8sAPIAppsV1StatefulSetUpdateStrategy `json:"updateStrategy,omitempty" json,yaml:"updateStrategy,omitempty"`
 
 	// volumeClaimTemplates is a list of claims that pods are allowed to reference. The StatefulSet controller is responsible for mapping network identities to claims in a way that maintains the identity of a pod. Every claim in this list must have at least one matching (by name) volumeMount in one container in the template. A claim in this list takes precedence over any volumes in the template, with the same name.
-	VolumeClaimTemplates []*IoK8sAPICoreV1PersistentVolumeClaim `json:"volumeClaimTemplates"`
+	VolumeClaimTemplates []*IoK8sAPICoreV1PersistentVolumeClaim `json:"volumeClaimTemplates" json,yaml:"volumeClaimTemplates"`
 }
 
 // Validate validates this io k8s api apps v1 stateful set spec
 func (m *IoK8sAPIAppsV1StatefulSetSpec) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validatePersistentVolumeClaimRetentionPolicy(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validatePodManagementPolicy(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateSelector(formats); err != nil {
 		res = append(res, err)
@@ -95,67 +75,6 @@ func (m *IoK8sAPIAppsV1StatefulSetSpec) Validate(formats strfmt.Registry) error 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *IoK8sAPIAppsV1StatefulSetSpec) validatePersistentVolumeClaimRetentionPolicy(formats strfmt.Registry) error {
-	if swag.IsZero(m.PersistentVolumeClaimRetentionPolicy) { // not required
-		return nil
-	}
-
-	if m.PersistentVolumeClaimRetentionPolicy != nil {
-		if err := m.PersistentVolumeClaimRetentionPolicy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("persistentVolumeClaimRetentionPolicy")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("persistentVolumeClaimRetentionPolicy")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-var ioK8sApiAppsV1StatefulSetSpecTypePodManagementPolicyPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["OrderedReady","Parallel"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiAppsV1StatefulSetSpecTypePodManagementPolicyPropEnum = append(ioK8sApiAppsV1StatefulSetSpecTypePodManagementPolicyPropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPIAppsV1StatefulSetSpecPodManagementPolicyOrderedReady captures enum value "OrderedReady"
-	IoK8sAPIAppsV1StatefulSetSpecPodManagementPolicyOrderedReady string = "OrderedReady"
-
-	// IoK8sAPIAppsV1StatefulSetSpecPodManagementPolicyParallel captures enum value "Parallel"
-	IoK8sAPIAppsV1StatefulSetSpecPodManagementPolicyParallel string = "Parallel"
-)
-
-// prop value enum
-func (m *IoK8sAPIAppsV1StatefulSetSpec) validatePodManagementPolicyEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiAppsV1StatefulSetSpecTypePodManagementPolicyPropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *IoK8sAPIAppsV1StatefulSetSpec) validatePodManagementPolicy(formats strfmt.Registry) error {
-	if swag.IsZero(m.PodManagementPolicy) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validatePodManagementPolicyEnum("podManagementPolicy", "body", m.PodManagementPolicy); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -257,10 +176,6 @@ func (m *IoK8sAPIAppsV1StatefulSetSpec) validateVolumeClaimTemplates(formats str
 func (m *IoK8sAPIAppsV1StatefulSetSpec) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidatePersistentVolumeClaimRetentionPolicy(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateSelector(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -280,22 +195,6 @@ func (m *IoK8sAPIAppsV1StatefulSetSpec) ContextValidate(ctx context.Context, for
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *IoK8sAPIAppsV1StatefulSetSpec) contextValidatePersistentVolumeClaimRetentionPolicy(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.PersistentVolumeClaimRetentionPolicy != nil {
-		if err := m.PersistentVolumeClaimRetentionPolicy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("persistentVolumeClaimRetentionPolicy")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("persistentVolumeClaimRetentionPolicy")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

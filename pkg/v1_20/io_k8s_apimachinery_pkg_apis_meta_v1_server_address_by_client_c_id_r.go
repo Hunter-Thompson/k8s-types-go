@@ -21,11 +21,11 @@ type IoK8sApimachineryPkgApisMetaV1ServerAddressByClientCIDR struct {
 
 	// The CIDR with which clients can match their IP to figure out the server address that they should use.
 	// Required: true
-	ClientCIDR *string `json:"clientCIDR"`
+	ClientCIDR *string `json:"clientCIDR" json,yaml:"clientCIDR"`
 
 	// Address of this server, suitable for a client that matches the above CIDR. This can be a hostname, hostname:port, IP or IP:port.
 	// Required: true
-	ServerAddress *string `json:"serverAddress"`
+	ServerAddress *string `json:"serverAddress" json,yaml:"serverAddress"`
 }
 
 // Validate validates this io k8s apimachinery pkg apis meta v1 server address by client c ID r

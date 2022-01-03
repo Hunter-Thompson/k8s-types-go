@@ -13,13 +13,13 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// IoK8sAPICoreV1NodeConfigSource NodeConfigSource specifies a source of node configuration. Exactly one subfield (excluding metadata) must be non-nil. This API is deprecated since 1.22
+// IoK8sAPICoreV1NodeConfigSource NodeConfigSource specifies a source of node configuration. Exactly one subfield (excluding metadata) must be non-nil.
 //
 // swagger:model io.k8s.api.core.v1.NodeConfigSource
 type IoK8sAPICoreV1NodeConfigSource struct {
 
 	// ConfigMap is a reference to a Node's ConfigMap
-	ConfigMap *IoK8sAPICoreV1ConfigMapNodeConfigSource `json:"configMap,omitempty"`
+	ConfigMap *IoK8sAPICoreV1ConfigMapNodeConfigSource `json:"configMap,omitempty" json,yaml:"configMap,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 node config source

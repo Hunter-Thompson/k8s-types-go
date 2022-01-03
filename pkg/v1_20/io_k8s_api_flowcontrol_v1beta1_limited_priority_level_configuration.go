@@ -25,10 +25,10 @@ type IoK8sAPIFlowcontrolV1beta1LimitedPriorityLevelConfiguration struct {
 	//             ACV(l) = ceil( SCL * ACS(l) / ( sum[priority levels k] ACS(k) ) )
 	//
 	// bigger numbers of ACS mean more reserved concurrent requests (at the expense of every other PL). This field has a default value of 30.
-	AssuredConcurrencyShares int32 `json:"assuredConcurrencyShares,omitempty"`
+	AssuredConcurrencyShares int32 `json:"assuredConcurrencyShares,omitempty" json,yaml:"assuredConcurrencyShares,omitempty"`
 
 	// `limitResponse` indicates what to do with requests that can not be executed right now
-	LimitResponse *IoK8sAPIFlowcontrolV1beta1LimitResponse `json:"limitResponse,omitempty"`
+	LimitResponse *IoK8sAPIFlowcontrolV1beta1LimitResponse `json:"limitResponse,omitempty" json,yaml:"limitResponse,omitempty"`
 }
 
 // Validate validates this io k8s api flowcontrol v1beta1 limited priority level configuration

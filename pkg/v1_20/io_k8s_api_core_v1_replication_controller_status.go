@@ -21,23 +21,23 @@ import (
 type IoK8sAPICoreV1ReplicationControllerStatus struct {
 
 	// The number of available replicas (ready for at least minReadySeconds) for this replication controller.
-	AvailableReplicas int32 `json:"availableReplicas,omitempty"`
+	AvailableReplicas int32 `json:"availableReplicas,omitempty" json,yaml:"availableReplicas,omitempty"`
 
 	// Represents the latest available observations of a replication controller's current state.
-	Conditions []*IoK8sAPICoreV1ReplicationControllerCondition `json:"conditions"`
+	Conditions []*IoK8sAPICoreV1ReplicationControllerCondition `json:"conditions" json,yaml:"conditions"`
 
 	// The number of pods that have labels matching the labels of the pod template of the replication controller.
-	FullyLabeledReplicas int32 `json:"fullyLabeledReplicas,omitempty"`
+	FullyLabeledReplicas int32 `json:"fullyLabeledReplicas,omitempty" json,yaml:"fullyLabeledReplicas,omitempty"`
 
 	// ObservedGeneration reflects the generation of the most recently observed replication controller.
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" json,yaml:"observedGeneration,omitempty"`
 
 	// The number of ready replicas for this replication controller.
-	ReadyReplicas int32 `json:"readyReplicas,omitempty"`
+	ReadyReplicas int32 `json:"readyReplicas,omitempty" json,yaml:"readyReplicas,omitempty"`
 
 	// Replicas is the most recently oberved number of replicas. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller
 	// Required: true
-	Replicas *int32 `json:"replicas"`
+	Replicas *int32 `json:"replicas" json,yaml:"replicas"`
 }
 
 // Validate validates this io k8s api core v1 replication controller status

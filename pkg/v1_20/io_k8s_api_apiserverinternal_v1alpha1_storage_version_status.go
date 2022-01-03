@@ -20,13 +20,13 @@ import (
 type IoK8sAPIApiserverinternalV1alpha1StorageVersionStatus struct {
 
 	// If all API server instances agree on the same encoding storage version, then this field is set to that version. Otherwise this field is left empty. API servers should finish updating its storageVersionStatus entry before serving write operations, so that this field will be in sync with the reality.
-	CommonEncodingVersion string `json:"commonEncodingVersion,omitempty"`
+	CommonEncodingVersion string `json:"commonEncodingVersion,omitempty" json,yaml:"commonEncodingVersion,omitempty"`
 
 	// The latest available observations of the storageVersion's state.
-	Conditions []*IoK8sAPIApiserverinternalV1alpha1StorageVersionCondition `json:"conditions"`
+	Conditions []*IoK8sAPIApiserverinternalV1alpha1StorageVersionCondition `json:"conditions" json,yaml:"conditions"`
 
 	// The reported versions per API server instance.
-	StorageVersions []*IoK8sAPIApiserverinternalV1alpha1ServerStorageVersion `json:"storageVersions"`
+	StorageVersions []*IoK8sAPIApiserverinternalV1alpha1ServerStorageVersion `json:"storageVersions" json,yaml:"storageVersions"`
 }
 
 // Validate validates this io k8s api apiserverinternal v1alpha1 storage version status

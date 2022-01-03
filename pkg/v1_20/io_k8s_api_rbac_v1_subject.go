@@ -20,18 +20,18 @@ import (
 type IoK8sAPIRbacV1Subject struct {
 
 	// APIGroup holds the API group of the referenced subject. Defaults to "" for ServiceAccount subjects. Defaults to "rbac.authorization.k8s.io" for User and Group subjects.
-	APIGroup string `json:"apiGroup,omitempty"`
+	APIGroup string `json:"apiGroup,omitempty" json,yaml:"apiGroup,omitempty"`
 
 	// Kind of object being referenced. Values defined by this API group are "User", "Group", and "ServiceAccount". If the Authorizer does not recognized the kind value, the Authorizer should report an error.
 	// Required: true
-	Kind *string `json:"kind"`
+	Kind *string `json:"kind" json,yaml:"kind"`
 
 	// Name of the object being referenced.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 
 	// Namespace of the referenced object.  If the object kind is non-namespace, such as "User" or "Group", and this value is not empty the Authorizer should report an error.
-	Namespace string `json:"namespace,omitempty"`
+	Namespace string `json:"namespace,omitempty" json,yaml:"namespace,omitempty"`
 }
 
 // Validate validates this io k8s api rbac v1 subject

@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -20,47 +19,32 @@ import (
 // swagger:model io.k8s.api.policy.v1beta1.PodDisruptionBudgetStatus
 type IoK8sAPIPolicyV1beta1PodDisruptionBudgetStatus struct {
 
-	// Conditions contain conditions for PDB. The disruption controller sets the DisruptionAllowed condition. The following are known values for the reason field (additional reasons could be added in the future): - SyncFailed: The controller encountered an error and wasn't able to compute
-	//               the number of allowed disruptions. Therefore no disruptions are
-	//               allowed and the status of the condition will be False.
-	// - InsufficientPods: The number of pods are either at or below the number
-	//                     required by the PodDisruptionBudget. No disruptions are
-	//                     allowed and the status of the condition will be False.
-	// - SufficientPods: There are more pods than required by the PodDisruptionBudget.
-	//                   The condition will be True, and the number of allowed
-	//                   disruptions are provided by the disruptionsAllowed property.
-	Conditions []*IoK8sApimachineryPkgApisMetaV1Condition `json:"conditions"`
-
 	// current number of healthy pods
 	// Required: true
-	CurrentHealthy *int32 `json:"currentHealthy"`
+	CurrentHealthy *int32 `json:"currentHealthy" json,yaml:"currentHealthy"`
 
 	// minimum desired number of healthy pods
 	// Required: true
-	DesiredHealthy *int32 `json:"desiredHealthy"`
+	DesiredHealthy *int32 `json:"desiredHealthy" json,yaml:"desiredHealthy"`
 
 	// DisruptedPods contains information about pods whose eviction was processed by the API server eviction subresource handler but has not yet been observed by the PodDisruptionBudget controller. A pod will be in this map from the time when the API server processed the eviction request to the time when the pod is seen by PDB controller as having been marked for deletion (or after a timeout). The key in the map is the name of the pod and the value is the time when the API server processed the eviction request. If the deletion didn't occur and a pod is still there it will be removed from the list automatically by PodDisruptionBudget controller after some time. If everything goes smooth this map should be empty for the most of the time. Large number of entries in the map may indicate problems with pod deletions.
-	DisruptedPods map[string]IoK8sApimachineryPkgApisMetaV1Time `json:"disruptedPods,omitempty"`
+	DisruptedPods map[string]IoK8sApimachineryPkgApisMetaV1Time `json:"disruptedPods,omitempty" json,yaml:"disruptedPods,omitempty"`
 
 	// Number of pod disruptions that are currently allowed.
 	// Required: true
-	DisruptionsAllowed *int32 `json:"disruptionsAllowed"`
+	DisruptionsAllowed *int32 `json:"disruptionsAllowed" json,yaml:"disruptionsAllowed"`
 
 	// total number of pods counted by this disruption budget
 	// Required: true
-	ExpectedPods *int32 `json:"expectedPods"`
+	ExpectedPods *int32 `json:"expectedPods" json,yaml:"expectedPods"`
 
 	// Most recent generation observed when updating this PDB status. DisruptionsAllowed and other status information is valid only if observedGeneration equals to PDB's object generation.
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" json,yaml:"observedGeneration,omitempty"`
 }
 
 // Validate validates this io k8s api policy v1beta1 pod disruption budget status
 func (m *IoK8sAPIPolicyV1beta1PodDisruptionBudgetStatus) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateConditions(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateCurrentHealthy(formats); err != nil {
 		res = append(res, err)
@@ -85,32 +69,6 @@ func (m *IoK8sAPIPolicyV1beta1PodDisruptionBudgetStatus) Validate(formats strfmt
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *IoK8sAPIPolicyV1beta1PodDisruptionBudgetStatus) validateConditions(formats strfmt.Registry) error {
-	if swag.IsZero(m.Conditions) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.Conditions); i++ {
-		if swag.IsZero(m.Conditions[i]) { // not required
-			continue
-		}
-
-		if m.Conditions[i] != nil {
-			if err := m.Conditions[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("conditions" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("conditions" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
 	return nil
 }
 
@@ -172,10 +130,6 @@ func (m *IoK8sAPIPolicyV1beta1PodDisruptionBudgetStatus) validateExpectedPods(fo
 func (m *IoK8sAPIPolicyV1beta1PodDisruptionBudgetStatus) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateConditions(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateDisruptedPods(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -183,26 +137,6 @@ func (m *IoK8sAPIPolicyV1beta1PodDisruptionBudgetStatus) ContextValidate(ctx con
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *IoK8sAPIPolicyV1beta1PodDisruptionBudgetStatus) contextValidateConditions(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Conditions); i++ {
-
-		if m.Conditions[i] != nil {
-			if err := m.Conditions[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("conditions" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("conditions" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
 	return nil
 }
 

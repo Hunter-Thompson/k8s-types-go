@@ -7,12 +7,10 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // IoK8sAPIAppsV1DaemonSetUpdateStrategy DaemonSetUpdateStrategy is a struct used to control the update strategy for a DaemonSet.
@@ -21,15 +19,10 @@ import (
 type IoK8sAPIAppsV1DaemonSetUpdateStrategy struct {
 
 	// Rolling update config params. Present only if type = "RollingUpdate".
-	RollingUpdate *IoK8sAPIAppsV1RollingUpdateDaemonSet `json:"rollingUpdate,omitempty"`
+	RollingUpdate *IoK8sAPIAppsV1RollingUpdateDaemonSet `json:"rollingUpdate,omitempty" json,yaml:"rollingUpdate,omitempty"`
 
 	// Type of daemon set update. Can be "RollingUpdate" or "OnDelete". Default is RollingUpdate.
-	//
-	// Possible enum values:
-	//  - `"OnDelete"` Replace the old daemons only when it's killed
-	//  - `"RollingUpdate"` Replace the old daemons by new ones using rolling update i.e replace them on each node one after the other.
-	// Enum: [OnDelete RollingUpdate]
-	Type string `json:"type,omitempty"`
+	Type string `json:"type,omitempty" json,yaml:"type,omitempty"`
 }
 
 // Validate validates this io k8s api apps v1 daemon set update strategy
@@ -37,10 +30,6 @@ func (m *IoK8sAPIAppsV1DaemonSetUpdateStrategy) Validate(formats strfmt.Registry
 	var res []error
 
 	if err := m.validateRollingUpdate(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -64,48 +53,6 @@ func (m *IoK8sAPIAppsV1DaemonSetUpdateStrategy) validateRollingUpdate(formats st
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-var ioK8sApiAppsV1DaemonSetUpdateStrategyTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["OnDelete","RollingUpdate"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiAppsV1DaemonSetUpdateStrategyTypeTypePropEnum = append(ioK8sApiAppsV1DaemonSetUpdateStrategyTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPIAppsV1DaemonSetUpdateStrategyTypeOnDelete captures enum value "OnDelete"
-	IoK8sAPIAppsV1DaemonSetUpdateStrategyTypeOnDelete string = "OnDelete"
-
-	// IoK8sAPIAppsV1DaemonSetUpdateStrategyTypeRollingUpdate captures enum value "RollingUpdate"
-	IoK8sAPIAppsV1DaemonSetUpdateStrategyTypeRollingUpdate string = "RollingUpdate"
-)
-
-// prop value enum
-func (m *IoK8sAPIAppsV1DaemonSetUpdateStrategy) validateTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiAppsV1DaemonSetUpdateStrategyTypeTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *IoK8sAPIAppsV1DaemonSetUpdateStrategy) validateType(formats strfmt.Registry) error {
-	if swag.IsZero(m.Type) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
-		return err
 	}
 
 	return nil

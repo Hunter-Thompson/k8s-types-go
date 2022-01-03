@@ -21,11 +21,11 @@ type IoK8sAPIAutoscalingV2beta2ResourceMetricSource struct {
 
 	// name is the name of the resource in question.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 
 	// target specifies the target value for the given metric
 	// Required: true
-	Target *IoK8sAPIAutoscalingV2beta2MetricTarget `json:"target"`
+	Target *IoK8sAPIAutoscalingV2beta2MetricTarget `json:"target" json,yaml:"target"`
 }
 
 // Validate validates this io k8s api autoscaling v2beta2 resource metric source

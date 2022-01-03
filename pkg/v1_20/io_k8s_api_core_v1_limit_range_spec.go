@@ -22,7 +22,7 @@ type IoK8sAPICoreV1LimitRangeSpec struct {
 
 	// Limits is the list of LimitRangeItem objects that are enforced.
 	// Required: true
-	Limits []*IoK8sAPICoreV1LimitRangeItem `json:"limits"`
+	Limits []*IoK8sAPICoreV1LimitRangeItem `json:"limits" json,yaml:"limits"`
 }
 
 // Validate validates this io k8s api core v1 limit range spec

@@ -21,39 +21,39 @@ type IoK8sApimachineryPkgVersionInfo struct {
 
 	// build date
 	// Required: true
-	BuildDate *string `json:"buildDate"`
+	BuildDate *string `json:"buildDate" json,yaml:"buildDate"`
 
 	// compiler
 	// Required: true
-	Compiler *string `json:"compiler"`
+	Compiler *string `json:"compiler" json,yaml:"compiler"`
 
 	// git commit
 	// Required: true
-	GitCommit *string `json:"gitCommit"`
+	GitCommit *string `json:"gitCommit" json,yaml:"gitCommit"`
 
 	// git tree state
 	// Required: true
-	GitTreeState *string `json:"gitTreeState"`
+	GitTreeState *string `json:"gitTreeState" json,yaml:"gitTreeState"`
 
 	// git version
 	// Required: true
-	GitVersion *string `json:"gitVersion"`
+	GitVersion *string `json:"gitVersion" json,yaml:"gitVersion"`
 
 	// go version
 	// Required: true
-	GoVersion *string `json:"goVersion"`
+	GoVersion *string `json:"goVersion" json,yaml:"goVersion"`
 
 	// major
 	// Required: true
-	Major *string `json:"major"`
+	Major *string `json:"major" json,yaml:"major"`
 
 	// minor
 	// Required: true
-	Minor *string `json:"minor"`
+	Minor *string `json:"minor" json,yaml:"minor"`
 
 	// platform
 	// Required: true
-	Platform *string `json:"platform"`
+	Platform *string `json:"platform" json,yaml:"platform"`
 }
 
 // Validate validates this io k8s apimachinery pkg version info

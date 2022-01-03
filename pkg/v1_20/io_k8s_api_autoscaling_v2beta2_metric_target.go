@@ -20,17 +20,17 @@ import (
 type IoK8sAPIAutoscalingV2beta2MetricTarget struct {
 
 	// averageUtilization is the target value of the average of the resource metric across all relevant pods, represented as a percentage of the requested value of the resource for the pods. Currently only valid for Resource metric source type
-	AverageUtilization int32 `json:"averageUtilization,omitempty"`
+	AverageUtilization int32 `json:"averageUtilization,omitempty" json,yaml:"averageUtilization,omitempty"`
 
 	// averageValue is the target value of the average of the metric across all relevant pods (as a quantity)
-	AverageValue IoK8sApimachineryPkgAPIResourceQuantity `json:"averageValue,omitempty"`
+	AverageValue IoK8sApimachineryPkgAPIResourceQuantity `json:"averageValue,omitempty" json,yaml:"averageValue,omitempty"`
 
 	// type represents whether the metric type is Utilization, Value, or AverageValue
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 
 	// value is the target value of the metric (as a quantity).
-	Value IoK8sApimachineryPkgAPIResourceQuantity `json:"value,omitempty"`
+	Value IoK8sApimachineryPkgAPIResourceQuantity `json:"value,omitempty" json,yaml:"value,omitempty"`
 }
 
 // Validate validates this io k8s api autoscaling v2beta2 metric target

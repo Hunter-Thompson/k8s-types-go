@@ -19,26 +19,23 @@ import (
 type IoK8sApimachineryPkgApisMetaV1ManagedFieldsEntry struct {
 
 	// APIVersion defines the version of this resource that this field set applies to. The format is "group/version" just like the top-level APIVersion field. It is necessary to track the version of a field set because it cannot be automatically converted.
-	APIVersion string `json:"apiVersion,omitempty"`
+	APIVersion string `json:"apiVersion,omitempty" json,yaml:"apiVersion,omitempty"`
 
 	// FieldsType is the discriminator for the different fields format and version. There is currently only one possible value: "FieldsV1"
-	FieldsType string `json:"fieldsType,omitempty"`
+	FieldsType string `json:"fieldsType,omitempty" json,yaml:"fieldsType,omitempty"`
 
 	// FieldsV1 holds the first JSON version format as described in the "FieldsV1" type.
-	FieldsV1 IoK8sApimachineryPkgApisMetaV1FieldsV1 `json:"fieldsV1,omitempty"`
+	FieldsV1 IoK8sApimachineryPkgApisMetaV1FieldsV1 `json:"fieldsV1,omitempty" json,yaml:"fieldsV1,omitempty"`
 
 	// Manager is an identifier of the workflow managing these fields.
-	Manager string `json:"manager,omitempty"`
+	Manager string `json:"manager,omitempty" json,yaml:"manager,omitempty"`
 
 	// Operation is the type of operation which lead to this ManagedFieldsEntry being created. The only valid values for this field are 'Apply' and 'Update'.
-	Operation string `json:"operation,omitempty"`
-
-	// Subresource is the name of the subresource used to update that object, or empty string if the object was updated through the main resource. The value of this field is used to distinguish between managers, even if they share the same name. For example, a status update will be distinct from a regular update using the same manager name. Note that the APIVersion field is not related to the Subresource field and it always corresponds to the version of the main resource.
-	Subresource string `json:"subresource,omitempty"`
+	Operation string `json:"operation,omitempty" json,yaml:"operation,omitempty"`
 
 	// Time is timestamp of when these fields were set. It should always be empty if Operation is 'Apply'
 	// Format: date-time
-	Time IoK8sApimachineryPkgApisMetaV1Time `json:"time,omitempty"`
+	Time IoK8sApimachineryPkgApisMetaV1Time `json:"time,omitempty" json,yaml:"time,omitempty"`
 }
 
 // Validate validates this io k8s apimachinery pkg apis meta v1 managed fields entry

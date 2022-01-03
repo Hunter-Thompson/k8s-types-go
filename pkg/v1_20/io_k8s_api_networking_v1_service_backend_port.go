@@ -18,10 +18,10 @@ import (
 type IoK8sAPINetworkingV1ServiceBackendPort struct {
 
 	// Name is the name of the port on the Service. This is a mutually exclusive setting with "Number".
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" json,yaml:"name,omitempty"`
 
 	// Number is the numerical port number (e.g. 80) on the Service. This is a mutually exclusive setting with "Name".
-	Number int32 `json:"number,omitempty"`
+	Number int32 `json:"number,omitempty" json,yaml:"number,omitempty"`
 }
 
 // Validate validates this io k8s api networking v1 service backend port

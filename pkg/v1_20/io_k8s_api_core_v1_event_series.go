@@ -19,11 +19,11 @@ import (
 type IoK8sAPICoreV1EventSeries struct {
 
 	// Number of occurrences in this series up to the last heartbeat time
-	Count int32 `json:"count,omitempty"`
+	Count int32 `json:"count,omitempty" json,yaml:"count,omitempty"`
 
 	// Time of the last occurrence observed
 	// Format: date-time
-	LastObservedTime IoK8sApimachineryPkgApisMetaV1MicroTime `json:"lastObservedTime,omitempty"`
+	LastObservedTime IoK8sApimachineryPkgApisMetaV1MicroTime `json:"lastObservedTime,omitempty" json,yaml:"lastObservedTime,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 event series

@@ -21,25 +21,26 @@ import (
 type IoK8sAPIAutoscalingV2beta1HorizontalPodAutoscalerStatus struct {
 
 	// conditions is the set of conditions required for this autoscaler to scale its target, and indicates whether or not those conditions are met.
-	Conditions []*IoK8sAPIAutoscalingV2beta1HorizontalPodAutoscalerCondition `json:"conditions"`
+	// Required: true
+	Conditions []*IoK8sAPIAutoscalingV2beta1HorizontalPodAutoscalerCondition `json:"conditions" json,yaml:"conditions"`
 
 	// currentMetrics is the last read state of the metrics used by this autoscaler.
-	CurrentMetrics []*IoK8sAPIAutoscalingV2beta1MetricStatus `json:"currentMetrics"`
+	CurrentMetrics []*IoK8sAPIAutoscalingV2beta1MetricStatus `json:"currentMetrics" json,yaml:"currentMetrics"`
 
 	// currentReplicas is current number of replicas of pods managed by this autoscaler, as last seen by the autoscaler.
 	// Required: true
-	CurrentReplicas *int32 `json:"currentReplicas"`
+	CurrentReplicas *int32 `json:"currentReplicas" json,yaml:"currentReplicas"`
 
 	// desiredReplicas is the desired number of replicas of pods managed by this autoscaler, as last calculated by the autoscaler.
 	// Required: true
-	DesiredReplicas *int32 `json:"desiredReplicas"`
+	DesiredReplicas *int32 `json:"desiredReplicas" json,yaml:"desiredReplicas"`
 
 	// lastScaleTime is the last time the HorizontalPodAutoscaler scaled the number of pods, used by the autoscaler to control how often the number of pods is changed.
 	// Format: date-time
-	LastScaleTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastScaleTime,omitempty"`
+	LastScaleTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastScaleTime,omitempty" json,yaml:"lastScaleTime,omitempty"`
 
 	// observedGeneration is the most recent generation observed by this autoscaler.
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" json,yaml:"observedGeneration,omitempty"`
 }
 
 // Validate validates this io k8s api autoscaling v2beta1 horizontal pod autoscaler status
@@ -73,8 +74,9 @@ func (m *IoK8sAPIAutoscalingV2beta1HorizontalPodAutoscalerStatus) Validate(forma
 }
 
 func (m *IoK8sAPIAutoscalingV2beta1HorizontalPodAutoscalerStatus) validateConditions(formats strfmt.Registry) error {
-	if swag.IsZero(m.Conditions) { // not required
-		return nil
+
+	if err := validate.Required("conditions", "body", m.Conditions); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Conditions); i++ {

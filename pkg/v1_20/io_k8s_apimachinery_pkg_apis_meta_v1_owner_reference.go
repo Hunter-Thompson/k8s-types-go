@@ -21,25 +21,25 @@ type IoK8sApimachineryPkgApisMetaV1OwnerReference struct {
 
 	// API version of the referent.
 	// Required: true
-	APIVersion *string `json:"apiVersion"`
+	APIVersion *string `json:"apiVersion" json,yaml:"apiVersion"`
 
 	// If true, AND if the owner has the "foregroundDeletion" finalizer, then the owner cannot be deleted from the key-value store until this reference is removed. Defaults to false. To set this field, a user needs "delete" permission of the owner, otherwise 422 (Unprocessable Entity) will be returned.
-	BlockOwnerDeletion bool `json:"blockOwnerDeletion,omitempty"`
+	BlockOwnerDeletion bool `json:"blockOwnerDeletion,omitempty" json,yaml:"blockOwnerDeletion,omitempty"`
 
 	// If true, this reference points to the managing controller.
-	Controller bool `json:"controller,omitempty"`
+	Controller bool `json:"controller,omitempty" json,yaml:"controller,omitempty"`
 
 	// Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 	// Required: true
-	Kind *string `json:"kind"`
+	Kind *string `json:"kind" json,yaml:"kind"`
 
 	// Name of the referent. More info: http://kubernetes.io/docs/user-guide/identifiers#names
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 
 	// UID of the referent. More info: http://kubernetes.io/docs/user-guide/identifiers#uids
 	// Required: true
-	UID *string `json:"uid"`
+	UID *string `json:"uid" json,yaml:"uid"`
 }
 
 // Validate validates this io k8s apimachinery pkg apis meta v1 owner reference

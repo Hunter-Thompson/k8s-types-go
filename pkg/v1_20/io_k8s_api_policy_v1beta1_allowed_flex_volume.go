@@ -21,7 +21,7 @@ type IoK8sAPIPolicyV1beta1AllowedFlexVolume struct {
 
 	// driver is the name of the Flexvolume driver.
 	// Required: true
-	Driver *string `json:"driver"`
+	Driver *string `json:"driver" json,yaml:"driver"`
 }
 
 // Validate validates this io k8s api policy v1beta1 allowed flex volume

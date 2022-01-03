@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -21,19 +20,13 @@ import (
 type IoK8sAPICoreV1SeccompProfile struct {
 
 	// localhostProfile indicates a profile defined in a file on the node should be used. The profile must be preconfigured on the node to work. Must be a descending path, relative to the kubelet's configured seccomp profile location. Must only be set if type is "Localhost".
-	LocalhostProfile string `json:"localhostProfile,omitempty"`
+	LocalhostProfile string `json:"localhostProfile,omitempty" json,yaml:"localhostProfile,omitempty"`
 
 	// type indicates which kind of seccomp profile will be applied. Valid options are:
 	//
 	// Localhost - a profile defined in a file on the node should be used. RuntimeDefault - the container runtime default profile should be used. Unconfined - no profile should be applied.
-	//
-	// Possible enum values:
-	//  - `"Localhost"` indicates a profile defined in a file on the node should be used. The file's location relative to <kubelet-root-dir>/seccomp.
-	//  - `"RuntimeDefault"` represents the default container runtime seccomp profile.
-	//  - `"Unconfined"` indicates no seccomp profile is applied (A.K.A. unconfined).
 	// Required: true
-	// Enum: [Localhost RuntimeDefault Unconfined]
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s api core v1 seccomp profile
@@ -50,46 +43,9 @@ func (m *IoK8sAPICoreV1SeccompProfile) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var ioK8sApiCoreV1SeccompProfileTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["Localhost","RuntimeDefault","Unconfined"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1SeccompProfileTypeTypePropEnum = append(ioK8sApiCoreV1SeccompProfileTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1SeccompProfileTypeLocalhost captures enum value "Localhost"
-	IoK8sAPICoreV1SeccompProfileTypeLocalhost string = "Localhost"
-
-	// IoK8sAPICoreV1SeccompProfileTypeRuntimeDefault captures enum value "RuntimeDefault"
-	IoK8sAPICoreV1SeccompProfileTypeRuntimeDefault string = "RuntimeDefault"
-
-	// IoK8sAPICoreV1SeccompProfileTypeUnconfined captures enum value "Unconfined"
-	IoK8sAPICoreV1SeccompProfileTypeUnconfined string = "Unconfined"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1SeccompProfile) validateTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1SeccompProfileTypeTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *IoK8sAPICoreV1SeccompProfile) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

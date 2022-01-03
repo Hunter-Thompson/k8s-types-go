@@ -20,7 +20,7 @@ import (
 type IoK8sAPICoreV1LoadBalancerStatus struct {
 
 	// Ingress is a list containing ingress points for the load-balancer. Traffic intended for the service should be sent to these ingress points.
-	Ingress []*IoK8sAPICoreV1LoadBalancerIngress `json:"ingress"`
+	Ingress []*IoK8sAPICoreV1LoadBalancerIngress `json:"ingress" json,yaml:"ingress"`
 }
 
 // Validate validates this io k8s api core v1 load balancer status

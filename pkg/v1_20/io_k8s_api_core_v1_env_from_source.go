@@ -19,13 +19,13 @@ import (
 type IoK8sAPICoreV1EnvFromSource struct {
 
 	// The ConfigMap to select from
-	ConfigMapRef *IoK8sAPICoreV1ConfigMapEnvSource `json:"configMapRef,omitempty"`
+	ConfigMapRef *IoK8sAPICoreV1ConfigMapEnvSource `json:"configMapRef,omitempty" json,yaml:"configMapRef,omitempty"`
 
 	// An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
-	Prefix string `json:"prefix,omitempty"`
+	Prefix string `json:"prefix,omitempty" json,yaml:"prefix,omitempty"`
 
 	// The Secret to select from
-	SecretRef *IoK8sAPICoreV1SecretEnvSource `json:"secretRef,omitempty"`
+	SecretRef *IoK8sAPICoreV1SecretEnvSource `json:"secretRef,omitempty" json,yaml:"secretRef,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 env from source

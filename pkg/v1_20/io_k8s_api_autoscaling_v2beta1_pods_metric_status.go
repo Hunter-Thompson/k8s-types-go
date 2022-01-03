@@ -21,14 +21,14 @@ type IoK8sAPIAutoscalingV2beta1PodsMetricStatus struct {
 
 	// currentAverageValue is the current value of the average of the metric across all relevant pods (as a quantity)
 	// Required: true
-	CurrentAverageValue *IoK8sApimachineryPkgAPIResourceQuantity `json:"currentAverageValue"`
+	CurrentAverageValue *IoK8sApimachineryPkgAPIResourceQuantity `json:"currentAverageValue" json,yaml:"currentAverageValue"`
 
 	// metricName is the name of the metric in question
 	// Required: true
-	MetricName *string `json:"metricName"`
+	MetricName *string `json:"metricName" json,yaml:"metricName"`
 
 	// selector is the string-encoded form of a standard kubernetes label selector for the given metric When set in the PodsMetricSource, it is passed as an additional parameter to the metrics server for more specific metrics scoping. When unset, just the metricName will be used to gather metrics.
-	Selector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"selector,omitempty"`
+	Selector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"selector,omitempty" json,yaml:"selector,omitempty"`
 }
 
 // Validate validates this io k8s api autoscaling v2beta1 pods metric status

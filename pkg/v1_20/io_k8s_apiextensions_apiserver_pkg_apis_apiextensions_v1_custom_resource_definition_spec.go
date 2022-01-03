@@ -21,26 +21,26 @@ import (
 type IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionSpec struct {
 
 	// conversion defines conversion settings for the CRD.
-	Conversion *IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceConversion `json:"conversion,omitempty"`
+	Conversion *IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceConversion `json:"conversion,omitempty" json,yaml:"conversion,omitempty"`
 
 	// group is the API group of the defined custom resource. The custom resources are served under `/apis/<group>/...`. Must match the name of the CustomResourceDefinition (in the form `<names.plural>.<group>`).
 	// Required: true
-	Group *string `json:"group"`
+	Group *string `json:"group" json,yaml:"group"`
 
 	// names specify the resource and kind names for the custom resource.
 	// Required: true
-	Names *IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionNames `json:"names"`
+	Names *IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionNames `json:"names" json,yaml:"names"`
 
 	// preserveUnknownFields indicates that object fields which are not specified in the OpenAPI schema should be preserved when persisting to storage. apiVersion, kind, metadata and known fields inside metadata are always preserved. This field is deprecated in favor of setting `x-preserve-unknown-fields` to true in `spec.versions[*].schema.openAPIV3Schema`. See https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/#pruning-versus-preserving-unknown-fields for details.
-	PreserveUnknownFields bool `json:"preserveUnknownFields,omitempty"`
+	PreserveUnknownFields bool `json:"preserveUnknownFields,omitempty" json,yaml:"preserveUnknownFields,omitempty"`
 
 	// scope indicates whether the defined custom resource is cluster- or namespace-scoped. Allowed values are `Cluster` and `Namespaced`.
 	// Required: true
-	Scope *string `json:"scope"`
+	Scope *string `json:"scope" json,yaml:"scope"`
 
 	// versions is the list of all API versions of the defined custom resource. Version names are used to compute the order in which served versions are listed in API discovery. If the version string is "kube-like", it will sort above non "kube-like" version strings, which are ordered lexicographically. "Kube-like" versions start with a "v", then are followed by a number (the major version), then optionally the string "alpha" or "beta" and another number (the minor version). These are sorted first by GA > beta > alpha (where GA is a version with no suffix such as beta or alpha), and then by comparing major version, then minor version. An example sorted list of versions: v10, v2, v1, v11beta2, v10beta3, v3beta1, v12alpha1, v11alpha2, foo1, foo10.
 	// Required: true
-	Versions []*IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionVersion `json:"versions"`
+	Versions []*IoK8sApiextensionsApiserverPkgApisApiextensionsV1CustomResourceDefinitionVersion `json:"versions" json,yaml:"versions"`
 }
 
 // Validate validates this io k8s apiextensions apiserver pkg apis apiextensions v1 custom resource definition spec

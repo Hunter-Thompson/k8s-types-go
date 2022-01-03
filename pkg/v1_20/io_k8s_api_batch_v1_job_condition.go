@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -22,31 +21,25 @@ type IoK8sAPIBatchV1JobCondition struct {
 
 	// Last time the condition was checked.
 	// Format: date-time
-	LastProbeTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastProbeTime,omitempty"`
+	LastProbeTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastProbeTime,omitempty" json,yaml:"lastProbeTime,omitempty"`
 
 	// Last time the condition transit from one status to another.
 	// Format: date-time
-	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty"`
+	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty" json,yaml:"lastTransitionTime,omitempty"`
 
 	// Human readable message indicating details about last transition.
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// (brief) reason for the condition's last transition.
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty" json,yaml:"reason,omitempty"`
 
 	// Status of the condition, one of True, False, Unknown.
 	// Required: true
-	Status *string `json:"status"`
+	Status *string `json:"status" json,yaml:"status"`
 
 	// Type of job condition, Complete or Failed.
-	//
-	// Possible enum values:
-	//  - `"Complete"` means the job has completed its execution.
-	//  - `"Failed"` means the job has failed its execution.
-	//  - `"Suspended"` means the job has been suspended.
 	// Required: true
-	// Enum: [Complete Failed Suspended]
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s api batch v1 job condition
@@ -118,46 +111,9 @@ func (m *IoK8sAPIBatchV1JobCondition) validateStatus(formats strfmt.Registry) er
 	return nil
 }
 
-var ioK8sApiBatchV1JobConditionTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["Complete","Failed","Suspended"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiBatchV1JobConditionTypeTypePropEnum = append(ioK8sApiBatchV1JobConditionTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPIBatchV1JobConditionTypeComplete captures enum value "Complete"
-	IoK8sAPIBatchV1JobConditionTypeComplete string = "Complete"
-
-	// IoK8sAPIBatchV1JobConditionTypeFailed captures enum value "Failed"
-	IoK8sAPIBatchV1JobConditionTypeFailed string = "Failed"
-
-	// IoK8sAPIBatchV1JobConditionTypeSuspended captures enum value "Suspended"
-	IoK8sAPIBatchV1JobConditionTypeSuspended string = "Suspended"
-)
-
-// prop value enum
-func (m *IoK8sAPIBatchV1JobCondition) validateTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiBatchV1JobConditionTypeTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *IoK8sAPIBatchV1JobCondition) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

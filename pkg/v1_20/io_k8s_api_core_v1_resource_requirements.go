@@ -18,11 +18,11 @@ import (
 // swagger:model io.k8s.api.core.v1.ResourceRequirements
 type IoK8sAPICoreV1ResourceRequirements struct {
 
-	// Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
-	Limits map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"limits,omitempty"`
+	// Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+	Limits map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"limits,omitempty" json,yaml:"limits,omitempty"`
 
-	// Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
-	Requests map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"requests,omitempty"`
+	// Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+	Requests map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"requests,omitempty" json,yaml:"requests,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 resource requirements

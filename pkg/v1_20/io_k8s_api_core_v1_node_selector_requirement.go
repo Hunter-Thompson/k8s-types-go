@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -22,23 +21,14 @@ type IoK8sAPICoreV1NodeSelectorRequirement struct {
 
 	// The label key that the selector applies to.
 	// Required: true
-	Key *string `json:"key"`
+	Key *string `json:"key" json,yaml:"key"`
 
 	// Represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
-	//
-	// Possible enum values:
-	//  - `"DoesNotExist"`
-	//  - `"Exists"`
-	//  - `"Gt"`
-	//  - `"In"`
-	//  - `"Lt"`
-	//  - `"NotIn"`
 	// Required: true
-	// Enum: [DoesNotExist Exists Gt In Lt NotIn]
-	Operator *string `json:"operator"`
+	Operator *string `json:"operator" json,yaml:"operator"`
 
 	// An array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. If the operator is Gt or Lt, the values array must have a single element, which will be interpreted as an integer. This array is replaced during a strategic merge patch.
-	Values []string `json:"values"`
+	Values []string `json:"values" json,yaml:"values"`
 }
 
 // Validate validates this io k8s api core v1 node selector requirement
@@ -68,55 +58,9 @@ func (m *IoK8sAPICoreV1NodeSelectorRequirement) validateKey(formats strfmt.Regis
 	return nil
 }
 
-var ioK8sApiCoreV1NodeSelectorRequirementTypeOperatorPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["DoesNotExist","Exists","Gt","In","Lt","NotIn"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1NodeSelectorRequirementTypeOperatorPropEnum = append(ioK8sApiCoreV1NodeSelectorRequirementTypeOperatorPropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1NodeSelectorRequirementOperatorDoesNotExist captures enum value "DoesNotExist"
-	IoK8sAPICoreV1NodeSelectorRequirementOperatorDoesNotExist string = "DoesNotExist"
-
-	// IoK8sAPICoreV1NodeSelectorRequirementOperatorExists captures enum value "Exists"
-	IoK8sAPICoreV1NodeSelectorRequirementOperatorExists string = "Exists"
-
-	// IoK8sAPICoreV1NodeSelectorRequirementOperatorGt captures enum value "Gt"
-	IoK8sAPICoreV1NodeSelectorRequirementOperatorGt string = "Gt"
-
-	// IoK8sAPICoreV1NodeSelectorRequirementOperatorIn captures enum value "In"
-	IoK8sAPICoreV1NodeSelectorRequirementOperatorIn string = "In"
-
-	// IoK8sAPICoreV1NodeSelectorRequirementOperatorLt captures enum value "Lt"
-	IoK8sAPICoreV1NodeSelectorRequirementOperatorLt string = "Lt"
-
-	// IoK8sAPICoreV1NodeSelectorRequirementOperatorNotIn captures enum value "NotIn"
-	IoK8sAPICoreV1NodeSelectorRequirementOperatorNotIn string = "NotIn"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1NodeSelectorRequirement) validateOperatorEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1NodeSelectorRequirementTypeOperatorPropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *IoK8sAPICoreV1NodeSelectorRequirement) validateOperator(formats strfmt.Registry) error {
 
 	if err := validate.Required("operator", "body", m.Operator); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateOperatorEnum("operator", "body", *m.Operator); err != nil {
 		return err
 	}
 

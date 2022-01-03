@@ -19,22 +19,22 @@ import (
 type IoK8sAPIAuthorizationV1SubjectAccessReviewSpec struct {
 
 	// Extra corresponds to the user.Info.GetExtra() method from the authenticator.  Since that is input to the authorizer it needs a reflection here.
-	Extra map[string][]string `json:"extra,omitempty"`
+	Extra map[string][]string `json:"extra,omitempty" json,yaml:"extra,omitempty"`
 
 	// Groups is the groups you're testing for.
-	Groups []string `json:"groups"`
+	Groups []string `json:"groups" json,yaml:"groups"`
 
 	// NonResourceAttributes describes information for a non-resource access request
-	NonResourceAttributes *IoK8sAPIAuthorizationV1NonResourceAttributes `json:"nonResourceAttributes,omitempty"`
+	NonResourceAttributes *IoK8sAPIAuthorizationV1NonResourceAttributes `json:"nonResourceAttributes,omitempty" json,yaml:"nonResourceAttributes,omitempty"`
 
 	// ResourceAuthorizationAttributes describes information for a resource access request
-	ResourceAttributes *IoK8sAPIAuthorizationV1ResourceAttributes `json:"resourceAttributes,omitempty"`
+	ResourceAttributes *IoK8sAPIAuthorizationV1ResourceAttributes `json:"resourceAttributes,omitempty" json,yaml:"resourceAttributes,omitempty"`
 
 	// UID information about the requesting user.
-	UID string `json:"uid,omitempty"`
+	UID string `json:"uid,omitempty" json,yaml:"uid,omitempty"`
 
 	// User is the user you're testing for. If you specify "User" but not "Groups", then is it interpreted as "What if User were not a member of any groups
-	User string `json:"user,omitempty"`
+	User string `json:"user,omitempty" json,yaml:"user,omitempty"`
 }
 
 // Validate validates this io k8s api authorization v1 subject access review spec

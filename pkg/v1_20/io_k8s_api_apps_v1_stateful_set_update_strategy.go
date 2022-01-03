@@ -7,12 +7,10 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // IoK8sAPIAppsV1StatefulSetUpdateStrategy StatefulSetUpdateStrategy indicates the strategy that the StatefulSet controller will use to perform updates. It includes any additional parameters necessary to perform the update for the indicated strategy.
@@ -21,15 +19,10 @@ import (
 type IoK8sAPIAppsV1StatefulSetUpdateStrategy struct {
 
 	// RollingUpdate is used to communicate parameters when Type is RollingUpdateStatefulSetStrategyType.
-	RollingUpdate *IoK8sAPIAppsV1RollingUpdateStatefulSetStrategy `json:"rollingUpdate,omitempty"`
+	RollingUpdate *IoK8sAPIAppsV1RollingUpdateStatefulSetStrategy `json:"rollingUpdate,omitempty" json,yaml:"rollingUpdate,omitempty"`
 
 	// Type indicates the type of the StatefulSetUpdateStrategy. Default is RollingUpdate.
-	//
-	// Possible enum values:
-	//  - `"OnDelete"` triggers the legacy behavior. Version tracking and ordered rolling restarts are disabled. Pods are recreated from the StatefulSetSpec when they are manually deleted. When a scale operation is performed with this strategy,specification version indicated by the StatefulSet's currentRevision.
-	//  - `"RollingUpdate"` indicates that update will be applied to all Pods in the StatefulSet with respect to the StatefulSet ordering constraints. When a scale operation is performed with this strategy, new Pods will be created from the specification version indicated by the StatefulSet's updateRevision.
-	// Enum: [OnDelete RollingUpdate]
-	Type string `json:"type,omitempty"`
+	Type string `json:"type,omitempty" json,yaml:"type,omitempty"`
 }
 
 // Validate validates this io k8s api apps v1 stateful set update strategy
@@ -37,10 +30,6 @@ func (m *IoK8sAPIAppsV1StatefulSetUpdateStrategy) Validate(formats strfmt.Regist
 	var res []error
 
 	if err := m.validateRollingUpdate(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -64,48 +53,6 @@ func (m *IoK8sAPIAppsV1StatefulSetUpdateStrategy) validateRollingUpdate(formats 
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-var ioK8sApiAppsV1StatefulSetUpdateStrategyTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["OnDelete","RollingUpdate"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiAppsV1StatefulSetUpdateStrategyTypeTypePropEnum = append(ioK8sApiAppsV1StatefulSetUpdateStrategyTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPIAppsV1StatefulSetUpdateStrategyTypeOnDelete captures enum value "OnDelete"
-	IoK8sAPIAppsV1StatefulSetUpdateStrategyTypeOnDelete string = "OnDelete"
-
-	// IoK8sAPIAppsV1StatefulSetUpdateStrategyTypeRollingUpdate captures enum value "RollingUpdate"
-	IoK8sAPIAppsV1StatefulSetUpdateStrategyTypeRollingUpdate string = "RollingUpdate"
-)
-
-// prop value enum
-func (m *IoK8sAPIAppsV1StatefulSetUpdateStrategy) validateTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiAppsV1StatefulSetUpdateStrategyTypeTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *IoK8sAPIAppsV1StatefulSetUpdateStrategy) validateType(formats strfmt.Registry) error {
-	if swag.IsZero(m.Type) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
-		return err
 	}
 
 	return nil

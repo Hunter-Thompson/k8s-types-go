@@ -7,12 +7,10 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // IoK8sAPIAppsV1DeploymentStrategy DeploymentStrategy describes how to replace existing pods with new ones.
@@ -21,15 +19,10 @@ import (
 type IoK8sAPIAppsV1DeploymentStrategy struct {
 
 	// Rolling update config params. Present only if DeploymentStrategyType = RollingUpdate.
-	RollingUpdate *IoK8sAPIAppsV1RollingUpdateDeployment `json:"rollingUpdate,omitempty"`
+	RollingUpdate *IoK8sAPIAppsV1RollingUpdateDeployment `json:"rollingUpdate,omitempty" json,yaml:"rollingUpdate,omitempty"`
 
 	// Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.
-	//
-	// Possible enum values:
-	//  - `"Recreate"` Kill all existing pods before creating new ones.
-	//  - `"RollingUpdate"` Replace the old ReplicaSets by new one using rolling update i.e gradually scale down the old ReplicaSets and scale up the new one.
-	// Enum: [Recreate RollingUpdate]
-	Type string `json:"type,omitempty"`
+	Type string `json:"type,omitempty" json,yaml:"type,omitempty"`
 }
 
 // Validate validates this io k8s api apps v1 deployment strategy
@@ -37,10 +30,6 @@ func (m *IoK8sAPIAppsV1DeploymentStrategy) Validate(formats strfmt.Registry) err
 	var res []error
 
 	if err := m.validateRollingUpdate(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -64,48 +53,6 @@ func (m *IoK8sAPIAppsV1DeploymentStrategy) validateRollingUpdate(formats strfmt.
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-var ioK8sApiAppsV1DeploymentStrategyTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["Recreate","RollingUpdate"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiAppsV1DeploymentStrategyTypeTypePropEnum = append(ioK8sApiAppsV1DeploymentStrategyTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPIAppsV1DeploymentStrategyTypeRecreate captures enum value "Recreate"
-	IoK8sAPIAppsV1DeploymentStrategyTypeRecreate string = "Recreate"
-
-	// IoK8sAPIAppsV1DeploymentStrategyTypeRollingUpdate captures enum value "RollingUpdate"
-	IoK8sAPIAppsV1DeploymentStrategyTypeRollingUpdate string = "RollingUpdate"
-)
-
-// prop value enum
-func (m *IoK8sAPIAppsV1DeploymentStrategy) validateTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiAppsV1DeploymentStrategyTypeTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *IoK8sAPIAppsV1DeploymentStrategy) validateType(formats strfmt.Registry) error {
-	if swag.IsZero(m.Type) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
-		return err
 	}
 
 	return nil

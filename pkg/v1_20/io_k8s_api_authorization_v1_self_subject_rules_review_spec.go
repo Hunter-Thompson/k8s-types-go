@@ -12,13 +12,13 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// IoK8sAPIAuthorizationV1SelfSubjectRulesReviewSpec SelfSubjectRulesReviewSpec defines the specification for SelfSubjectRulesReview.
+// IoK8sAPIAuthorizationV1SelfSubjectRulesReviewSpec io k8s api authorization v1 self subject rules review spec
 //
 // swagger:model io.k8s.api.authorization.v1.SelfSubjectRulesReviewSpec
 type IoK8sAPIAuthorizationV1SelfSubjectRulesReviewSpec struct {
 
 	// Namespace to evaluate rules for. Required.
-	Namespace string `json:"namespace,omitempty"`
+	Namespace string `json:"namespace,omitempty" json,yaml:"namespace,omitempty"`
 }
 
 // Validate validates this io k8s api authorization v1 self subject rules review spec

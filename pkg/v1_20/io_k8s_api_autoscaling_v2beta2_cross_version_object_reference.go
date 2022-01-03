@@ -20,15 +20,15 @@ import (
 type IoK8sAPIAutoscalingV2beta2CrossVersionObjectReference struct {
 
 	// API version of the referent
-	APIVersion string `json:"apiVersion,omitempty"`
+	APIVersion string `json:"apiVersion,omitempty" json,yaml:"apiVersion,omitempty"`
 
 	// Kind of the referent; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds"
 	// Required: true
-	Kind *string `json:"kind"`
+	Kind *string `json:"kind" json,yaml:"kind"`
 
 	// Name of the referent; More info: http://kubernetes.io/docs/user-guide/identifiers#names
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 }
 
 // Validate validates this io k8s api autoscaling v2beta2 cross version object reference

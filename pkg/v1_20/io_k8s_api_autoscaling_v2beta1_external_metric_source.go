@@ -21,16 +21,16 @@ type IoK8sAPIAutoscalingV2beta1ExternalMetricSource struct {
 
 	// metricName is the name of the metric in question.
 	// Required: true
-	MetricName *string `json:"metricName"`
+	MetricName *string `json:"metricName" json,yaml:"metricName"`
 
 	// metricSelector is used to identify a specific time series within a given metric.
-	MetricSelector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"metricSelector,omitempty"`
+	MetricSelector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"metricSelector,omitempty" json,yaml:"metricSelector,omitempty"`
 
 	// targetAverageValue is the target per-pod value of global metric (as a quantity). Mutually exclusive with TargetValue.
-	TargetAverageValue IoK8sApimachineryPkgAPIResourceQuantity `json:"targetAverageValue,omitempty"`
+	TargetAverageValue IoK8sApimachineryPkgAPIResourceQuantity `json:"targetAverageValue,omitempty" json,yaml:"targetAverageValue,omitempty"`
 
 	// targetValue is the target value of the metric (as a quantity). Mutually exclusive with TargetAverageValue.
-	TargetValue IoK8sApimachineryPkgAPIResourceQuantity `json:"targetValue,omitempty"`
+	TargetValue IoK8sApimachineryPkgAPIResourceQuantity `json:"targetValue,omitempty" json,yaml:"targetValue,omitempty"`
 }
 
 // Validate validates this io k8s api autoscaling v2beta1 external metric source

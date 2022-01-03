@@ -21,18 +21,18 @@ import (
 type IoK8sApimachineryPkgApisMetaV1APIResourceList struct {
 
 	// APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-	APIVersion string `json:"apiVersion,omitempty"`
+	APIVersion string `json:"apiVersion,omitempty" json,yaml:"apiVersion,omitempty"`
 
 	// groupVersion is the group and version this APIResourceList is for.
 	// Required: true
-	GroupVersion *string `json:"groupVersion"`
+	GroupVersion *string `json:"groupVersion" json,yaml:"groupVersion"`
 
 	// Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-	Kind string `json:"kind,omitempty"`
+	Kind string `json:"kind,omitempty" json,yaml:"kind,omitempty"`
 
 	// resources contains the name of the resources and if they are namespaced.
 	// Required: true
-	Resources []*IoK8sApimachineryPkgApisMetaV1APIResource `json:"resources"`
+	Resources []*IoK8sApimachineryPkgApisMetaV1APIResource `json:"resources" json,yaml:"resources"`
 }
 
 // Validate validates this io k8s apimachinery pkg apis meta v1 API resource list

@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -22,31 +21,25 @@ type IoK8sAPICoreV1PersistentVolumeClaimCondition struct {
 
 	// Last time we probed the condition.
 	// Format: date-time
-	LastProbeTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastProbeTime,omitempty"`
+	LastProbeTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastProbeTime,omitempty" json,yaml:"lastProbeTime,omitempty"`
 
 	// Last time the condition transitioned from one status to another.
 	// Format: date-time
-	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty"`
+	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty" json,yaml:"lastTransitionTime,omitempty"`
 
 	// Human-readable message indicating details about last transition.
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// Unique, this should be a short, machine understandable string that gives the reason for condition's last transition. If it reports "ResizeStarted" that means the underlying persistent volume is being resized.
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty" json,yaml:"reason,omitempty"`
 
 	// status
 	// Required: true
-	Status *string `json:"status"`
+	Status *string `json:"status" json,yaml:"status"`
 
-	//
-	//
-	//
-	// Possible enum values:
-	//  - `"FileSystemResizePending"` - controller resize is finished and a file system resize is pending on node
-	//  - `"Resizing"` - a user trigger resize of pvc has been started
+	// type
 	// Required: true
-	// Enum: [FileSystemResizePending Resizing]
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s api core v1 persistent volume claim condition
@@ -118,43 +111,9 @@ func (m *IoK8sAPICoreV1PersistentVolumeClaimCondition) validateStatus(formats st
 	return nil
 }
 
-var ioK8sApiCoreV1PersistentVolumeClaimConditionTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["FileSystemResizePending","Resizing"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1PersistentVolumeClaimConditionTypeTypePropEnum = append(ioK8sApiCoreV1PersistentVolumeClaimConditionTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1PersistentVolumeClaimConditionTypeFileSystemResizePending captures enum value "FileSystemResizePending"
-	IoK8sAPICoreV1PersistentVolumeClaimConditionTypeFileSystemResizePending string = "FileSystemResizePending"
-
-	// IoK8sAPICoreV1PersistentVolumeClaimConditionTypeResizing captures enum value "Resizing"
-	IoK8sAPICoreV1PersistentVolumeClaimConditionTypeResizing string = "Resizing"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1PersistentVolumeClaimCondition) validateTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1PersistentVolumeClaimConditionTypeTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *IoK8sAPICoreV1PersistentVolumeClaimCondition) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

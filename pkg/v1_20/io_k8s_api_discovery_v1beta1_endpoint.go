@@ -19,24 +19,21 @@ import (
 // swagger:model io.k8s.api.discovery.v1beta1.Endpoint
 type IoK8sAPIDiscoveryV1beta1Endpoint struct {
 
-	// addresses of this endpoint. The contents of this field are interpreted according to the corresponding EndpointSlice addressType field. Consumers must handle different types of addresses in the context of their own capabilities. This must contain at least one address but no more than 100. These are all assumed to be fungible and clients may choose to only use the first element. Refer to: https://issue.k8s.io/106267
+	// addresses of this endpoint. The contents of this field are interpreted according to the corresponding EndpointSlice addressType field. Consumers must handle different types of addresses in the context of their own capabilities. This must contain at least one address but no more than 100.
 	// Required: true
-	Addresses []string `json:"addresses"`
+	Addresses []string `json:"addresses" json,yaml:"addresses"`
 
 	// conditions contains information about the current status of the endpoint.
-	Conditions *IoK8sAPIDiscoveryV1beta1EndpointConditions `json:"conditions,omitempty"`
-
-	// hints contains information associated with how an endpoint should be consumed.
-	Hints *IoK8sAPIDiscoveryV1beta1EndpointHints `json:"hints,omitempty"`
+	Conditions *IoK8sAPIDiscoveryV1beta1EndpointConditions `json:"conditions,omitempty" json,yaml:"conditions,omitempty"`
 
 	// hostname of this endpoint. This field may be used by consumers of endpoints to distinguish endpoints from each other (e.g. in DNS names). Multiple endpoints which use the same hostname should be considered fungible (e.g. multiple A values in DNS). Must be lowercase and pass DNS Label (RFC 1123) validation.
-	Hostname string `json:"hostname,omitempty"`
+	Hostname string `json:"hostname,omitempty" json,yaml:"hostname,omitempty"`
 
 	// nodeName represents the name of the Node hosting this endpoint. This can be used to determine endpoints local to a Node. This field can be enabled with the EndpointSliceNodeName feature gate.
-	NodeName string `json:"nodeName,omitempty"`
+	NodeName string `json:"nodeName,omitempty" json,yaml:"nodeName,omitempty"`
 
 	// targetRef is a reference to a Kubernetes object that represents this endpoint.
-	TargetRef *IoK8sAPICoreV1ObjectReference `json:"targetRef,omitempty"`
+	TargetRef *IoK8sAPICoreV1ObjectReference `json:"targetRef,omitempty" json,yaml:"targetRef,omitempty"`
 
 	// topology contains arbitrary topology information associated with the endpoint. These key/value pairs must conform with the label format. https://kubernetes.io/docs/concepts/overview/working-with-objects/labels Topology may include a maximum of 16 key/value pairs. This includes, but is not limited to the following well known keys: * kubernetes.io/hostname: the value indicates the hostname of the node
 	//   where the endpoint is located. This should match the corresponding
@@ -46,7 +43,7 @@ type IoK8sAPIDiscoveryV1beta1Endpoint struct {
 	// * topology.kubernetes.io/region: the value indicates the region where the
 	//   endpoint is located. This should match the corresponding node label.
 	// This field is deprecated and will be removed in future api versions.
-	Topology map[string]string `json:"topology,omitempty"`
+	Topology map[string]string `json:"topology,omitempty" json,yaml:"topology,omitempty"`
 }
 
 // Validate validates this io k8s api discovery v1beta1 endpoint
@@ -58,10 +55,6 @@ func (m *IoK8sAPIDiscoveryV1beta1Endpoint) Validate(formats strfmt.Registry) err
 	}
 
 	if err := m.validateConditions(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateHints(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -103,25 +96,6 @@ func (m *IoK8sAPIDiscoveryV1beta1Endpoint) validateConditions(formats strfmt.Reg
 	return nil
 }
 
-func (m *IoK8sAPIDiscoveryV1beta1Endpoint) validateHints(formats strfmt.Registry) error {
-	if swag.IsZero(m.Hints) { // not required
-		return nil
-	}
-
-	if m.Hints != nil {
-		if err := m.Hints.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("hints")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("hints")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *IoK8sAPIDiscoveryV1beta1Endpoint) validateTargetRef(formats strfmt.Registry) error {
 	if swag.IsZero(m.TargetRef) { // not required
 		return nil
@@ -149,10 +123,6 @@ func (m *IoK8sAPIDiscoveryV1beta1Endpoint) ContextValidate(ctx context.Context, 
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateHints(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateTargetRef(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -171,22 +141,6 @@ func (m *IoK8sAPIDiscoveryV1beta1Endpoint) contextValidateConditions(ctx context
 				return ve.ValidateName("conditions")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("conditions")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *IoK8sAPIDiscoveryV1beta1Endpoint) contextValidateHints(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Hints != nil {
-		if err := m.Hints.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("hints")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("hints")
 			}
 			return err
 		}

@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -20,24 +19,18 @@ import (
 // swagger:model io.k8s.api.core.v1.EndpointPort
 type IoK8sAPICoreV1EndpointPort struct {
 
-	// The application protocol for this port. This field follows standard Kubernetes label syntax. Un-prefixed names are reserved for IANA standard service names (as per RFC-6335 and http://www.iana.org/assignments/service-names). Non-standard protocols should use prefixed names such as mycompany.com/my-custom-protocol.
-	AppProtocol string `json:"appProtocol,omitempty"`
+	// The application protocol for this port. This field follows standard Kubernetes label syntax. Un-prefixed names are reserved for IANA standard service names (as per RFC-6335 and http://www.iana.org/assignments/service-names). Non-standard protocols should use prefixed names such as mycompany.com/my-custom-protocol. This is a beta field that is guarded by the ServiceAppProtocol feature gate and enabled by default.
+	AppProtocol string `json:"appProtocol,omitempty" json,yaml:"appProtocol,omitempty"`
 
 	// The name of this port.  This must match the 'name' field in the corresponding ServicePort. Must be a DNS_LABEL. Optional only if one port is defined.
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" json,yaml:"name,omitempty"`
 
 	// The port number of the endpoint.
 	// Required: true
-	Port *int32 `json:"port"`
+	Port *int32 `json:"port" json,yaml:"port"`
 
 	// The IP protocol for this port. Must be UDP, TCP, or SCTP. Default is TCP.
-	//
-	// Possible enum values:
-	//  - `"SCTP"` is the SCTP protocol.
-	//  - `"TCP"` is the TCP protocol.
-	//  - `"UDP"` is the UDP protocol.
-	// Enum: [SCTP TCP UDP]
-	Protocol string `json:"protocol,omitempty"`
+	Protocol string `json:"protocol,omitempty" json,yaml:"protocol,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 endpoint port
@@ -45,10 +38,6 @@ func (m *IoK8sAPICoreV1EndpointPort) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validatePort(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateProtocol(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -61,51 +50,6 @@ func (m *IoK8sAPICoreV1EndpointPort) Validate(formats strfmt.Registry) error {
 func (m *IoK8sAPICoreV1EndpointPort) validatePort(formats strfmt.Registry) error {
 
 	if err := validate.Required("port", "body", m.Port); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var ioK8sApiCoreV1EndpointPortTypeProtocolPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["SCTP","TCP","UDP"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1EndpointPortTypeProtocolPropEnum = append(ioK8sApiCoreV1EndpointPortTypeProtocolPropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1EndpointPortProtocolSCTP captures enum value "SCTP"
-	IoK8sAPICoreV1EndpointPortProtocolSCTP string = "SCTP"
-
-	// IoK8sAPICoreV1EndpointPortProtocolTCP captures enum value "TCP"
-	IoK8sAPICoreV1EndpointPortProtocolTCP string = "TCP"
-
-	// IoK8sAPICoreV1EndpointPortProtocolUDP captures enum value "UDP"
-	IoK8sAPICoreV1EndpointPortProtocolUDP string = "UDP"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1EndpointPort) validateProtocolEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1EndpointPortTypeProtocolPropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *IoK8sAPICoreV1EndpointPort) validateProtocol(formats strfmt.Registry) error {
-	if swag.IsZero(m.Protocol) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateProtocolEnum("protocol", "body", m.Protocol); err != nil {
 		return err
 	}
 

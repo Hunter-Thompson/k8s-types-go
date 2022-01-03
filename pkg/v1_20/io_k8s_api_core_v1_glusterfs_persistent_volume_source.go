@@ -21,17 +21,17 @@ type IoK8sAPICoreV1GlusterfsPersistentVolumeSource struct {
 
 	// EndpointsName is the endpoint name that details Glusterfs topology. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
 	// Required: true
-	Endpoints *string `json:"endpoints"`
+	Endpoints *string `json:"endpoints" json,yaml:"endpoints"`
 
 	// EndpointsNamespace is the namespace that contains Glusterfs endpoint. If this field is empty, the EndpointNamespace defaults to the same namespace as the bound PVC. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
-	EndpointsNamespace string `json:"endpointsNamespace,omitempty"`
+	EndpointsNamespace string `json:"endpointsNamespace,omitempty" json,yaml:"endpointsNamespace,omitempty"`
 
 	// Path is the Glusterfs volume path. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
 	// Required: true
-	Path *string `json:"path"`
+	Path *string `json:"path" json,yaml:"path"`
 
 	// ReadOnly here will force the Glusterfs volume to be mounted with read-only permissions. Defaults to false. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
-	ReadOnly bool `json:"readOnly,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" json,yaml:"readOnly,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 glusterfs persistent volume source

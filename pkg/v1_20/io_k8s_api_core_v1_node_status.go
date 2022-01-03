@@ -7,13 +7,11 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // IoK8sAPICoreV1NodeStatus NodeStatus is information about the current status of a node.
@@ -22,43 +20,37 @@ import (
 type IoK8sAPICoreV1NodeStatus struct {
 
 	// List of addresses reachable to the node. Queried from cloud provider, if available. More info: https://kubernetes.io/docs/concepts/nodes/node/#addresses Note: This field is declared as mergeable, but the merge key is not sufficiently unique, which can cause data corruption when it is merged. Callers should instead use a full-replacement patch. See http://pr.k8s.io/79391 for an example.
-	Addresses []*IoK8sAPICoreV1NodeAddress `json:"addresses"`
+	Addresses []*IoK8sAPICoreV1NodeAddress `json:"addresses" json,yaml:"addresses"`
 
 	// Allocatable represents the resources of a node that are available for scheduling. Defaults to Capacity.
-	Allocatable map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"allocatable,omitempty"`
+	Allocatable map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"allocatable,omitempty" json,yaml:"allocatable,omitempty"`
 
 	// Capacity represents the total resources of a node. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
-	Capacity map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"capacity,omitempty"`
+	Capacity map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"capacity,omitempty" json,yaml:"capacity,omitempty"`
 
 	// Conditions is an array of current observed node conditions. More info: https://kubernetes.io/docs/concepts/nodes/node/#condition
-	Conditions []*IoK8sAPICoreV1NodeCondition `json:"conditions"`
+	Conditions []*IoK8sAPICoreV1NodeCondition `json:"conditions" json,yaml:"conditions"`
 
 	// Status of the config assigned to the node via the dynamic Kubelet config feature.
-	Config *IoK8sAPICoreV1NodeConfigStatus `json:"config,omitempty"`
+	Config *IoK8sAPICoreV1NodeConfigStatus `json:"config,omitempty" json,yaml:"config,omitempty"`
 
 	// Endpoints of daemons running on the Node.
-	DaemonEndpoints *IoK8sAPICoreV1NodeDaemonEndpoints `json:"daemonEndpoints,omitempty"`
+	DaemonEndpoints *IoK8sAPICoreV1NodeDaemonEndpoints `json:"daemonEndpoints,omitempty" json,yaml:"daemonEndpoints,omitempty"`
 
 	// List of container images on this node
-	Images []*IoK8sAPICoreV1ContainerImage `json:"images"`
+	Images []*IoK8sAPICoreV1ContainerImage `json:"images" json,yaml:"images"`
 
 	// Set of ids/uuids to uniquely identify the node. More info: https://kubernetes.io/docs/concepts/nodes/node/#info
-	NodeInfo *IoK8sAPICoreV1NodeSystemInfo `json:"nodeInfo,omitempty"`
+	NodeInfo *IoK8sAPICoreV1NodeSystemInfo `json:"nodeInfo,omitempty" json,yaml:"nodeInfo,omitempty"`
 
 	// NodePhase is the recently observed lifecycle phase of the node. More info: https://kubernetes.io/docs/concepts/nodes/node/#phase The field is never populated, and now is deprecated.
-	//
-	// Possible enum values:
-	//  - `"Pending"` means the node has been created/added by the system, but not configured.
-	//  - `"Running"` means the node has been configured and has Kubernetes components running.
-	//  - `"Terminated"` means the node has been removed from the cluster.
-	// Enum: [Pending Running Terminated]
-	Phase string `json:"phase,omitempty"`
+	Phase string `json:"phase,omitempty" json,yaml:"phase,omitempty"`
 
 	// List of volumes that are attached to the node.
-	VolumesAttached []*IoK8sAPICoreV1AttachedVolume `json:"volumesAttached"`
+	VolumesAttached []*IoK8sAPICoreV1AttachedVolume `json:"volumesAttached" json,yaml:"volumesAttached"`
 
 	// List of attachable volumes in use (mounted) by the node.
-	VolumesInUse []string `json:"volumesInUse"`
+	VolumesInUse []string `json:"volumesInUse" json,yaml:"volumesInUse"`
 }
 
 // Validate validates this io k8s api core v1 node status
@@ -94,10 +86,6 @@ func (m *IoK8sAPICoreV1NodeStatus) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateNodeInfo(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validatePhase(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -277,51 +265,6 @@ func (m *IoK8sAPICoreV1NodeStatus) validateNodeInfo(formats strfmt.Registry) err
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-var ioK8sApiCoreV1NodeStatusTypePhasePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["Pending","Running","Terminated"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1NodeStatusTypePhasePropEnum = append(ioK8sApiCoreV1NodeStatusTypePhasePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1NodeStatusPhasePending captures enum value "Pending"
-	IoK8sAPICoreV1NodeStatusPhasePending string = "Pending"
-
-	// IoK8sAPICoreV1NodeStatusPhaseRunning captures enum value "Running"
-	IoK8sAPICoreV1NodeStatusPhaseRunning string = "Running"
-
-	// IoK8sAPICoreV1NodeStatusPhaseTerminated captures enum value "Terminated"
-	IoK8sAPICoreV1NodeStatusPhaseTerminated string = "Terminated"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1NodeStatus) validatePhaseEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1NodeStatusTypePhasePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *IoK8sAPICoreV1NodeStatus) validatePhase(formats strfmt.Registry) error {
-	if swag.IsZero(m.Phase) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validatePhaseEnum("phase", "body", m.Phase); err != nil {
-		return err
 	}
 
 	return nil

@@ -19,13 +19,13 @@ import (
 type IoK8sAPIPolicyV1beta1PodDisruptionBudgetSpec struct {
 
 	// An eviction is allowed if at most "maxUnavailable" pods selected by "selector" are unavailable after the eviction, i.e. even in absence of the evicted pod. For example, one can prevent all voluntary evictions by specifying 0. This is a mutually exclusive setting with "minAvailable".
-	MaxUnavailable IoK8sApimachineryPkgUtilIntstrIntOrString `json:"maxUnavailable,omitempty"`
+	MaxUnavailable IoK8sApimachineryPkgUtilIntstrIntOrString `json:"maxUnavailable,omitempty" json,yaml:"maxUnavailable,omitempty"`
 
 	// An eviction is allowed if at least "minAvailable" pods selected by "selector" will still be available after the eviction, i.e. even in the absence of the evicted pod.  So for example you can prevent all voluntary evictions by specifying "100%".
-	MinAvailable IoK8sApimachineryPkgUtilIntstrIntOrString `json:"minAvailable,omitempty"`
+	MinAvailable IoK8sApimachineryPkgUtilIntstrIntOrString `json:"minAvailable,omitempty" json,yaml:"minAvailable,omitempty"`
 
-	// Label query over pods whose evictions are managed by the disruption budget. A null selector selects no pods. An empty selector ({}) also selects no pods, which differs from standard behavior of selecting all pods. In policy/v1, an empty selector will select all pods in the namespace.
-	Selector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"selector,omitempty"`
+	// Label query over pods whose evictions are managed by the disruption budget.
+	Selector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"selector,omitempty" json,yaml:"selector,omitempty"`
 }
 
 // Validate validates this io k8s api policy v1beta1 pod disruption budget spec

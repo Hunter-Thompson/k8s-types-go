@@ -19,32 +19,16 @@ import (
 // swagger:model io.k8s.api.certificates.v1.CertificateSigningRequestSpec
 type IoK8sAPICertificatesV1CertificateSigningRequestSpec struct {
 
-	// expirationSeconds is the requested duration of validity of the issued certificate. The certificate signer may issue a certificate with a different validity duration so a client must check the delta between the notBefore and and notAfter fields in the issued certificate to determine the actual duration.
-	//
-	// The v1.22+ in-tree implementations of the well-known Kubernetes signers will honor this field as long as the requested duration is not greater than the maximum duration they will honor per the --cluster-signing-duration CLI flag to the Kubernetes controller manager.
-	//
-	// Certificate signers may not honor this field for various reasons:
-	//
-	//   1. Old signer that is unaware of the field (such as the in-tree
-	//      implementations prior to v1.22)
-	//   2. Signer whose configured maximum is shorter than the requested duration
-	//   3. Signer whose configured minimum is longer than the requested duration
-	//
-	// The minimum valid value for expirationSeconds is 600, i.e. 10 minutes.
-	//
-	// As of v1.22, this field is beta and is controlled via the CSRDuration feature gate.
-	ExpirationSeconds int32 `json:"expirationSeconds,omitempty"`
-
 	// extra contains extra attributes of the user that created the CertificateSigningRequest. Populated by the API server on creation and immutable.
-	Extra map[string][]string `json:"extra,omitempty"`
+	Extra map[string][]string `json:"extra,omitempty" json,yaml:"extra,omitempty"`
 
 	// groups contains group membership of the user that created the CertificateSigningRequest. Populated by the API server on creation and immutable.
-	Groups []string `json:"groups"`
+	Groups []string `json:"groups" json,yaml:"groups"`
 
 	// request contains an x509 certificate signing request encoded in a "CERTIFICATE REQUEST" PEM block. When serialized as JSON or YAML, the data is additionally base64-encoded.
 	// Required: true
 	// Format: byte
-	Request *strfmt.Base64 `json:"request"`
+	Request *strfmt.Base64 `json:"request" json,yaml:"request"`
 
 	// signerName indicates the requested signer, and is a qualified name.
 	//
@@ -68,10 +52,10 @@ type IoK8sAPICertificatesV1CertificateSigningRequestSpec struct {
 	//  5. Expiration/certificate lifetime: whether it is fixed by the signer, configurable by the admin.
 	//  6. Whether or not requests for CA certificates are allowed.
 	// Required: true
-	SignerName *string `json:"signerName"`
+	SignerName *string `json:"signerName" json,yaml:"signerName"`
 
 	// uid contains the uid of the user that created the CertificateSigningRequest. Populated by the API server on creation and immutable.
-	UID string `json:"uid,omitempty"`
+	UID string `json:"uid,omitempty" json,yaml:"uid,omitempty"`
 
 	// usages specifies a set of key usages requested in the issued certificate.
 	//
@@ -87,10 +71,10 @@ type IoK8sAPICertificatesV1CertificateSigningRequestSpec struct {
 	//  "code signing", "email protection", "s/mime",
 	//  "ipsec end system", "ipsec tunnel", "ipsec user",
 	//  "timestamping", "ocsp signing", "microsoft sgc", "netscape sgc"
-	Usages []string `json:"usages"`
+	Usages []string `json:"usages" json,yaml:"usages"`
 
 	// username contains the name of the user that created the CertificateSigningRequest. Populated by the API server on creation and immutable.
-	Username string `json:"username,omitempty"`
+	Username string `json:"username,omitempty" json,yaml:"username,omitempty"`
 }
 
 // Validate validates this io k8s api certificates v1 certificate signing request spec

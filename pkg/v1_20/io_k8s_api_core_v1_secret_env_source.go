@@ -20,10 +20,10 @@ import (
 type IoK8sAPICoreV1SecretEnvSource struct {
 
 	// Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" json,yaml:"name,omitempty"`
 
 	// Specify whether the Secret must be defined
-	Optional bool `json:"optional,omitempty"`
+	Optional bool `json:"optional,omitempty" json,yaml:"optional,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 secret env source

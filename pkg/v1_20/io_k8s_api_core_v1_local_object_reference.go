@@ -18,7 +18,7 @@ import (
 type IoK8sAPICoreV1LocalObjectReference struct {
 
 	// Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" json,yaml:"name,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 local object reference

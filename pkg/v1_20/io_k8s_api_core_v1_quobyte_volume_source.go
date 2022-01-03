@@ -20,24 +20,24 @@ import (
 type IoK8sAPICoreV1QuobyteVolumeSource struct {
 
 	// Group to map volume access to Default is no group
-	Group string `json:"group,omitempty"`
+	Group string `json:"group,omitempty" json,yaml:"group,omitempty"`
 
 	// ReadOnly here will force the Quobyte volume to be mounted with read-only permissions. Defaults to false.
-	ReadOnly bool `json:"readOnly,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" json,yaml:"readOnly,omitempty"`
 
 	// Registry represents a single or multiple Quobyte Registry services specified as a string as host:port pair (multiple entries are separated with commas) which acts as the central registry for volumes
 	// Required: true
-	Registry *string `json:"registry"`
+	Registry *string `json:"registry" json,yaml:"registry"`
 
 	// Tenant owning the given Quobyte volume in the Backend Used with dynamically provisioned Quobyte volumes, value is set by the plugin
-	Tenant string `json:"tenant,omitempty"`
+	Tenant string `json:"tenant,omitempty" json,yaml:"tenant,omitempty"`
 
 	// User to map volume access to Defaults to serivceaccount user
-	User string `json:"user,omitempty"`
+	User string `json:"user,omitempty" json,yaml:"user,omitempty"`
 
 	// Volume is a string that references an already created Quobyte volume by name.
 	// Required: true
-	Volume *string `json:"volume"`
+	Volume *string `json:"volume" json,yaml:"volume"`
 }
 
 // Validate validates this io k8s api core v1 quobyte volume source

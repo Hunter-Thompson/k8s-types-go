@@ -21,38 +21,38 @@ import (
 type IoK8sAPIAppsV1DaemonSetStatus struct {
 
 	// Count of hash collisions for the DaemonSet. The DaemonSet controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ControllerRevision.
-	CollisionCount int32 `json:"collisionCount,omitempty"`
+	CollisionCount int32 `json:"collisionCount,omitempty" json,yaml:"collisionCount,omitempty"`
 
 	// Represents the latest available observations of a DaemonSet's current state.
-	Conditions []*IoK8sAPIAppsV1DaemonSetCondition `json:"conditions"`
+	Conditions []*IoK8sAPIAppsV1DaemonSetCondition `json:"conditions" json,yaml:"conditions"`
 
 	// The number of nodes that are running at least 1 daemon pod and are supposed to run the daemon pod. More info: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
 	// Required: true
-	CurrentNumberScheduled *int32 `json:"currentNumberScheduled"`
+	CurrentNumberScheduled *int32 `json:"currentNumberScheduled" json,yaml:"currentNumberScheduled"`
 
 	// The total number of nodes that should be running the daemon pod (including nodes correctly running the daemon pod). More info: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
 	// Required: true
-	DesiredNumberScheduled *int32 `json:"desiredNumberScheduled"`
+	DesiredNumberScheduled *int32 `json:"desiredNumberScheduled" json,yaml:"desiredNumberScheduled"`
 
 	// The number of nodes that should be running the daemon pod and have one or more of the daemon pod running and available (ready for at least spec.minReadySeconds)
-	NumberAvailable int32 `json:"numberAvailable,omitempty"`
+	NumberAvailable int32 `json:"numberAvailable,omitempty" json,yaml:"numberAvailable,omitempty"`
 
 	// The number of nodes that are running the daemon pod, but are not supposed to run the daemon pod. More info: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
 	// Required: true
-	NumberMisscheduled *int32 `json:"numberMisscheduled"`
+	NumberMisscheduled *int32 `json:"numberMisscheduled" json,yaml:"numberMisscheduled"`
 
-	// numberReady is the number of nodes that should be running the daemon pod and have one or more of the daemon pod running with a Ready Condition.
+	// The number of nodes that should be running the daemon pod and have one or more of the daemon pod running and ready.
 	// Required: true
-	NumberReady *int32 `json:"numberReady"`
+	NumberReady *int32 `json:"numberReady" json,yaml:"numberReady"`
 
 	// The number of nodes that should be running the daemon pod and have none of the daemon pod running and available (ready for at least spec.minReadySeconds)
-	NumberUnavailable int32 `json:"numberUnavailable,omitempty"`
+	NumberUnavailable int32 `json:"numberUnavailable,omitempty" json,yaml:"numberUnavailable,omitempty"`
 
 	// The most recent generation observed by the daemon set controller.
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" json,yaml:"observedGeneration,omitempty"`
 
 	// The total number of nodes that are running updated daemon pod
-	UpdatedNumberScheduled int32 `json:"updatedNumberScheduled,omitempty"`
+	UpdatedNumberScheduled int32 `json:"updatedNumberScheduled,omitempty" json,yaml:"updatedNumberScheduled,omitempty"`
 }
 
 // Validate validates this io k8s api apps v1 daemon set status

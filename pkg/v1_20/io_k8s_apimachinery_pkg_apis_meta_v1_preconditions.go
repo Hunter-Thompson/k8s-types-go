@@ -18,10 +18,10 @@ import (
 type IoK8sApimachineryPkgApisMetaV1Preconditions struct {
 
 	// Specifies the target ResourceVersion
-	ResourceVersion string `json:"resourceVersion,omitempty"`
+	ResourceVersion string `json:"resourceVersion,omitempty" json,yaml:"resourceVersion,omitempty"`
 
 	// Specifies the target UID.
-	UID string `json:"uid,omitempty"`
+	UID string `json:"uid,omitempty" json,yaml:"uid,omitempty"`
 }
 
 // Validate validates this io k8s apimachinery pkg apis meta v1 preconditions

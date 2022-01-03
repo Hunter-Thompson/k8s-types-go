@@ -21,11 +21,11 @@ type IoK8sAPIAutoscalingV2beta2PodsMetricStatus struct {
 
 	// current contains the current value for the given metric
 	// Required: true
-	Current *IoK8sAPIAutoscalingV2beta2MetricValueStatus `json:"current"`
+	Current *IoK8sAPIAutoscalingV2beta2MetricValueStatus `json:"current" json,yaml:"current"`
 
 	// metric identifies the target metric by name and selector
 	// Required: true
-	Metric *IoK8sAPIAutoscalingV2beta2MetricIdentifier `json:"metric"`
+	Metric *IoK8sAPIAutoscalingV2beta2MetricIdentifier `json:"metric" json,yaml:"metric"`
 }
 
 // Validate validates this io k8s api autoscaling v2beta2 pods metric status

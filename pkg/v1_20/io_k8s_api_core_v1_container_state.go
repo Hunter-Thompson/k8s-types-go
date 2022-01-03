@@ -19,13 +19,13 @@ import (
 type IoK8sAPICoreV1ContainerState struct {
 
 	// Details about a running container
-	Running *IoK8sAPICoreV1ContainerStateRunning `json:"running,omitempty"`
+	Running *IoK8sAPICoreV1ContainerStateRunning `json:"running,omitempty" json,yaml:"running,omitempty"`
 
 	// Details about a terminated container
-	Terminated *IoK8sAPICoreV1ContainerStateTerminated `json:"terminated,omitempty"`
+	Terminated *IoK8sAPICoreV1ContainerStateTerminated `json:"terminated,omitempty" json,yaml:"terminated,omitempty"`
 
 	// Details about a waiting container
-	Waiting *IoK8sAPICoreV1ContainerStateWaiting `json:"waiting,omitempty"`
+	Waiting *IoK8sAPICoreV1ContainerStateWaiting `json:"waiting,omitempty" json,yaml:"waiting,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 container state

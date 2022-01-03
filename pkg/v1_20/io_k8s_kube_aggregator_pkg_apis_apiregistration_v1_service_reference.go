@@ -18,13 +18,13 @@ import (
 type IoK8sKubeAggregatorPkgApisApiregistrationV1ServiceReference struct {
 
 	// Name is the name of the service
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" json,yaml:"name,omitempty"`
 
 	// Namespace is the namespace of the service
-	Namespace string `json:"namespace,omitempty"`
+	Namespace string `json:"namespace,omitempty" json,yaml:"namespace,omitempty"`
 
 	// If specified, the port on the service that hosting webhook. Default to 443 for backward compatibility. `port` should be a valid port number (1-65535, inclusive).
-	Port int32 `json:"port,omitempty"`
+	Port int32 `json:"port,omitempty" json,yaml:"port,omitempty"`
 }
 
 // Validate validates this io k8s kube aggregator pkg apis apiregistration v1 service reference

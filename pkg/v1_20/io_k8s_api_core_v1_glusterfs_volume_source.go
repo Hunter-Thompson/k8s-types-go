@@ -21,14 +21,14 @@ type IoK8sAPICoreV1GlusterfsVolumeSource struct {
 
 	// EndpointsName is the endpoint name that details Glusterfs topology. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
 	// Required: true
-	Endpoints *string `json:"endpoints"`
+	Endpoints *string `json:"endpoints" json,yaml:"endpoints"`
 
 	// Path is the Glusterfs volume path. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
 	// Required: true
-	Path *string `json:"path"`
+	Path *string `json:"path" json,yaml:"path"`
 
 	// ReadOnly here will force the Glusterfs volume to be mounted with read-only permissions. Defaults to false. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
-	ReadOnly bool `json:"readOnly,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" json,yaml:"readOnly,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 glusterfs volume source

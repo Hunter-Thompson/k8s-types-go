@@ -21,7 +21,7 @@ type IoK8sAPIFlowcontrolV1beta1PriorityLevelConfigurationReference struct {
 
 	// `name` is the name of the priority level configuration being referenced Required.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 }
 
 // Validate validates this io k8s api flowcontrol v1beta1 priority level configuration reference

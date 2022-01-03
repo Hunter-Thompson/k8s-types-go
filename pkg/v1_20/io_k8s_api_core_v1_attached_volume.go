@@ -21,11 +21,11 @@ type IoK8sAPICoreV1AttachedVolume struct {
 
 	// DevicePath represents the device path where the volume should be available
 	// Required: true
-	DevicePath *string `json:"devicePath"`
+	DevicePath *string `json:"devicePath" json,yaml:"devicePath"`
 
 	// Name of the attached volume
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 }
 
 // Validate validates this io k8s api core v1 attached volume

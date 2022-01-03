@@ -8,8 +8,10 @@ package v1_20
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // IoK8sAPICoreV1ContainerImage Describe a container image
@@ -18,14 +20,33 @@ import (
 type IoK8sAPICoreV1ContainerImage struct {
 
 	// Names by which this image is known. e.g. ["k8s.gcr.io/hyperkube:v1.0.7", "dockerhub.io/google_containers/hyperkube:v1.0.7"]
-	Names []string `json:"names"`
+	// Required: true
+	Names []string `json:"names" json,yaml:"names"`
 
 	// The size of the image in bytes.
-	SizeBytes int64 `json:"sizeBytes,omitempty"`
+	SizeBytes int64 `json:"sizeBytes,omitempty" json,yaml:"sizeBytes,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 container image
 func (m *IoK8sAPICoreV1ContainerImage) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateNames(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *IoK8sAPICoreV1ContainerImage) validateNames(formats strfmt.Registry) error {
+
+	if err := validate.Required("names", "body", m.Names); err != nil {
+		return err
+	}
+
 	return nil
 }
 

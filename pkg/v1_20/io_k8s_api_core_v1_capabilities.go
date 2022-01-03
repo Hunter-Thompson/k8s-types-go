@@ -18,10 +18,10 @@ import (
 type IoK8sAPICoreV1Capabilities struct {
 
 	// Added capabilities
-	Add []string `json:"add"`
+	Add []string `json:"add" json,yaml:"add"`
 
 	// Removed capabilities
-	Drop []string `json:"drop"`
+	Drop []string `json:"drop" json,yaml:"drop"`
 }
 
 // Validate validates this io k8s api core v1 capabilities

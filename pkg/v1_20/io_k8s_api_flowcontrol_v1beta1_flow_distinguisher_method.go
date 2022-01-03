@@ -21,7 +21,7 @@ type IoK8sAPIFlowcontrolV1beta1FlowDistinguisherMethod struct {
 
 	// `type` is the type of flow distinguisher method The supported types are "ByUser" and "ByNamespace". Required.
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s api flowcontrol v1beta1 flow distinguisher method

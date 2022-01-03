@@ -20,14 +20,14 @@ import (
 type IoK8sAPICoreV1PortworxVolumeSource struct {
 
 	// FSType represents the filesystem type to mount Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs". Implicitly inferred to be "ext4" if unspecified.
-	FsType string `json:"fsType,omitempty"`
+	FsType string `json:"fsType,omitempty" json,yaml:"fsType,omitempty"`
 
 	// Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
-	ReadOnly bool `json:"readOnly,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" json,yaml:"readOnly,omitempty"`
 
 	// VolumeID uniquely identifies a Portworx volume
 	// Required: true
-	VolumeID *string `json:"volumeID"`
+	VolumeID *string `json:"volumeID" json,yaml:"volumeID"`
 }
 
 // Validate validates this io k8s api core v1 portworx volume source

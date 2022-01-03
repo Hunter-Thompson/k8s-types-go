@@ -21,10 +21,10 @@ type IoK8sAPINetworkingV1IPBlock struct {
 
 	// CIDR is a string representing the IP Block Valid examples are "192.168.1.1/24" or "2001:db9::/64"
 	// Required: true
-	Cidr *string `json:"cidr"`
+	Cidr *string `json:"cidr" json,yaml:"cidr"`
 
 	// Except is a slice of CIDRs that should not be included within an IP Block Valid examples are "192.168.1.1/24" or "2001:db9::/64" Except values will be rejected if they are outside the CIDR range
-	Except []string `json:"except"`
+	Except []string `json:"except" json,yaml:"except"`
 }
 
 // Validate validates this io k8s api networking v1 IP block

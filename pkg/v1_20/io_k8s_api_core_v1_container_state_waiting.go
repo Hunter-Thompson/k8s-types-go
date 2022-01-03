@@ -18,10 +18,10 @@ import (
 type IoK8sAPICoreV1ContainerStateWaiting struct {
 
 	// Message regarding why the container is not yet running.
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// (brief) reason the container is not yet running.
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty" json,yaml:"reason,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 container state waiting

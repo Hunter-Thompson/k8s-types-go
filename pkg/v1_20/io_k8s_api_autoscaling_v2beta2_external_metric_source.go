@@ -21,11 +21,11 @@ type IoK8sAPIAutoscalingV2beta2ExternalMetricSource struct {
 
 	// metric identifies the target metric by name and selector
 	// Required: true
-	Metric *IoK8sAPIAutoscalingV2beta2MetricIdentifier `json:"metric"`
+	Metric *IoK8sAPIAutoscalingV2beta2MetricIdentifier `json:"metric" json,yaml:"metric"`
 
 	// target specifies the target value for the given metric
 	// Required: true
-	Target *IoK8sAPIAutoscalingV2beta2MetricTarget `json:"target"`
+	Target *IoK8sAPIAutoscalingV2beta2MetricTarget `json:"target" json,yaml:"target"`
 }
 
 // Validate validates this io k8s api autoscaling v2beta2 external metric source

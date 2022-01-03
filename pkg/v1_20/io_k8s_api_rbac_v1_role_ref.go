@@ -21,15 +21,15 @@ type IoK8sAPIRbacV1RoleRef struct {
 
 	// APIGroup is the group for the resource being referenced
 	// Required: true
-	APIGroup *string `json:"apiGroup"`
+	APIGroup *string `json:"apiGroup" json,yaml:"apiGroup"`
 
 	// Kind is the type of resource being referenced
 	// Required: true
-	Kind *string `json:"kind"`
+	Kind *string `json:"kind" json,yaml:"kind"`
 
 	// Name is the name of resource being referenced
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 }
 
 // Validate validates this io k8s api rbac v1 role ref

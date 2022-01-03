@@ -20,27 +20,27 @@ import (
 type IoK8sAPIBatchV1beta1CronJobSpec struct {
 
 	// Specifies how to treat concurrent executions of a Job. Valid values are: - "Allow" (default): allows CronJobs to run concurrently; - "Forbid": forbids concurrent runs, skipping next run if previous run hasn't finished yet; - "Replace": cancels currently running job and replaces it with a new one
-	ConcurrencyPolicy string `json:"concurrencyPolicy,omitempty"`
+	ConcurrencyPolicy string `json:"concurrencyPolicy,omitempty" json,yaml:"concurrencyPolicy,omitempty"`
 
 	// The number of failed finished jobs to retain. This is a pointer to distinguish between explicit zero and not specified. Defaults to 1.
-	FailedJobsHistoryLimit int32 `json:"failedJobsHistoryLimit,omitempty"`
+	FailedJobsHistoryLimit int32 `json:"failedJobsHistoryLimit,omitempty" json,yaml:"failedJobsHistoryLimit,omitempty"`
 
 	// Specifies the job that will be created when executing a CronJob.
 	// Required: true
-	JobTemplate *IoK8sAPIBatchV1beta1JobTemplateSpec `json:"jobTemplate"`
+	JobTemplate *IoK8sAPIBatchV1beta1JobTemplateSpec `json:"jobTemplate" json,yaml:"jobTemplate"`
 
 	// The schedule in Cron format, see https://en.wikipedia.org/wiki/Cron.
 	// Required: true
-	Schedule *string `json:"schedule"`
+	Schedule *string `json:"schedule" json,yaml:"schedule"`
 
 	// Optional deadline in seconds for starting the job if it misses scheduled time for any reason.  Missed jobs executions will be counted as failed ones.
-	StartingDeadlineSeconds int64 `json:"startingDeadlineSeconds,omitempty"`
+	StartingDeadlineSeconds int64 `json:"startingDeadlineSeconds,omitempty" json,yaml:"startingDeadlineSeconds,omitempty"`
 
 	// The number of successful finished jobs to retain. This is a pointer to distinguish between explicit zero and not specified. Defaults to 3.
-	SuccessfulJobsHistoryLimit int32 `json:"successfulJobsHistoryLimit,omitempty"`
+	SuccessfulJobsHistoryLimit int32 `json:"successfulJobsHistoryLimit,omitempty" json,yaml:"successfulJobsHistoryLimit,omitempty"`
 
 	// This flag tells the controller to suspend subsequent executions, it does not apply to already started executions.  Defaults to false.
-	Suspend bool `json:"suspend,omitempty"`
+	Suspend bool `json:"suspend,omitempty" json,yaml:"suspend,omitempty"`
 }
 
 // Validate validates this io k8s api batch v1beta1 cron job spec

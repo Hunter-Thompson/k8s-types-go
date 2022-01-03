@@ -21,10 +21,10 @@ type IoK8sAPIAutoscalingV2beta2MetricIdentifier struct {
 
 	// name is the name of the given metric
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 
 	// selector is the string-encoded form of a standard kubernetes label selector for the given metric When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping. When unset, just the metricName will be used to gather metrics.
-	Selector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"selector,omitempty"`
+	Selector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"selector,omitempty" json,yaml:"selector,omitempty"`
 }
 
 // Validate validates this io k8s api autoscaling v2beta2 metric identifier

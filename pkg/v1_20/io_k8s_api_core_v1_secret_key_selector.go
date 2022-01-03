@@ -21,13 +21,13 @@ type IoK8sAPICoreV1SecretKeySelector struct {
 
 	// The key of the secret to select from.  Must be a valid secret key.
 	// Required: true
-	Key *string `json:"key"`
+	Key *string `json:"key" json,yaml:"key"`
 
 	// Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" json,yaml:"name,omitempty"`
 
 	// Specify whether the Secret or its key must be defined
-	Optional bool `json:"optional,omitempty"`
+	Optional bool `json:"optional,omitempty" json,yaml:"optional,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 secret key selector

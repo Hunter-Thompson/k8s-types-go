@@ -20,13 +20,13 @@ import (
 type IoK8sAPICoreV1LoadBalancerIngress struct {
 
 	// Hostname is set for load-balancer ingress points that are DNS based (typically AWS load-balancers)
-	Hostname string `json:"hostname,omitempty"`
+	Hostname string `json:"hostname,omitempty" json,yaml:"hostname,omitempty"`
 
 	// IP is set for load-balancer ingress points that are IP based (typically GCE or OpenStack load-balancers)
-	IP string `json:"ip,omitempty"`
+	IP string `json:"ip,omitempty" json,yaml:"ip,omitempty"`
 
 	// Ports is a list of records of service ports If used, every port defined in the service should have an entry in it
-	Ports []*IoK8sAPICoreV1PortStatus `json:"ports"`
+	Ports []*IoK8sAPICoreV1PortStatus `json:"ports" json,yaml:"ports"`
 }
 
 // Validate validates this io k8s api core v1 load balancer ingress

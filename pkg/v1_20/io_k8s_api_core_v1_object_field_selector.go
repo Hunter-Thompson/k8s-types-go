@@ -20,11 +20,11 @@ import (
 type IoK8sAPICoreV1ObjectFieldSelector struct {
 
 	// Version of the schema the FieldPath is written in terms of, defaults to "v1".
-	APIVersion string `json:"apiVersion,omitempty"`
+	APIVersion string `json:"apiVersion,omitempty" json,yaml:"apiVersion,omitempty"`
 
 	// Path of the field to select in the specified API version.
 	// Required: true
-	FieldPath *string `json:"fieldPath"`
+	FieldPath *string `json:"fieldPath" json,yaml:"fieldPath"`
 }
 
 // Validate validates this io k8s api core v1 object field selector

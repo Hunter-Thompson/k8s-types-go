@@ -21,15 +21,15 @@ type IoK8sAPIAutoscalingV2beta2ContainerResourceMetricStatus struct {
 
 	// Container is the name of the container in the pods of the scaling target
 	// Required: true
-	Container *string `json:"container"`
+	Container *string `json:"container" json,yaml:"container"`
 
 	// current contains the current value for the given metric
 	// Required: true
-	Current *IoK8sAPIAutoscalingV2beta2MetricValueStatus `json:"current"`
+	Current *IoK8sAPIAutoscalingV2beta2MetricValueStatus `json:"current" json,yaml:"current"`
 
 	// Name is the name of the resource in question.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 }
 
 // Validate validates this io k8s api autoscaling v2beta2 container resource metric status

@@ -20,11 +20,11 @@ import (
 type IoK8sAPIFlowcontrolV1beta1LimitResponse struct {
 
 	// `queuing` holds the configuration parameters for queuing. This field may be non-empty only if `type` is `"Queue"`.
-	Queuing *IoK8sAPIFlowcontrolV1beta1QueuingConfiguration `json:"queuing,omitempty"`
+	Queuing *IoK8sAPIFlowcontrolV1beta1QueuingConfiguration `json:"queuing,omitempty" json,yaml:"queuing,omitempty"`
 
 	// `type` is "Queue" or "Reject". "Queue" means that requests that can not be executed upon arrival are held in a queue until they can be executed or a queuing limit is reached. "Reject" means that requests that can not be executed upon arrival are rejected. Required.
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s api flowcontrol v1beta1 limit response

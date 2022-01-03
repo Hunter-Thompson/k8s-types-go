@@ -20,17 +20,14 @@ import (
 type IoK8sAPICoreV1PodAffinityTerm struct {
 
 	// A label query over a set of resources, in this case pods.
-	LabelSelector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"labelSelector,omitempty"`
+	LabelSelector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"labelSelector,omitempty" json,yaml:"labelSelector,omitempty"`
 
-	// A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces. This field is beta-level and is only honored when PodAffinityNamespaceSelector feature is enabled.
-	NamespaceSelector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"namespaceSelector,omitempty"`
-
-	// namespaces specifies a static list of namespace names that the term applies to. The term is applied to the union of the namespaces listed in this field and the ones selected by namespaceSelector. null or empty namespaces list and null namespaceSelector means "this pod's namespace"
-	Namespaces []string `json:"namespaces"`
+	// namespaces specifies which namespaces the labelSelector applies to (matches against); null or empty list means "this pod's namespace"
+	Namespaces []string `json:"namespaces" json,yaml:"namespaces"`
 
 	// This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching the labelSelector in the specified namespaces, where co-located is defined as running on a node whose value of the label with key topologyKey matches that of any node on which any of the selected pods is running. Empty topologyKey is not allowed.
 	// Required: true
-	TopologyKey *string `json:"topologyKey"`
+	TopologyKey *string `json:"topologyKey" json,yaml:"topologyKey"`
 }
 
 // Validate validates this io k8s api core v1 pod affinity term
@@ -38,10 +35,6 @@ func (m *IoK8sAPICoreV1PodAffinityTerm) Validate(formats strfmt.Registry) error 
 	var res []error
 
 	if err := m.validateLabelSelector(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateNamespaceSelector(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -74,25 +67,6 @@ func (m *IoK8sAPICoreV1PodAffinityTerm) validateLabelSelector(formats strfmt.Reg
 	return nil
 }
 
-func (m *IoK8sAPICoreV1PodAffinityTerm) validateNamespaceSelector(formats strfmt.Registry) error {
-	if swag.IsZero(m.NamespaceSelector) { // not required
-		return nil
-	}
-
-	if m.NamespaceSelector != nil {
-		if err := m.NamespaceSelector.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("namespaceSelector")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("namespaceSelector")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *IoK8sAPICoreV1PodAffinityTerm) validateTopologyKey(formats strfmt.Registry) error {
 
 	if err := validate.Required("topologyKey", "body", m.TopologyKey); err != nil {
@@ -110,10 +84,6 @@ func (m *IoK8sAPICoreV1PodAffinityTerm) ContextValidate(ctx context.Context, for
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateNamespaceSelector(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -128,22 +98,6 @@ func (m *IoK8sAPICoreV1PodAffinityTerm) contextValidateLabelSelector(ctx context
 				return ve.ValidateName("labelSelector")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("labelSelector")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *IoK8sAPICoreV1PodAffinityTerm) contextValidateNamespaceSelector(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.NamespaceSelector != nil {
-		if err := m.NamespaceSelector.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("namespaceSelector")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("namespaceSelector")
 			}
 			return err
 		}

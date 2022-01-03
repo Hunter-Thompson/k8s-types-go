@@ -20,33 +20,33 @@ import (
 type IoK8sAPICoreV1Volume struct {
 
 	// AWSElasticBlockStore represents an AWS Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
-	AwsElasticBlockStore *IoK8sAPICoreV1AWSElasticBlockStoreVolumeSource `json:"awsElasticBlockStore,omitempty"`
+	AwsElasticBlockStore *IoK8sAPICoreV1AWSElasticBlockStoreVolumeSource `json:"awsElasticBlockStore,omitempty" json,yaml:"awsElasticBlockStore,omitempty"`
 
 	// AzureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
-	AzureDisk *IoK8sAPICoreV1AzureDiskVolumeSource `json:"azureDisk,omitempty"`
+	AzureDisk *IoK8sAPICoreV1AzureDiskVolumeSource `json:"azureDisk,omitempty" json,yaml:"azureDisk,omitempty"`
 
 	// AzureFile represents an Azure File Service mount on the host and bind mount to the pod.
-	AzureFile *IoK8sAPICoreV1AzureFileVolumeSource `json:"azureFile,omitempty"`
+	AzureFile *IoK8sAPICoreV1AzureFileVolumeSource `json:"azureFile,omitempty" json,yaml:"azureFile,omitempty"`
 
 	// CephFS represents a Ceph FS mount on the host that shares a pod's lifetime
-	Cephfs *IoK8sAPICoreV1CephFSVolumeSource `json:"cephfs,omitempty"`
+	Cephfs *IoK8sAPICoreV1CephFSVolumeSource `json:"cephfs,omitempty" json,yaml:"cephfs,omitempty"`
 
 	// Cinder represents a cinder volume attached and mounted on kubelets host machine. More info: https://examples.k8s.io/mysql-cinder-pd/README.md
-	Cinder *IoK8sAPICoreV1CinderVolumeSource `json:"cinder,omitempty"`
+	Cinder *IoK8sAPICoreV1CinderVolumeSource `json:"cinder,omitempty" json,yaml:"cinder,omitempty"`
 
 	// ConfigMap represents a configMap that should populate this volume
-	ConfigMap *IoK8sAPICoreV1ConfigMapVolumeSource `json:"configMap,omitempty"`
+	ConfigMap *IoK8sAPICoreV1ConfigMapVolumeSource `json:"configMap,omitempty" json,yaml:"configMap,omitempty"`
 
 	// CSI (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers (Beta feature).
-	Csi *IoK8sAPICoreV1CSIVolumeSource `json:"csi,omitempty"`
+	Csi *IoK8sAPICoreV1CSIVolumeSource `json:"csi,omitempty" json,yaml:"csi,omitempty"`
 
 	// DownwardAPI represents downward API about the pod that should populate this volume
-	DownwardAPI *IoK8sAPICoreV1DownwardAPIVolumeSource `json:"downwardAPI,omitempty"`
+	DownwardAPI *IoK8sAPICoreV1DownwardAPIVolumeSource `json:"downwardAPI,omitempty" json,yaml:"downwardAPI,omitempty"`
 
 	// EmptyDir represents a temporary directory that shares a pod's lifetime. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
-	EmptyDir *IoK8sAPICoreV1EmptyDirVolumeSource `json:"emptyDir,omitempty"`
+	EmptyDir *IoK8sAPICoreV1EmptyDirVolumeSource `json:"emptyDir,omitempty" json,yaml:"emptyDir,omitempty"`
 
-	// Ephemeral represents a volume that is handled by a cluster storage driver. The volume's lifecycle is tied to the pod that defines it - it will be created before the pod starts, and deleted when the pod is removed.
+	// Ephemeral represents a volume that is handled by a cluster storage driver (Alpha feature). The volume's lifecycle is tied to the pod that defines it - it will be created before the pod starts, and deleted when the pod is removed.
 	//
 	// Use this if: a) the volume is only needed while the pod runs, b) features of normal volumes like restoring from snapshot or capacity
 	//    tracking are needed,
@@ -60,68 +60,68 @@ type IoK8sAPICoreV1Volume struct {
 	// Use CSI for light-weight local ephemeral volumes if the CSI driver is meant to be used that way - see the documentation of the driver for more information.
 	//
 	// A pod can use both types of ephemeral volumes and persistent volumes at the same time.
-	Ephemeral *IoK8sAPICoreV1EphemeralVolumeSource `json:"ephemeral,omitempty"`
+	Ephemeral *IoK8sAPICoreV1EphemeralVolumeSource `json:"ephemeral,omitempty" json,yaml:"ephemeral,omitempty"`
 
 	// FC represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod.
-	Fc *IoK8sAPICoreV1FCVolumeSource `json:"fc,omitempty"`
+	Fc *IoK8sAPICoreV1FCVolumeSource `json:"fc,omitempty" json,yaml:"fc,omitempty"`
 
 	// FlexVolume represents a generic volume resource that is provisioned/attached using an exec based plugin.
-	FlexVolume *IoK8sAPICoreV1FlexVolumeSource `json:"flexVolume,omitempty"`
+	FlexVolume *IoK8sAPICoreV1FlexVolumeSource `json:"flexVolume,omitempty" json,yaml:"flexVolume,omitempty"`
 
 	// Flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running
-	Flocker *IoK8sAPICoreV1FlockerVolumeSource `json:"flocker,omitempty"`
+	Flocker *IoK8sAPICoreV1FlockerVolumeSource `json:"flocker,omitempty" json,yaml:"flocker,omitempty"`
 
 	// GCEPersistentDisk represents a GCE Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
-	GcePersistentDisk *IoK8sAPICoreV1GCEPersistentDiskVolumeSource `json:"gcePersistentDisk,omitempty"`
+	GcePersistentDisk *IoK8sAPICoreV1GCEPersistentDiskVolumeSource `json:"gcePersistentDisk,omitempty" json,yaml:"gcePersistentDisk,omitempty"`
 
 	// GitRepo represents a git repository at a particular revision. DEPRECATED: GitRepo is deprecated. To provision a container with a git repo, mount an EmptyDir into an InitContainer that clones the repo using git, then mount the EmptyDir into the Pod's container.
-	GitRepo *IoK8sAPICoreV1GitRepoVolumeSource `json:"gitRepo,omitempty"`
+	GitRepo *IoK8sAPICoreV1GitRepoVolumeSource `json:"gitRepo,omitempty" json,yaml:"gitRepo,omitempty"`
 
 	// Glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime. More info: https://examples.k8s.io/volumes/glusterfs/README.md
-	Glusterfs *IoK8sAPICoreV1GlusterfsVolumeSource `json:"glusterfs,omitempty"`
+	Glusterfs *IoK8sAPICoreV1GlusterfsVolumeSource `json:"glusterfs,omitempty" json,yaml:"glusterfs,omitempty"`
 
 	// HostPath represents a pre-existing file or directory on the host machine that is directly exposed to the container. This is generally used for system agents or other privileged things that are allowed to see the host machine. Most containers will NOT need this. More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath
-	HostPath *IoK8sAPICoreV1HostPathVolumeSource `json:"hostPath,omitempty"`
+	HostPath *IoK8sAPICoreV1HostPathVolumeSource `json:"hostPath,omitempty" json,yaml:"hostPath,omitempty"`
 
 	// ISCSI represents an ISCSI Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://examples.k8s.io/volumes/iscsi/README.md
-	Iscsi *IoK8sAPICoreV1ISCSIVolumeSource `json:"iscsi,omitempty"`
+	Iscsi *IoK8sAPICoreV1ISCSIVolumeSource `json:"iscsi,omitempty" json,yaml:"iscsi,omitempty"`
 
 	// Volume's name. Must be a DNS_LABEL and unique within the pod. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 
 	// NFS represents an NFS mount on the host that shares a pod's lifetime More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs
-	Nfs *IoK8sAPICoreV1NFSVolumeSource `json:"nfs,omitempty"`
+	Nfs *IoK8sAPICoreV1NFSVolumeSource `json:"nfs,omitempty" json,yaml:"nfs,omitempty"`
 
 	// PersistentVolumeClaimVolumeSource represents a reference to a PersistentVolumeClaim in the same namespace. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
-	PersistentVolumeClaim *IoK8sAPICoreV1PersistentVolumeClaimVolumeSource `json:"persistentVolumeClaim,omitempty"`
+	PersistentVolumeClaim *IoK8sAPICoreV1PersistentVolumeClaimVolumeSource `json:"persistentVolumeClaim,omitempty" json,yaml:"persistentVolumeClaim,omitempty"`
 
 	// PhotonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine
-	PhotonPersistentDisk *IoK8sAPICoreV1PhotonPersistentDiskVolumeSource `json:"photonPersistentDisk,omitempty"`
+	PhotonPersistentDisk *IoK8sAPICoreV1PhotonPersistentDiskVolumeSource `json:"photonPersistentDisk,omitempty" json,yaml:"photonPersistentDisk,omitempty"`
 
 	// PortworxVolume represents a portworx volume attached and mounted on kubelets host machine
-	PortworxVolume *IoK8sAPICoreV1PortworxVolumeSource `json:"portworxVolume,omitempty"`
+	PortworxVolume *IoK8sAPICoreV1PortworxVolumeSource `json:"portworxVolume,omitempty" json,yaml:"portworxVolume,omitempty"`
 
 	// Items for all in one resources secrets, configmaps, and downward API
-	Projected *IoK8sAPICoreV1ProjectedVolumeSource `json:"projected,omitempty"`
+	Projected *IoK8sAPICoreV1ProjectedVolumeSource `json:"projected,omitempty" json,yaml:"projected,omitempty"`
 
 	// Quobyte represents a Quobyte mount on the host that shares a pod's lifetime
-	Quobyte *IoK8sAPICoreV1QuobyteVolumeSource `json:"quobyte,omitempty"`
+	Quobyte *IoK8sAPICoreV1QuobyteVolumeSource `json:"quobyte,omitempty" json,yaml:"quobyte,omitempty"`
 
 	// RBD represents a Rados Block Device mount on the host that shares a pod's lifetime. More info: https://examples.k8s.io/volumes/rbd/README.md
-	Rbd *IoK8sAPICoreV1RBDVolumeSource `json:"rbd,omitempty"`
+	Rbd *IoK8sAPICoreV1RBDVolumeSource `json:"rbd,omitempty" json,yaml:"rbd,omitempty"`
 
 	// ScaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
-	ScaleIO *IoK8sAPICoreV1ScaleIOVolumeSource `json:"scaleIO,omitempty"`
+	ScaleIO *IoK8sAPICoreV1ScaleIOVolumeSource `json:"scaleIO,omitempty" json,yaml:"scaleIO,omitempty"`
 
 	// Secret represents a secret that should populate this volume. More info: https://kubernetes.io/docs/concepts/storage/volumes#secret
-	Secret *IoK8sAPICoreV1SecretVolumeSource `json:"secret,omitempty"`
+	Secret *IoK8sAPICoreV1SecretVolumeSource `json:"secret,omitempty" json,yaml:"secret,omitempty"`
 
 	// StorageOS represents a StorageOS volume attached and mounted on Kubernetes nodes.
-	Storageos *IoK8sAPICoreV1StorageOSVolumeSource `json:"storageos,omitempty"`
+	Storageos *IoK8sAPICoreV1StorageOSVolumeSource `json:"storageos,omitempty" json,yaml:"storageos,omitempty"`
 
 	// VsphereVolume represents a vSphere volume attached and mounted on kubelets host machine
-	VsphereVolume *IoK8sAPICoreV1VsphereVirtualDiskVolumeSource `json:"vsphereVolume,omitempty"`
+	VsphereVolume *IoK8sAPICoreV1VsphereVirtualDiskVolumeSource `json:"vsphereVolume,omitempty" json,yaml:"vsphereVolume,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 volume

@@ -19,13 +19,13 @@ import (
 type IoK8sAPICoreV1Affinity struct {
 
 	// Describes node affinity scheduling rules for the pod.
-	NodeAffinity *IoK8sAPICoreV1NodeAffinity `json:"nodeAffinity,omitempty"`
+	NodeAffinity *IoK8sAPICoreV1NodeAffinity `json:"nodeAffinity,omitempty" json,yaml:"nodeAffinity,omitempty"`
 
 	// Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
-	PodAffinity *IoK8sAPICoreV1PodAffinity `json:"podAffinity,omitempty"`
+	PodAffinity *IoK8sAPICoreV1PodAffinity `json:"podAffinity,omitempty" json,yaml:"podAffinity,omitempty"`
 
 	// Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
-	PodAntiAffinity *IoK8sAPICoreV1PodAntiAffinity `json:"podAntiAffinity,omitempty"`
+	PodAntiAffinity *IoK8sAPICoreV1PodAntiAffinity `json:"podAntiAffinity,omitempty" json,yaml:"podAntiAffinity,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 affinity

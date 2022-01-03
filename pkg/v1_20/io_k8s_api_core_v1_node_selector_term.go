@@ -20,10 +20,10 @@ import (
 type IoK8sAPICoreV1NodeSelectorTerm struct {
 
 	// A list of node selector requirements by node's labels.
-	MatchExpressions []*IoK8sAPICoreV1NodeSelectorRequirement `json:"matchExpressions"`
+	MatchExpressions []*IoK8sAPICoreV1NodeSelectorRequirement `json:"matchExpressions" json,yaml:"matchExpressions"`
 
 	// A list of node selector requirements by node's fields.
-	MatchFields []*IoK8sAPICoreV1NodeSelectorRequirement `json:"matchFields"`
+	MatchFields []*IoK8sAPICoreV1NodeSelectorRequirement `json:"matchFields" json,yaml:"matchFields"`
 }
 
 // Validate validates this io k8s api core v1 node selector term

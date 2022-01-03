@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -22,21 +21,21 @@ type IoK8sAPICertificatesV1CertificateSigningRequestCondition struct {
 
 	// lastTransitionTime is the time the condition last transitioned from one status to another. If unset, when a new condition type is added or an existing condition's status is changed, the server defaults this to the current time.
 	// Format: date-time
-	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty"`
+	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty" json,yaml:"lastTransitionTime,omitempty"`
 
 	// lastUpdateTime is the time of the last update to this condition
 	// Format: date-time
-	LastUpdateTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastUpdateTime,omitempty"`
+	LastUpdateTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastUpdateTime,omitempty" json,yaml:"lastUpdateTime,omitempty"`
 
 	// message contains a human readable message with details about the request state
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// reason indicates a brief reason for the request state
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty" json,yaml:"reason,omitempty"`
 
 	// status of the condition, one of True, False, Unknown. Approved, Denied, and Failed conditions may not be "False" or "Unknown".
 	// Required: true
-	Status *string `json:"status"`
+	Status *string `json:"status" json,yaml:"status"`
 
 	// type of the condition. Known conditions are "Approved", "Denied", and "Failed".
 	//
@@ -49,14 +48,8 @@ type IoK8sAPICertificatesV1CertificateSigningRequestCondition struct {
 	// Approved and Denied conditions are mutually exclusive. Approved, Denied, and Failed conditions cannot be removed once added.
 	//
 	// Only one condition of a given type is allowed.
-	//
-	// Possible enum values:
-	//  - `"Approved"` Approved indicates the request was approved and should be issued by the signer.
-	//  - `"Denied"` Denied indicates the request was denied and should not be issued by the signer.
-	//  - `"Failed"` Failed indicates the signer failed to issue the certificate.
 	// Required: true
-	// Enum: [Approved Denied Failed]
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s api certificates v1 certificate signing request condition
@@ -128,46 +121,9 @@ func (m *IoK8sAPICertificatesV1CertificateSigningRequestCondition) validateStatu
 	return nil
 }
 
-var ioK8sApiCertificatesV1CertificateSigningRequestConditionTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["Approved","Denied","Failed"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCertificatesV1CertificateSigningRequestConditionTypeTypePropEnum = append(ioK8sApiCertificatesV1CertificateSigningRequestConditionTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICertificatesV1CertificateSigningRequestConditionTypeApproved captures enum value "Approved"
-	IoK8sAPICertificatesV1CertificateSigningRequestConditionTypeApproved string = "Approved"
-
-	// IoK8sAPICertificatesV1CertificateSigningRequestConditionTypeDenied captures enum value "Denied"
-	IoK8sAPICertificatesV1CertificateSigningRequestConditionTypeDenied string = "Denied"
-
-	// IoK8sAPICertificatesV1CertificateSigningRequestConditionTypeFailed captures enum value "Failed"
-	IoK8sAPICertificatesV1CertificateSigningRequestConditionTypeFailed string = "Failed"
-)
-
-// prop value enum
-func (m *IoK8sAPICertificatesV1CertificateSigningRequestCondition) validateTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCertificatesV1CertificateSigningRequestConditionTypeTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *IoK8sAPICertificatesV1CertificateSigningRequestCondition) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

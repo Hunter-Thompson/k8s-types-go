@@ -20,60 +20,60 @@ import (
 type IoK8sAPICoreV1Event struct {
 
 	// What action was taken/failed regarding to the Regarding object.
-	Action string `json:"action,omitempty"`
+	Action string `json:"action,omitempty" json,yaml:"action,omitempty"`
 
 	// APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-	APIVersion string `json:"apiVersion,omitempty"`
+	APIVersion string `json:"apiVersion,omitempty" json,yaml:"apiVersion,omitempty"`
 
 	// The number of times this event has occurred.
-	Count int32 `json:"count,omitempty"`
+	Count int32 `json:"count,omitempty" json,yaml:"count,omitempty"`
 
 	// Time when this Event was first observed.
 	// Format: date-time
-	EventTime IoK8sApimachineryPkgApisMetaV1MicroTime `json:"eventTime,omitempty"`
+	EventTime IoK8sApimachineryPkgApisMetaV1MicroTime `json:"eventTime,omitempty" json,yaml:"eventTime,omitempty"`
 
 	// The time at which the event was first recorded. (Time of server receipt is in TypeMeta.)
 	// Format: date-time
-	FirstTimestamp IoK8sApimachineryPkgApisMetaV1Time `json:"firstTimestamp,omitempty"`
+	FirstTimestamp IoK8sApimachineryPkgApisMetaV1Time `json:"firstTimestamp,omitempty" json,yaml:"firstTimestamp,omitempty"`
 
 	// The object that this event is about.
 	// Required: true
-	InvolvedObject *IoK8sAPICoreV1ObjectReference `json:"involvedObject"`
+	InvolvedObject *IoK8sAPICoreV1ObjectReference `json:"involvedObject" json,yaml:"involvedObject"`
 
 	// Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-	Kind string `json:"kind,omitempty"`
+	Kind string `json:"kind,omitempty" json,yaml:"kind,omitempty"`
 
 	// The time at which the most recent occurrence of this event was recorded.
 	// Format: date-time
-	LastTimestamp IoK8sApimachineryPkgApisMetaV1Time `json:"lastTimestamp,omitempty"`
+	LastTimestamp IoK8sApimachineryPkgApisMetaV1Time `json:"lastTimestamp,omitempty" json,yaml:"lastTimestamp,omitempty"`
 
 	// A human-readable description of the status of this operation.
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// Required: true
-	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata"`
+	Metadata *IoK8sApimachineryPkgApisMetaV1ObjectMeta `json:"metadata" json,yaml:"metadata"`
 
 	// This should be a short, machine understandable string that gives the reason for the transition into the object's current status.
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty" json,yaml:"reason,omitempty"`
 
 	// Optional secondary object for more complex actions.
-	Related *IoK8sAPICoreV1ObjectReference `json:"related,omitempty"`
+	Related *IoK8sAPICoreV1ObjectReference `json:"related,omitempty" json,yaml:"related,omitempty"`
 
 	// Name of the controller that emitted this Event, e.g. `kubernetes.io/kubelet`.
-	ReportingComponent string `json:"reportingComponent,omitempty"`
+	ReportingComponent string `json:"reportingComponent,omitempty" json,yaml:"reportingComponent,omitempty"`
 
 	// ID of the controller instance, e.g. `kubelet-xyzf`.
-	ReportingInstance string `json:"reportingInstance,omitempty"`
+	ReportingInstance string `json:"reportingInstance,omitempty" json,yaml:"reportingInstance,omitempty"`
 
 	// Data about the Event series this event represents or nil if it's a singleton Event.
-	Series *IoK8sAPICoreV1EventSeries `json:"series,omitempty"`
+	Series *IoK8sAPICoreV1EventSeries `json:"series,omitempty" json,yaml:"series,omitempty"`
 
 	// The component reporting this event. Should be a short machine understandable string.
-	Source *IoK8sAPICoreV1EventSource `json:"source,omitempty"`
+	Source *IoK8sAPICoreV1EventSource `json:"source,omitempty" json,yaml:"source,omitempty"`
 
 	// Type of this event (Normal, Warning), new types could be added in the future
-	Type string `json:"type,omitempty"`
+	Type string `json:"type,omitempty" json,yaml:"type,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 event

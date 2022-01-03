@@ -18,19 +18,19 @@ import (
 type IoK8sAPICoreV1FCVolumeSource struct {
 
 	// Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
-	FsType string `json:"fsType,omitempty"`
+	FsType string `json:"fsType,omitempty" json,yaml:"fsType,omitempty"`
 
 	// Optional: FC target lun number
-	Lun int32 `json:"lun,omitempty"`
+	Lun int32 `json:"lun,omitempty" json,yaml:"lun,omitempty"`
 
 	// Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
-	ReadOnly bool `json:"readOnly,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" json,yaml:"readOnly,omitempty"`
 
 	// Optional: FC target worldwide names (WWNs)
-	TargetWWNs []string `json:"targetWWNs"`
+	TargetWWNs []string `json:"targetWWNs" json,yaml:"targetWWNs"`
 
 	// Optional: FC volume world wide identifiers (wwids) Either wwids or combination of targetWWNs and lun must be set, but not both simultaneously.
-	Wwids []string `json:"wwids"`
+	Wwids []string `json:"wwids" json,yaml:"wwids"`
 }
 
 // Validate validates this io k8s api core v1 f c volume source

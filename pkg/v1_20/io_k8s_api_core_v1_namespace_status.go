@@ -7,13 +7,11 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // IoK8sAPICoreV1NamespaceStatus NamespaceStatus is information about the current status of a Namespace.
@@ -22,15 +20,10 @@ import (
 type IoK8sAPICoreV1NamespaceStatus struct {
 
 	// Represents the latest available observations of a namespace's current state.
-	Conditions []*IoK8sAPICoreV1NamespaceCondition `json:"conditions"`
+	Conditions []*IoK8sAPICoreV1NamespaceCondition `json:"conditions" json,yaml:"conditions"`
 
 	// Phase is the current lifecycle phase of the namespace. More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/
-	//
-	// Possible enum values:
-	//  - `"Active"` means the namespace is available for use in the system
-	//  - `"Terminating"` means the namespace is undergoing graceful termination
-	// Enum: [Active Terminating]
-	Phase string `json:"phase,omitempty"`
+	Phase string `json:"phase,omitempty" json,yaml:"phase,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 namespace status
@@ -38,10 +31,6 @@ func (m *IoK8sAPICoreV1NamespaceStatus) Validate(formats strfmt.Registry) error 
 	var res []error
 
 	if err := m.validateConditions(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validatePhase(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -72,48 +61,6 @@ func (m *IoK8sAPICoreV1NamespaceStatus) validateConditions(formats strfmt.Regist
 			}
 		}
 
-	}
-
-	return nil
-}
-
-var ioK8sApiCoreV1NamespaceStatusTypePhasePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["Active","Terminating"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1NamespaceStatusTypePhasePropEnum = append(ioK8sApiCoreV1NamespaceStatusTypePhasePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1NamespaceStatusPhaseActive captures enum value "Active"
-	IoK8sAPICoreV1NamespaceStatusPhaseActive string = "Active"
-
-	// IoK8sAPICoreV1NamespaceStatusPhaseTerminating captures enum value "Terminating"
-	IoK8sAPICoreV1NamespaceStatusPhaseTerminating string = "Terminating"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1NamespaceStatus) validatePhaseEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1NamespaceStatusTypePhasePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *IoK8sAPICoreV1NamespaceStatus) validatePhase(formats strfmt.Registry) error {
-	if swag.IsZero(m.Phase) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validatePhaseEnum("phase", "body", m.Phase); err != nil {
-		return err
 	}
 
 	return nil

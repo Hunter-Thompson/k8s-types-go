@@ -19,7 +19,7 @@ import (
 type IoK8sAPINetworkingV1IngressStatus struct {
 
 	// LoadBalancer contains the current status of the load-balancer.
-	LoadBalancer *IoK8sAPICoreV1LoadBalancerStatus `json:"loadBalancer,omitempty"`
+	LoadBalancer *IoK8sAPICoreV1LoadBalancerStatus `json:"loadBalancer,omitempty" json,yaml:"loadBalancer,omitempty"`
 }
 
 // Validate validates this io k8s api networking v1 ingress status

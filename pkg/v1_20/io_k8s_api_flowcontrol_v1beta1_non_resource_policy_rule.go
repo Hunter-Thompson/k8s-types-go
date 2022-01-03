@@ -27,11 +27,11 @@ type IoK8sAPIFlowcontrolV1beta1NonResourcePolicyRule struct {
 	//   - "/healthz/*" matches all per-component health checks.
 	// "*" matches all non-resource urls. if it is present, it must be the only entry. Required.
 	// Required: true
-	NonResourceURLs []string `json:"nonResourceURLs"`
+	NonResourceURLs []string `json:"nonResourceURLs" json,yaml:"nonResourceURLs"`
 
 	// `verbs` is a list of matching verbs and may not be empty. "*" matches all verbs. If it is present, it must be the only entry. Required.
 	// Required: true
-	Verbs []string `json:"verbs"`
+	Verbs []string `json:"verbs" json,yaml:"verbs"`
 }
 
 // Validate validates this io k8s api flowcontrol v1beta1 non resource policy rule

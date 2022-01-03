@@ -20,7 +20,7 @@ import (
 type IoK8sAPICoreV1TopologySelectorTerm struct {
 
 	// A list of topology selector requirements by labels.
-	MatchLabelExpressions []*IoK8sAPICoreV1TopologySelectorLabelRequirement `json:"matchLabelExpressions"`
+	MatchLabelExpressions []*IoK8sAPICoreV1TopologySelectorLabelRequirement `json:"matchLabelExpressions" json,yaml:"matchLabelExpressions"`
 }
 
 // Validate validates this io k8s api core v1 topology selector term

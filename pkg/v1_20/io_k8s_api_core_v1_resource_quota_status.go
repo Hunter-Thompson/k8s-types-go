@@ -19,10 +19,10 @@ import (
 type IoK8sAPICoreV1ResourceQuotaStatus struct {
 
 	// Hard is the set of enforced hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/
-	Hard map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"hard,omitempty"`
+	Hard map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"hard,omitempty" json,yaml:"hard,omitempty"`
 
 	// Used is the current observed total usage of the resource in the namespace.
-	Used map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"used,omitempty"`
+	Used map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"used,omitempty" json,yaml:"used,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 resource quota status

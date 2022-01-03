@@ -20,20 +20,20 @@ type IoK8sAPICoordinationV1LeaseSpec struct {
 
 	// acquireTime is a time when the current lease was acquired.
 	// Format: date-time
-	AcquireTime IoK8sApimachineryPkgApisMetaV1MicroTime `json:"acquireTime,omitempty"`
+	AcquireTime IoK8sApimachineryPkgApisMetaV1MicroTime `json:"acquireTime,omitempty" json,yaml:"acquireTime,omitempty"`
 
 	// holderIdentity contains the identity of the holder of a current lease.
-	HolderIdentity string `json:"holderIdentity,omitempty"`
+	HolderIdentity string `json:"holderIdentity,omitempty" json,yaml:"holderIdentity,omitempty"`
 
 	// leaseDurationSeconds is a duration that candidates for a lease need to wait to force acquire it. This is measure against time of last observed RenewTime.
-	LeaseDurationSeconds int32 `json:"leaseDurationSeconds,omitempty"`
+	LeaseDurationSeconds int32 `json:"leaseDurationSeconds,omitempty" json,yaml:"leaseDurationSeconds,omitempty"`
 
 	// leaseTransitions is the number of transitions of a lease between holders.
-	LeaseTransitions int32 `json:"leaseTransitions,omitempty"`
+	LeaseTransitions int32 `json:"leaseTransitions,omitempty" json,yaml:"leaseTransitions,omitempty"`
 
 	// renewTime is a time when the current holder of a lease has last updated the lease.
 	// Format: date-time
-	RenewTime IoK8sApimachineryPkgApisMetaV1MicroTime `json:"renewTime,omitempty"`
+	RenewTime IoK8sApimachineryPkgApisMetaV1MicroTime `json:"renewTime,omitempty" json,yaml:"renewTime,omitempty"`
 }
 
 // Validate validates this io k8s api coordination v1 lease spec

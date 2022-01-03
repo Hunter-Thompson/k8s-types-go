@@ -12,10 +12,14 @@ Its nice to have it all in a single package.
 
 ## Want to contritube a k8s version?
 
-1. Get a schema from [here](https://github.com/cdk8s-team/cdk8s/tree/master/kubernetes-schemas).
+1. Get a schema from a specific k8s release branch 
+```
+version='1.20'
+curl https://raw.githubusercontent.com/kubernetes/kubernetes/release-$version/api/openapi-spec/swagger.json > definitions.json
+```
 2. Use  go-swagger to generate the models.
 ```
-swagger generate model -f definition.json
+swagger generate model --struct-tags='json,yaml' -f ./definitions.json
 ```
-3. Update pkg name to version. Example: `package v1_20`.
+3. Update pkg name to k8s release version. Example: `package v1_20`.
 4. Create a PR : )

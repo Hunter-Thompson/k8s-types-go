@@ -20,7 +20,7 @@ import (
 type IoK8sAPICoreV1DownwardAPIProjection struct {
 
 	// Items is a list of DownwardAPIVolume file
-	Items []*IoK8sAPICoreV1DownwardAPIVolumeFile `json:"items"`
+	Items []*IoK8sAPICoreV1DownwardAPIVolumeFile `json:"items" json,yaml:"items"`
 }
 
 // Validate validates this io k8s api core v1 downward API projection

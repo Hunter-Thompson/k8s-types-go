@@ -20,22 +20,22 @@ import (
 type IoK8sAPIAutoscalingV2beta1ObjectMetricSource struct {
 
 	// averageValue is the target value of the average of the metric across all relevant pods (as a quantity)
-	AverageValue IoK8sApimachineryPkgAPIResourceQuantity `json:"averageValue,omitempty"`
+	AverageValue IoK8sApimachineryPkgAPIResourceQuantity `json:"averageValue,omitempty" json,yaml:"averageValue,omitempty"`
 
 	// metricName is the name of the metric in question.
 	// Required: true
-	MetricName *string `json:"metricName"`
+	MetricName *string `json:"metricName" json,yaml:"metricName"`
 
 	// selector is the string-encoded form of a standard kubernetes label selector for the given metric When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping When unset, just the metricName will be used to gather metrics.
-	Selector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"selector,omitempty"`
+	Selector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"selector,omitempty" json,yaml:"selector,omitempty"`
 
 	// target is the described Kubernetes object.
 	// Required: true
-	Target *IoK8sAPIAutoscalingV2beta1CrossVersionObjectReference `json:"target"`
+	Target *IoK8sAPIAutoscalingV2beta1CrossVersionObjectReference `json:"target" json,yaml:"target"`
 
 	// targetValue is the target value of the metric (as a quantity).
 	// Required: true
-	TargetValue *IoK8sApimachineryPkgAPIResourceQuantity `json:"targetValue"`
+	TargetValue *IoK8sApimachineryPkgAPIResourceQuantity `json:"targetValue" json,yaml:"targetValue"`
 }
 
 // Validate validates this io k8s api autoscaling v2beta1 object metric source

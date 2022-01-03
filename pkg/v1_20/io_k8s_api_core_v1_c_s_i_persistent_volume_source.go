@@ -20,33 +20,33 @@ import (
 type IoK8sAPICoreV1CSIPersistentVolumeSource struct {
 
 	// ControllerExpandSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI ControllerExpandVolume call. This is an alpha field and requires enabling ExpandCSIVolumes feature gate. This field is optional, and may be empty if no secret is required. If the secret object contains more than one secret, all secrets are passed.
-	ControllerExpandSecretRef *IoK8sAPICoreV1SecretReference `json:"controllerExpandSecretRef,omitempty"`
+	ControllerExpandSecretRef *IoK8sAPICoreV1SecretReference `json:"controllerExpandSecretRef,omitempty" json,yaml:"controllerExpandSecretRef,omitempty"`
 
 	// ControllerPublishSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI ControllerPublishVolume and ControllerUnpublishVolume calls. This field is optional, and may be empty if no secret is required. If the secret object contains more than one secret, all secrets are passed.
-	ControllerPublishSecretRef *IoK8sAPICoreV1SecretReference `json:"controllerPublishSecretRef,omitempty"`
+	ControllerPublishSecretRef *IoK8sAPICoreV1SecretReference `json:"controllerPublishSecretRef,omitempty" json,yaml:"controllerPublishSecretRef,omitempty"`
 
 	// Driver is the name of the driver to use for this volume. Required.
 	// Required: true
-	Driver *string `json:"driver"`
+	Driver *string `json:"driver" json,yaml:"driver"`
 
 	// Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs".
-	FsType string `json:"fsType,omitempty"`
+	FsType string `json:"fsType,omitempty" json,yaml:"fsType,omitempty"`
 
 	// NodePublishSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI NodePublishVolume and NodeUnpublishVolume calls. This field is optional, and may be empty if no secret is required. If the secret object contains more than one secret, all secrets are passed.
-	NodePublishSecretRef *IoK8sAPICoreV1SecretReference `json:"nodePublishSecretRef,omitempty"`
+	NodePublishSecretRef *IoK8sAPICoreV1SecretReference `json:"nodePublishSecretRef,omitempty" json,yaml:"nodePublishSecretRef,omitempty"`
 
 	// NodeStageSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI NodeStageVolume and NodeStageVolume and NodeUnstageVolume calls. This field is optional, and may be empty if no secret is required. If the secret object contains more than one secret, all secrets are passed.
-	NodeStageSecretRef *IoK8sAPICoreV1SecretReference `json:"nodeStageSecretRef,omitempty"`
+	NodeStageSecretRef *IoK8sAPICoreV1SecretReference `json:"nodeStageSecretRef,omitempty" json,yaml:"nodeStageSecretRef,omitempty"`
 
 	// Optional: The value to pass to ControllerPublishVolumeRequest. Defaults to false (read/write).
-	ReadOnly bool `json:"readOnly,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" json,yaml:"readOnly,omitempty"`
 
 	// Attributes of the volume to publish.
-	VolumeAttributes map[string]string `json:"volumeAttributes,omitempty"`
+	VolumeAttributes map[string]string `json:"volumeAttributes,omitempty" json,yaml:"volumeAttributes,omitempty"`
 
 	// VolumeHandle is the unique volume name returned by the CSI volume plugin’s CreateVolume to refer to the volume on all subsequent calls. Required.
 	// Required: true
-	VolumeHandle *string `json:"volumeHandle"`
+	VolumeHandle *string `json:"volumeHandle" json,yaml:"volumeHandle"`
 }
 
 // Validate validates this io k8s api core v1 c s i persistent volume source

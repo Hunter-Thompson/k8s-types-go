@@ -20,12 +20,12 @@ type IoK8sAPIAdmissionregistrationV1WebhookClientConfig struct {
 
 	// `caBundle` is a PEM encoded CA bundle which will be used to validate the webhook's server certificate. If unspecified, system trust roots on the apiserver are used.
 	// Format: byte
-	CaBundle strfmt.Base64 `json:"caBundle,omitempty"`
+	CaBundle strfmt.Base64 `json:"caBundle,omitempty" json,yaml:"caBundle,omitempty"`
 
 	// `service` is a reference to the service for this webhook. Either `service` or `url` must be specified.
 	//
 	// If the webhook is running within the cluster, then you should use `service`.
-	Service *IoK8sAPIAdmissionregistrationV1ServiceReference `json:"service,omitempty"`
+	Service *IoK8sAPIAdmissionregistrationV1ServiceReference `json:"service,omitempty" json,yaml:"service,omitempty"`
 
 	// `url` gives the location of the webhook, in standard URL form (`scheme://host:port/path`). Exactly one of `url` or `service` must be specified.
 	//
@@ -38,7 +38,7 @@ type IoK8sAPIAdmissionregistrationV1WebhookClientConfig struct {
 	// A path is optional, and if present may be any string permissible in a URL. You may use the path to pass an arbitrary string to the webhook, for example, a cluster identifier.
 	//
 	// Attempting to use a user or basic auth e.g. "user:password@" is not allowed. Fragments ("#...") and query parameters ("?...") are not allowed, either.
-	URL string `json:"url,omitempty"`
+	URL string `json:"url,omitempty" json,yaml:"url,omitempty"`
 }
 
 // Validate validates this io k8s api admissionregistration v1 webhook client config

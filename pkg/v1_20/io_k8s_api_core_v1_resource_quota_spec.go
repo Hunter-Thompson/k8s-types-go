@@ -19,13 +19,13 @@ import (
 type IoK8sAPICoreV1ResourceQuotaSpec struct {
 
 	// hard is the set of desired hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/
-	Hard map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"hard,omitempty"`
+	Hard map[string]IoK8sApimachineryPkgAPIResourceQuantity `json:"hard,omitempty" json,yaml:"hard,omitempty"`
 
 	// scopeSelector is also a collection of filters like scopes that must match each object tracked by a quota but expressed using ScopeSelectorOperator in combination with possible values. For a resource to match, both scopes AND scopeSelector (if specified in spec), must be matched.
-	ScopeSelector *IoK8sAPICoreV1ScopeSelector `json:"scopeSelector,omitempty"`
+	ScopeSelector *IoK8sAPICoreV1ScopeSelector `json:"scopeSelector,omitempty" json,yaml:"scopeSelector,omitempty"`
 
 	// A collection of filters that must match each object tracked by a quota. If not specified, the quota matches all objects.
-	Scopes []string `json:"scopes"`
+	Scopes []string `json:"scopes" json,yaml:"scopes"`
 }
 
 // Validate validates this io k8s api core v1 resource quota spec

@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -22,32 +21,25 @@ type IoK8sAPICoreV1PodCondition struct {
 
 	// Last time we probed the condition.
 	// Format: date-time
-	LastProbeTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastProbeTime,omitempty"`
+	LastProbeTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastProbeTime,omitempty" json,yaml:"lastProbeTime,omitempty"`
 
 	// Last time the condition transitioned from one status to another.
 	// Format: date-time
-	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty"`
+	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty" json,yaml:"lastTransitionTime,omitempty"`
 
 	// Human-readable message indicating details about last transition.
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// Unique, one-word, CamelCase reason for the condition's last transition.
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty" json,yaml:"reason,omitempty"`
 
 	// Status is the status of the condition. Can be True, False, Unknown. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions
 	// Required: true
-	Status *string `json:"status"`
+	Status *string `json:"status" json,yaml:"status"`
 
 	// Type is the type of the condition. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions
-	//
-	// Possible enum values:
-	//  - `"ContainersReady"` indicates whether all containers in the pod are ready.
-	//  - `"Initialized"` means that all init containers in the pod have started successfully.
-	//  - `"PodScheduled"` represents status of the scheduling process for this pod.
-	//  - `"Ready"` means the pod is able to service requests and should be added to the load balancing pools of all matching services.
 	// Required: true
-	// Enum: [ContainersReady Initialized PodScheduled Ready]
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s api core v1 pod condition
@@ -119,49 +111,9 @@ func (m *IoK8sAPICoreV1PodCondition) validateStatus(formats strfmt.Registry) err
 	return nil
 }
 
-var ioK8sApiCoreV1PodConditionTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["ContainersReady","Initialized","PodScheduled","Ready"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1PodConditionTypeTypePropEnum = append(ioK8sApiCoreV1PodConditionTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1PodConditionTypeContainersReady captures enum value "ContainersReady"
-	IoK8sAPICoreV1PodConditionTypeContainersReady string = "ContainersReady"
-
-	// IoK8sAPICoreV1PodConditionTypeInitialized captures enum value "Initialized"
-	IoK8sAPICoreV1PodConditionTypeInitialized string = "Initialized"
-
-	// IoK8sAPICoreV1PodConditionTypePodScheduled captures enum value "PodScheduled"
-	IoK8sAPICoreV1PodConditionTypePodScheduled string = "PodScheduled"
-
-	// IoK8sAPICoreV1PodConditionTypeReady captures enum value "Ready"
-	IoK8sAPICoreV1PodConditionTypeReady string = "Ready"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1PodCondition) validateTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1PodConditionTypeTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *IoK8sAPICoreV1PodCondition) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

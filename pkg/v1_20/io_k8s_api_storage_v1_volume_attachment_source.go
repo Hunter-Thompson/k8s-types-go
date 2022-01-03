@@ -18,11 +18,11 @@ import (
 // swagger:model io.k8s.api.storage.v1.VolumeAttachmentSource
 type IoK8sAPIStorageV1VolumeAttachmentSource struct {
 
-	// inlineVolumeSpec contains all the information necessary to attach a persistent volume defined by a pod's inline VolumeSource. This field is populated only for the CSIMigration feature. It contains translated fields from a pod's inline VolumeSource to a PersistentVolumeSpec. This field is beta-level and is only honored by servers that enabled the CSIMigration feature.
-	InlineVolumeSpec *IoK8sAPICoreV1PersistentVolumeSpec `json:"inlineVolumeSpec,omitempty"`
+	// inlineVolumeSpec contains all the information necessary to attach a persistent volume defined by a pod's inline VolumeSource. This field is populated only for the CSIMigration feature. It contains translated fields from a pod's inline VolumeSource to a PersistentVolumeSpec. This field is alpha-level and is only honored by servers that enabled the CSIMigration feature.
+	InlineVolumeSpec *IoK8sAPICoreV1PersistentVolumeSpec `json:"inlineVolumeSpec,omitempty" json,yaml:"inlineVolumeSpec,omitempty"`
 
 	// Name of the persistent volume to attach.
-	PersistentVolumeName string `json:"persistentVolumeName,omitempty"`
+	PersistentVolumeName string `json:"persistentVolumeName,omitempty" json,yaml:"persistentVolumeName,omitempty"`
 }
 
 // Validate validates this io k8s api storage v1 volume attachment source

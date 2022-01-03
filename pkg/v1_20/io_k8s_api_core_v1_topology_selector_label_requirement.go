@@ -21,11 +21,11 @@ type IoK8sAPICoreV1TopologySelectorLabelRequirement struct {
 
 	// The label key that the selector applies to.
 	// Required: true
-	Key *string `json:"key"`
+	Key *string `json:"key" json,yaml:"key"`
 
 	// An array of string values. One value must match the label to be selected. Each entry in Values is ORed.
 	// Required: true
-	Values []string `json:"values"`
+	Values []string `json:"values" json,yaml:"values"`
 }
 
 // Validate validates this io k8s api core v1 topology selector label requirement

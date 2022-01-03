@@ -18,10 +18,10 @@ import (
 type IoK8sAPICoreV1SecretReference struct {
 
 	// Name is unique within a namespace to reference a secret resource.
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" json,yaml:"name,omitempty"`
 
 	// Namespace defines the space within which the secret name must be unique.
-	Namespace string `json:"namespace,omitempty"`
+	Namespace string `json:"namespace,omitempty" json,yaml:"namespace,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 secret reference

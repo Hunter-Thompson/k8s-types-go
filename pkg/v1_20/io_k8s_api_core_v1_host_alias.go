@@ -18,10 +18,10 @@ import (
 type IoK8sAPICoreV1HostAlias struct {
 
 	// Hostnames for the above IP address.
-	Hostnames []string `json:"hostnames"`
+	Hostnames []string `json:"hostnames" json,yaml:"hostnames"`
 
 	// IP address of the host file entry.
-	IP string `json:"ip,omitempty"`
+	IP string `json:"ip,omitempty" json,yaml:"ip,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 host alias

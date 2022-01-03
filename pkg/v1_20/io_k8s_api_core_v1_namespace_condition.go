@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -22,29 +21,21 @@ type IoK8sAPICoreV1NamespaceCondition struct {
 
 	// last transition time
 	// Format: date-time
-	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty"`
+	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty" json,yaml:"lastTransitionTime,omitempty"`
 
 	// message
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// reason
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty" json,yaml:"reason,omitempty"`
 
 	// Status of the condition, one of True, False, Unknown.
 	// Required: true
-	Status *string `json:"status"`
+	Status *string `json:"status" json,yaml:"status"`
 
 	// Type of namespace controller condition.
-	//
-	// Possible enum values:
-	//  - `"NamespaceContentRemaining"` contains information about resources remaining in a namespace.
-	//  - `"NamespaceDeletionContentFailure"` contains information about namespace deleter errors during deletion of resources.
-	//  - `"NamespaceDeletionDiscoveryFailure"` contains information about namespace deleter errors during resource discovery.
-	//  - `"NamespaceDeletionGroupVersionParsingFailure"` contains information about namespace deleter errors parsing GV for legacy types.
-	//  - `"NamespaceFinalizersRemaining"` contains information about which finalizers are on resources remaining in a namespace.
 	// Required: true
-	// Enum: [NamespaceContentRemaining NamespaceDeletionContentFailure NamespaceDeletionDiscoveryFailure NamespaceDeletionGroupVersionParsingFailure NamespaceFinalizersRemaining]
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s api core v1 namespace condition
@@ -95,52 +86,9 @@ func (m *IoK8sAPICoreV1NamespaceCondition) validateStatus(formats strfmt.Registr
 	return nil
 }
 
-var ioK8sApiCoreV1NamespaceConditionTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["NamespaceContentRemaining","NamespaceDeletionContentFailure","NamespaceDeletionDiscoveryFailure","NamespaceDeletionGroupVersionParsingFailure","NamespaceFinalizersRemaining"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1NamespaceConditionTypeTypePropEnum = append(ioK8sApiCoreV1NamespaceConditionTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1NamespaceConditionTypeNamespaceContentRemaining captures enum value "NamespaceContentRemaining"
-	IoK8sAPICoreV1NamespaceConditionTypeNamespaceContentRemaining string = "NamespaceContentRemaining"
-
-	// IoK8sAPICoreV1NamespaceConditionTypeNamespaceDeletionContentFailure captures enum value "NamespaceDeletionContentFailure"
-	IoK8sAPICoreV1NamespaceConditionTypeNamespaceDeletionContentFailure string = "NamespaceDeletionContentFailure"
-
-	// IoK8sAPICoreV1NamespaceConditionTypeNamespaceDeletionDiscoveryFailure captures enum value "NamespaceDeletionDiscoveryFailure"
-	IoK8sAPICoreV1NamespaceConditionTypeNamespaceDeletionDiscoveryFailure string = "NamespaceDeletionDiscoveryFailure"
-
-	// IoK8sAPICoreV1NamespaceConditionTypeNamespaceDeletionGroupVersionParsingFailure captures enum value "NamespaceDeletionGroupVersionParsingFailure"
-	IoK8sAPICoreV1NamespaceConditionTypeNamespaceDeletionGroupVersionParsingFailure string = "NamespaceDeletionGroupVersionParsingFailure"
-
-	// IoK8sAPICoreV1NamespaceConditionTypeNamespaceFinalizersRemaining captures enum value "NamespaceFinalizersRemaining"
-	IoK8sAPICoreV1NamespaceConditionTypeNamespaceFinalizersRemaining string = "NamespaceFinalizersRemaining"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1NamespaceCondition) validateTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1NamespaceConditionTypeTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *IoK8sAPICoreV1NamespaceCondition) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

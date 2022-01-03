@@ -20,19 +20,19 @@ type IoK8sAPIFlowcontrolV1beta1PriorityLevelConfigurationCondition struct {
 
 	// `lastTransitionTime` is the last time the condition transitioned from one status to another.
 	// Format: date-time
-	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty"`
+	LastTransitionTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastTransitionTime,omitempty" json,yaml:"lastTransitionTime,omitempty"`
 
 	// `message` is a human-readable message indicating details about last transition.
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// `reason` is a unique, one-word, CamelCase reason for the condition's last transition.
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty" json,yaml:"reason,omitempty"`
 
 	// `status` is the status of the condition. Can be True, False, Unknown. Required.
-	Status string `json:"status,omitempty"`
+	Status string `json:"status,omitempty" json,yaml:"status,omitempty"`
 
 	// `type` is the type of the condition. Required.
-	Type string `json:"type,omitempty"`
+	Type string `json:"type,omitempty" json,yaml:"type,omitempty"`
 }
 
 // Validate validates this io k8s api flowcontrol v1beta1 priority level configuration condition

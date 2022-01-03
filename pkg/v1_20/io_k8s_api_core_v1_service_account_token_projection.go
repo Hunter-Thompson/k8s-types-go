@@ -20,14 +20,14 @@ import (
 type IoK8sAPICoreV1ServiceAccountTokenProjection struct {
 
 	// Audience is the intended audience of the token. A recipient of a token must identify itself with an identifier specified in the audience of the token, and otherwise should reject the token. The audience defaults to the identifier of the apiserver.
-	Audience string `json:"audience,omitempty"`
+	Audience string `json:"audience,omitempty" json,yaml:"audience,omitempty"`
 
 	// ExpirationSeconds is the requested duration of validity of the service account token. As the token approaches expiration, the kubelet volume plugin will proactively rotate the service account token. The kubelet will start trying to rotate the token if the token is older than 80 percent of its time to live or if the token is older than 24 hours.Defaults to 1 hour and must be at least 10 minutes.
-	ExpirationSeconds int64 `json:"expirationSeconds,omitempty"`
+	ExpirationSeconds int64 `json:"expirationSeconds,omitempty" json,yaml:"expirationSeconds,omitempty"`
 
 	// Path is the path relative to the mount point of the file to project the token into.
 	// Required: true
-	Path *string `json:"path"`
+	Path *string `json:"path" json,yaml:"path"`
 }
 
 // Validate validates this io k8s api core v1 service account token projection

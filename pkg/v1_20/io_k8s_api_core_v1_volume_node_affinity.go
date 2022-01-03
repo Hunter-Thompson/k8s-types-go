@@ -19,7 +19,7 @@ import (
 type IoK8sAPICoreV1VolumeNodeAffinity struct {
 
 	// Required specifies hard node constraints that must be met.
-	Required *IoK8sAPICoreV1NodeSelector `json:"required,omitempty"`
+	Required *IoK8sAPICoreV1NodeSelector `json:"required,omitempty" json,yaml:"required,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 volume node affinity

@@ -20,22 +20,22 @@ import (
 type IoK8sAPIAutoscalingV1HorizontalPodAutoscalerStatus struct {
 
 	// current average CPU utilization over all pods, represented as a percentage of requested CPU, e.g. 70 means that an average pod is using now 70% of its requested CPU.
-	CurrentCPUUtilizationPercentage int32 `json:"currentCPUUtilizationPercentage,omitempty"`
+	CurrentCPUUtilizationPercentage int32 `json:"currentCPUUtilizationPercentage,omitempty" json,yaml:"currentCPUUtilizationPercentage,omitempty"`
 
 	// current number of replicas of pods managed by this autoscaler.
 	// Required: true
-	CurrentReplicas *int32 `json:"currentReplicas"`
+	CurrentReplicas *int32 `json:"currentReplicas" json,yaml:"currentReplicas"`
 
 	// desired number of replicas of pods managed by this autoscaler.
 	// Required: true
-	DesiredReplicas *int32 `json:"desiredReplicas"`
+	DesiredReplicas *int32 `json:"desiredReplicas" json,yaml:"desiredReplicas"`
 
 	// last time the HorizontalPodAutoscaler scaled the number of pods; used by the autoscaler to control how often the number of pods is changed.
 	// Format: date-time
-	LastScaleTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastScaleTime,omitempty"`
+	LastScaleTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastScaleTime,omitempty" json,yaml:"lastScaleTime,omitempty"`
 
 	// most recent generation observed by this autoscaler.
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" json,yaml:"observedGeneration,omitempty"`
 }
 
 // Validate validates this io k8s api autoscaling v1 horizontal pod autoscaler status

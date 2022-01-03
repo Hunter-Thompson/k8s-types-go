@@ -20,11 +20,11 @@ import (
 type IoK8sApiextensionsApiserverPkgApisApiextensionsV1WebhookConversion struct {
 
 	// clientConfig is the instructions for how to call the webhook if strategy is `Webhook`.
-	ClientConfig *IoK8sApiextensionsApiserverPkgApisApiextensionsV1WebhookClientConfig `json:"clientConfig,omitempty"`
+	ClientConfig *IoK8sApiextensionsApiserverPkgApisApiextensionsV1WebhookClientConfig `json:"clientConfig,omitempty" json,yaml:"clientConfig,omitempty"`
 
 	// conversionReviewVersions is an ordered list of preferred `ConversionReview` versions the Webhook expects. The API server will use the first version in the list which it supports. If none of the versions specified in this list are supported by API server, conversion will fail for the custom resource. If a persisted Webhook configuration specifies allowed versions and does not include any versions known to the API Server, calls to the webhook will fail.
 	// Required: true
-	ConversionReviewVersions []string `json:"conversionReviewVersions"`
+	ConversionReviewVersions []string `json:"conversionReviewVersions" json,yaml:"conversionReviewVersions"`
 }
 
 // Validate validates this io k8s apiextensions apiserver pkg apis apiextensions v1 webhook conversion

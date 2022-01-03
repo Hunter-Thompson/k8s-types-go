@@ -21,11 +21,11 @@ type IoK8sAPICoreV1HTTPHeader struct {
 
 	// The header field name
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 
 	// The header field value
 	// Required: true
-	Value *string `json:"value"`
+	Value *string `json:"value" json,yaml:"value"`
 }
 
 // Validate validates this io k8s api core v1 HTTP header

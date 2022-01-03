@@ -19,7 +19,7 @@ import (
 type IoK8sAPICoreV1SessionAffinityConfig struct {
 
 	// clientIP contains the configurations of Client IP based session affinity.
-	ClientIP *IoK8sAPICoreV1ClientIPConfig `json:"clientIP,omitempty"`
+	ClientIP *IoK8sAPICoreV1ClientIPConfig `json:"clientIP,omitempty" json,yaml:"clientIP,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 session affinity config

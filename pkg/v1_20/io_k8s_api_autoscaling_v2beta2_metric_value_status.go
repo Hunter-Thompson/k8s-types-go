@@ -19,13 +19,13 @@ import (
 type IoK8sAPIAutoscalingV2beta2MetricValueStatus struct {
 
 	// currentAverageUtilization is the current value of the average of the resource metric across all relevant pods, represented as a percentage of the requested value of the resource for the pods.
-	AverageUtilization int32 `json:"averageUtilization,omitempty"`
+	AverageUtilization int32 `json:"averageUtilization,omitempty" json,yaml:"averageUtilization,omitempty"`
 
 	// averageValue is the current value of the average of the metric across all relevant pods (as a quantity)
-	AverageValue IoK8sApimachineryPkgAPIResourceQuantity `json:"averageValue,omitempty"`
+	AverageValue IoK8sApimachineryPkgAPIResourceQuantity `json:"averageValue,omitempty" json,yaml:"averageValue,omitempty"`
 
 	// value is the current value of the metric (as a quantity).
-	Value IoK8sApimachineryPkgAPIResourceQuantity `json:"value,omitempty"`
+	Value IoK8sApimachineryPkgAPIResourceQuantity `json:"value,omitempty" json,yaml:"value,omitempty"`
 }
 
 // Validate validates this io k8s api autoscaling v2beta2 metric value status

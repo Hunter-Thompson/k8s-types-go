@@ -19,33 +19,25 @@ import (
 type IoK8sAPICoreV1PersistentVolumeClaimSpec struct {
 
 	// AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
-	AccessModes []string `json:"accessModes"`
+	AccessModes []string `json:"accessModes" json,yaml:"accessModes"`
 
-	// This field can be used to specify either: * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source. If the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field.
-	DataSource *IoK8sAPICoreV1TypedLocalObjectReference `json:"dataSource,omitempty"`
+	// This field can be used to specify either: * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An existing PVC (PersistentVolumeClaim) * An existing custom resource that implements data population (Alpha) In order to use custom resource types that implement data population, the AnyVolumeDataSource feature gate must be enabled. If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source.
+	DataSource *IoK8sAPICoreV1TypedLocalObjectReference `json:"dataSource,omitempty" json,yaml:"dataSource,omitempty"`
 
-	// Specifies the object from which to populate the volume with data, if a non-empty volume is desired. This may be any local object from a non-empty API group (non core object) or a PersistentVolumeClaim object. When this field is specified, volume binding will only succeed if the type of the specified object matches some installed volume populator or dynamic provisioner. This field will replace the functionality of the DataSource field and as such if both fields are non-empty, they must have the same value. For backwards compatibility, both fields (DataSource and DataSourceRef) will be set to the same value automatically if one of them is empty and the other is non-empty. There are two important differences between DataSource and DataSourceRef: * While DataSource only allows two specific types of objects, DataSourceRef
-	//   allows any non-core object, as well as PersistentVolumeClaim objects.
-	// * While DataSource ignores disallowed values (dropping them), DataSourceRef
-	//   preserves all values, and generates an error if a disallowed value is
-	//   specified.
-	// (Alpha) Using this field requires the AnyVolumeDataSource feature gate to be enabled.
-	DataSourceRef *IoK8sAPICoreV1TypedLocalObjectReference `json:"dataSourceRef,omitempty"`
-
-	// Resources represents the minimum resources the volume should have. If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements that are lower than previous value but must still be higher than capacity recorded in the status field of the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
-	Resources *IoK8sAPICoreV1ResourceRequirements `json:"resources,omitempty"`
+	// Resources represents the minimum resources the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
+	Resources *IoK8sAPICoreV1ResourceRequirements `json:"resources,omitempty" json,yaml:"resources,omitempty"`
 
 	// A label query over volumes to consider for binding.
-	Selector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"selector,omitempty"`
+	Selector *IoK8sApimachineryPkgApisMetaV1LabelSelector `json:"selector,omitempty" json,yaml:"selector,omitempty"`
 
 	// Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1
-	StorageClassName string `json:"storageClassName,omitempty"`
+	StorageClassName string `json:"storageClassName,omitempty" json,yaml:"storageClassName,omitempty"`
 
 	// volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec.
-	VolumeMode string `json:"volumeMode,omitempty"`
+	VolumeMode string `json:"volumeMode,omitempty" json,yaml:"volumeMode,omitempty"`
 
 	// VolumeName is the binding reference to the PersistentVolume backing this claim.
-	VolumeName string `json:"volumeName,omitempty"`
+	VolumeName string `json:"volumeName,omitempty" json,yaml:"volumeName,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 persistent volume claim spec
@@ -53,10 +45,6 @@ func (m *IoK8sAPICoreV1PersistentVolumeClaimSpec) Validate(formats strfmt.Regist
 	var res []error
 
 	if err := m.validateDataSource(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateDataSourceRef(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -85,25 +73,6 @@ func (m *IoK8sAPICoreV1PersistentVolumeClaimSpec) validateDataSource(formats str
 				return ve.ValidateName("dataSource")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("dataSource")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *IoK8sAPICoreV1PersistentVolumeClaimSpec) validateDataSourceRef(formats strfmt.Registry) error {
-	if swag.IsZero(m.DataSourceRef) { // not required
-		return nil
-	}
-
-	if m.DataSourceRef != nil {
-		if err := m.DataSourceRef.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("dataSourceRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("dataSourceRef")
 			}
 			return err
 		}
@@ -158,10 +127,6 @@ func (m *IoK8sAPICoreV1PersistentVolumeClaimSpec) ContextValidate(ctx context.Co
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateDataSourceRef(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateResources(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -184,22 +149,6 @@ func (m *IoK8sAPICoreV1PersistentVolumeClaimSpec) contextValidateDataSource(ctx 
 				return ve.ValidateName("dataSource")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("dataSource")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *IoK8sAPICoreV1PersistentVolumeClaimSpec) contextValidateDataSourceRef(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.DataSourceRef != nil {
-		if err := m.DataSourceRef.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("dataSourceRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("dataSourceRef")
 			}
 			return err
 		}

@@ -20,17 +20,17 @@ import (
 type IoK8sAPICoreV1CinderPersistentVolumeSource struct {
 
 	// Filesystem type to mount. Must be a filesystem type supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://examples.k8s.io/mysql-cinder-pd/README.md
-	FsType string `json:"fsType,omitempty"`
+	FsType string `json:"fsType,omitempty" json,yaml:"fsType,omitempty"`
 
 	// Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. More info: https://examples.k8s.io/mysql-cinder-pd/README.md
-	ReadOnly bool `json:"readOnly,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" json,yaml:"readOnly,omitempty"`
 
 	// Optional: points to a secret object containing parameters used to connect to OpenStack.
-	SecretRef *IoK8sAPICoreV1SecretReference `json:"secretRef,omitempty"`
+	SecretRef *IoK8sAPICoreV1SecretReference `json:"secretRef,omitempty" json,yaml:"secretRef,omitempty"`
 
 	// volume id used to identify the volume in cinder. More info: https://examples.k8s.io/mysql-cinder-pd/README.md
 	// Required: true
-	VolumeID *string `json:"volumeID"`
+	VolumeID *string `json:"volumeID" json,yaml:"volumeID"`
 }
 
 // Validate validates this io k8s api core v1 cinder persistent volume source

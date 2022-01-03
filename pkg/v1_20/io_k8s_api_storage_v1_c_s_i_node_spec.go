@@ -22,7 +22,7 @@ type IoK8sAPIStorageV1CSINodeSpec struct {
 
 	// drivers is a list of information of all CSI Drivers existing on a node. If all drivers in the list are uninstalled, this can become empty.
 	// Required: true
-	Drivers []*IoK8sAPIStorageV1CSINodeDriver `json:"drivers"`
+	Drivers []*IoK8sAPIStorageV1CSINodeDriver `json:"drivers" json,yaml:"drivers"`
 }
 
 // Validate validates this io k8s api storage v1 c s i node spec

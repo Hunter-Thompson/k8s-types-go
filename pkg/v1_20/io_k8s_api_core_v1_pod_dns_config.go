@@ -20,13 +20,13 @@ import (
 type IoK8sAPICoreV1PodDNSConfig struct {
 
 	// A list of DNS name server IP addresses. This will be appended to the base nameservers generated from DNSPolicy. Duplicated nameservers will be removed.
-	Nameservers []string `json:"nameservers"`
+	Nameservers []string `json:"nameservers" json,yaml:"nameservers"`
 
 	// A list of DNS resolver options. This will be merged with the base options generated from DNSPolicy. Duplicated entries will be removed. Resolution options given in Options will override those that appear in the base DNSPolicy.
-	Options []*IoK8sAPICoreV1PodDNSConfigOption `json:"options"`
+	Options []*IoK8sAPICoreV1PodDNSConfigOption `json:"options" json,yaml:"options"`
 
 	// A list of DNS search domains for host-name lookup. This will be appended to the base search paths generated from DNSPolicy. Duplicated search paths will be removed.
-	Searches []string `json:"searches"`
+	Searches []string `json:"searches" json,yaml:"searches"`
 }
 
 // Validate validates this io k8s api core v1 pod DNS config

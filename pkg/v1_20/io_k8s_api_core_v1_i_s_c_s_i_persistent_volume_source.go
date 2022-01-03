@@ -20,40 +20,40 @@ import (
 type IoK8sAPICoreV1ISCSIPersistentVolumeSource struct {
 
 	// whether support iSCSI Discovery CHAP authentication
-	ChapAuthDiscovery bool `json:"chapAuthDiscovery,omitempty"`
+	ChapAuthDiscovery bool `json:"chapAuthDiscovery,omitempty" json,yaml:"chapAuthDiscovery,omitempty"`
 
 	// whether support iSCSI Session CHAP authentication
-	ChapAuthSession bool `json:"chapAuthSession,omitempty"`
+	ChapAuthSession bool `json:"chapAuthSession,omitempty" json,yaml:"chapAuthSession,omitempty"`
 
 	// Filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#iscsi
-	FsType string `json:"fsType,omitempty"`
+	FsType string `json:"fsType,omitempty" json,yaml:"fsType,omitempty"`
 
 	// Custom iSCSI Initiator Name. If initiatorName is specified with iscsiInterface simultaneously, new iSCSI interface <target portal>:<volume name> will be created for the connection.
-	InitiatorName string `json:"initiatorName,omitempty"`
+	InitiatorName string `json:"initiatorName,omitempty" json,yaml:"initiatorName,omitempty"`
 
 	// Target iSCSI Qualified Name.
 	// Required: true
-	Iqn *string `json:"iqn"`
+	Iqn *string `json:"iqn" json,yaml:"iqn"`
 
 	// iSCSI Interface Name that uses an iSCSI transport. Defaults to 'default' (tcp).
-	IscsiInterface string `json:"iscsiInterface,omitempty"`
+	IscsiInterface string `json:"iscsiInterface,omitempty" json,yaml:"iscsiInterface,omitempty"`
 
 	// iSCSI Target Lun number.
 	// Required: true
-	Lun *int32 `json:"lun"`
+	Lun *int32 `json:"lun" json,yaml:"lun"`
 
 	// iSCSI Target Portal List. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260).
-	Portals []string `json:"portals"`
+	Portals []string `json:"portals" json,yaml:"portals"`
 
 	// ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false.
-	ReadOnly bool `json:"readOnly,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" json,yaml:"readOnly,omitempty"`
 
 	// CHAP Secret for iSCSI target and initiator authentication
-	SecretRef *IoK8sAPICoreV1SecretReference `json:"secretRef,omitempty"`
+	SecretRef *IoK8sAPICoreV1SecretReference `json:"secretRef,omitempty" json,yaml:"secretRef,omitempty"`
 
 	// iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260).
 	// Required: true
-	TargetPortal *string `json:"targetPortal"`
+	TargetPortal *string `json:"targetPortal" json,yaml:"targetPortal"`
 }
 
 // Validate validates this io k8s api core v1 i s c s i persistent volume source

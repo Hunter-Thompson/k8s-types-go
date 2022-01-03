@@ -21,17 +21,17 @@ type IoK8sApiextensionsApiserverPkgApisApiextensionsV1ServiceReference struct {
 
 	// name is the name of the service. Required
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 
 	// namespace is the namespace of the service. Required
 	// Required: true
-	Namespace *string `json:"namespace"`
+	Namespace *string `json:"namespace" json,yaml:"namespace"`
 
 	// path is an optional URL path at which the webhook will be contacted.
-	Path string `json:"path,omitempty"`
+	Path string `json:"path,omitempty" json,yaml:"path,omitempty"`
 
 	// port is an optional service port at which the webhook will be contacted. `port` should be a valid port number (1-65535, inclusive). Defaults to 443 for backward compatibility.
-	Port int32 `json:"port,omitempty"`
+	Port int32 `json:"port,omitempty" json,yaml:"port,omitempty"`
 }
 
 // Validate validates this io k8s apiextensions apiserver pkg apis apiextensions v1 service reference

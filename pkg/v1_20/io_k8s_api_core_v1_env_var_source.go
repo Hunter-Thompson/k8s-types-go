@@ -19,16 +19,16 @@ import (
 type IoK8sAPICoreV1EnvVarSource struct {
 
 	// Selects a key of a ConfigMap.
-	ConfigMapKeyRef *IoK8sAPICoreV1ConfigMapKeySelector `json:"configMapKeyRef,omitempty"`
+	ConfigMapKeyRef *IoK8sAPICoreV1ConfigMapKeySelector `json:"configMapKeyRef,omitempty" json,yaml:"configMapKeyRef,omitempty"`
 
 	// Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['<KEY>']`, `metadata.annotations['<KEY>']`, spec.nodeName, spec.serviceAccountName, status.hostIP, status.podIP, status.podIPs.
-	FieldRef *IoK8sAPICoreV1ObjectFieldSelector `json:"fieldRef,omitempty"`
+	FieldRef *IoK8sAPICoreV1ObjectFieldSelector `json:"fieldRef,omitempty" json,yaml:"fieldRef,omitempty"`
 
 	// Selects a resource of the container: only resources limits and requests (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu, requests.memory and requests.ephemeral-storage) are currently supported.
-	ResourceFieldRef *IoK8sAPICoreV1ResourceFieldSelector `json:"resourceFieldRef,omitempty"`
+	ResourceFieldRef *IoK8sAPICoreV1ResourceFieldSelector `json:"resourceFieldRef,omitempty" json,yaml:"resourceFieldRef,omitempty"`
 
 	// Selects a key of a secret in the pod's namespace
-	SecretKeyRef *IoK8sAPICoreV1SecretKeySelector `json:"secretKeyRef,omitempty"`
+	SecretKeyRef *IoK8sAPICoreV1SecretKeySelector `json:"secretKeyRef,omitempty" json,yaml:"secretKeyRef,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 env var source

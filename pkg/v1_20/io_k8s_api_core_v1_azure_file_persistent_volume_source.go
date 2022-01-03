@@ -20,18 +20,18 @@ import (
 type IoK8sAPICoreV1AzureFilePersistentVolumeSource struct {
 
 	// Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
-	ReadOnly bool `json:"readOnly,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" json,yaml:"readOnly,omitempty"`
 
 	// the name of secret that contains Azure Storage Account Name and Key
 	// Required: true
-	SecretName *string `json:"secretName"`
+	SecretName *string `json:"secretName" json,yaml:"secretName"`
 
 	// the namespace of the secret that contains Azure Storage Account Name and Key default is the same as the Pod
-	SecretNamespace string `json:"secretNamespace,omitempty"`
+	SecretNamespace string `json:"secretNamespace,omitempty" json,yaml:"secretNamespace,omitempty"`
 
 	// Share Name
 	// Required: true
-	ShareName *string `json:"shareName"`
+	ShareName *string `json:"shareName" json,yaml:"shareName"`
 }
 
 // Validate validates this io k8s api core v1 azure file persistent volume source

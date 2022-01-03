@@ -20,18 +20,18 @@ import (
 type IoK8sAPICoreV1ComponentCondition struct {
 
 	// Condition error code for a component. For example, a health check error code.
-	Error string `json:"error,omitempty"`
+	Error string `json:"error,omitempty" json,yaml:"error,omitempty"`
 
 	// Message about the condition for a component. For example, information about a health check.
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// Status of the condition for a component. Valid values for "Healthy": "True", "False", or "Unknown".
 	// Required: true
-	Status *string `json:"status"`
+	Status *string `json:"status" json,yaml:"status"`
 
 	// Type of condition for a component. Valid value: "Healthy"
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s api core v1 component condition

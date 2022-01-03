@@ -19,7 +19,7 @@ import (
 type IoK8sAPICoreV1PodIP struct {
 
 	// ip is an IP address (IPv4 or IPv6) assigned to the pod
-	IP string `json:"ip,omitempty"`
+	IP string `json:"ip,omitempty" json,yaml:"ip,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 pod IP

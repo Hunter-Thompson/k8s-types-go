@@ -20,30 +20,30 @@ import (
 type IoK8sAPICoreV1RBDVolumeSource struct {
 
 	// Filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#rbd
-	FsType string `json:"fsType,omitempty"`
+	FsType string `json:"fsType,omitempty" json,yaml:"fsType,omitempty"`
 
 	// The rados image name. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
 	// Required: true
-	Image *string `json:"image"`
+	Image *string `json:"image" json,yaml:"image"`
 
 	// Keyring is the path to key ring for RBDUser. Default is /etc/ceph/keyring. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
-	Keyring string `json:"keyring,omitempty"`
+	Keyring string `json:"keyring,omitempty" json,yaml:"keyring,omitempty"`
 
 	// A collection of Ceph monitors. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
 	// Required: true
-	Monitors []string `json:"monitors"`
+	Monitors []string `json:"monitors" json,yaml:"monitors"`
 
 	// The rados pool name. Default is rbd. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
-	Pool string `json:"pool,omitempty"`
+	Pool string `json:"pool,omitempty" json,yaml:"pool,omitempty"`
 
 	// ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
-	ReadOnly bool `json:"readOnly,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" json,yaml:"readOnly,omitempty"`
 
 	// SecretRef is name of the authentication secret for RBDUser. If provided overrides keyring. Default is nil. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
-	SecretRef *IoK8sAPICoreV1LocalObjectReference `json:"secretRef,omitempty"`
+	SecretRef *IoK8sAPICoreV1LocalObjectReference `json:"secretRef,omitempty" json,yaml:"secretRef,omitempty"`
 
 	// The rados user name. Default is admin. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
-	User string `json:"user,omitempty"`
+	User string `json:"user,omitempty" json,yaml:"user,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 r b d volume source

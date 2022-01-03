@@ -21,11 +21,11 @@ import (
 type IoK8sAPIPolicyV1beta1RunAsGroupStrategyOptions struct {
 
 	// ranges are the allowed ranges of gids that may be used. If you would like to force a single gid then supply a single range with the same start and end. Required for MustRunAs.
-	Ranges []*IoK8sAPIPolicyV1beta1IDRange `json:"ranges"`
+	Ranges []*IoK8sAPIPolicyV1beta1IDRange `json:"ranges" json,yaml:"ranges"`
 
 	// rule is the strategy that will dictate the allowable RunAsGroup values that may be set.
 	// Required: true
-	Rule *string `json:"rule"`
+	Rule *string `json:"rule" json,yaml:"rule"`
 }
 
 // Validate validates this io k8s api policy v1beta1 run as group strategy options

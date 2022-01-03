@@ -18,7 +18,7 @@ import (
 type IoK8sAPICoreV1NamespaceSpec struct {
 
 	// Finalizers is an opaque list of values that must be empty to permanently remove object from storage. More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/
-	Finalizers []string `json:"finalizers"`
+	Finalizers []string `json:"finalizers" json,yaml:"finalizers"`
 }
 
 // Validate validates this io k8s api core v1 namespace spec

@@ -7,7 +7,6 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -22,19 +21,11 @@ type IoK8sAPICoreV1NodeAddress struct {
 
 	// The node address.
 	// Required: true
-	Address *string `json:"address"`
+	Address *string `json:"address" json,yaml:"address"`
 
 	// Node address type, one of Hostname, ExternalIP or InternalIP.
-	//
-	// Possible enum values:
-	//  - `"ExternalDNS"` identifies a DNS name which resolves to an IP address which has the characteristics of a NodeExternalIP. The IP it resolves to may or may not be a listed NodeExternalIP address.
-	//  - `"ExternalIP"` identifies an IP address which is, in some way, intended to be more usable from outside the cluster then an internal IP, though no specific semantics are defined. It may be a globally routable IP, though it is not required to be. External IPs may be assigned directly to an interface on the node, like a NodeInternalIP, or alternatively, packets sent to the external IP may be NAT'ed to an internal node IP rather than being delivered directly (making the IP less efficient for node-to-node traffic than a NodeInternalIP).
-	//  - `"Hostname"` identifies a name of the node. Although every node can be assumed to have a NodeAddress of this type, its exact syntax and semantics are not defined, and are not consistent between different clusters.
-	//  - `"InternalDNS"` identifies a DNS name which resolves to an IP address which has the characteristics of a NodeInternalIP. The IP it resolves to may or may not be a listed NodeInternalIP address.
-	//  - `"InternalIP"` identifies an IP address which is assigned to one of the node's network interfaces. Every node should have at least one address of this type. An internal IP is normally expected to be reachable from every other node, but may not be visible to hosts outside the cluster. By default it is assumed that kube-apiserver can reach node internal IPs, though it is possible to configure clusters where this is not the case. NodeInternalIP is the default type of node IP, and does not necessarily imply that the IP is ONLY reachable internally. If a node has multiple internal IPs, no specific semantics are assigned to the additional IPs.
 	// Required: true
-	// Enum: [ExternalDNS ExternalIP Hostname InternalDNS InternalIP]
-	Type *string `json:"type"`
+	Type *string `json:"type" json,yaml:"type"`
 }
 
 // Validate validates this io k8s api core v1 node address
@@ -64,52 +55,9 @@ func (m *IoK8sAPICoreV1NodeAddress) validateAddress(formats strfmt.Registry) err
 	return nil
 }
 
-var ioK8sApiCoreV1NodeAddressTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["ExternalDNS","ExternalIP","Hostname","InternalDNS","InternalIP"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1NodeAddressTypeTypePropEnum = append(ioK8sApiCoreV1NodeAddressTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1NodeAddressTypeExternalDNS captures enum value "ExternalDNS"
-	IoK8sAPICoreV1NodeAddressTypeExternalDNS string = "ExternalDNS"
-
-	// IoK8sAPICoreV1NodeAddressTypeExternalIP captures enum value "ExternalIP"
-	IoK8sAPICoreV1NodeAddressTypeExternalIP string = "ExternalIP"
-
-	// IoK8sAPICoreV1NodeAddressTypeHostname captures enum value "Hostname"
-	IoK8sAPICoreV1NodeAddressTypeHostname string = "Hostname"
-
-	// IoK8sAPICoreV1NodeAddressTypeInternalDNS captures enum value "InternalDNS"
-	IoK8sAPICoreV1NodeAddressTypeInternalDNS string = "InternalDNS"
-
-	// IoK8sAPICoreV1NodeAddressTypeInternalIP captures enum value "InternalIP"
-	IoK8sAPICoreV1NodeAddressTypeInternalIP string = "InternalIP"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1NodeAddress) validateTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1NodeAddressTypeTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *IoK8sAPICoreV1NodeAddress) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

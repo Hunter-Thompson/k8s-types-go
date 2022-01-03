@@ -20,10 +20,10 @@ import (
 type IoK8sAPICoreV1ServiceStatus struct {
 
 	// Current service state
-	Conditions []*IoK8sApimachineryPkgApisMetaV1Condition `json:"conditions"`
+	Conditions []*IoK8sApimachineryPkgApisMetaV1Condition `json:"conditions" json,yaml:"conditions"`
 
 	// LoadBalancer contains the current status of the load-balancer, if one is present.
-	LoadBalancer *IoK8sAPICoreV1LoadBalancerStatus `json:"loadBalancer,omitempty"`
+	LoadBalancer *IoK8sAPICoreV1LoadBalancerStatus `json:"loadBalancer,omitempty" json,yaml:"loadBalancer,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 service status

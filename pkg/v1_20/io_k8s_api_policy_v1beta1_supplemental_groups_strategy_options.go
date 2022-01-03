@@ -20,10 +20,10 @@ import (
 type IoK8sAPIPolicyV1beta1SupplementalGroupsStrategyOptions struct {
 
 	// ranges are the allowed ranges of supplemental groups.  If you would like to force a single supplemental group then supply a single range with the same start and end. Required for MustRunAs.
-	Ranges []*IoK8sAPIPolicyV1beta1IDRange `json:"ranges"`
+	Ranges []*IoK8sAPIPolicyV1beta1IDRange `json:"ranges" json,yaml:"ranges"`
 
 	// rule is the strategy that will dictate what supplemental groups is used in the SecurityContext.
-	Rule string `json:"rule,omitempty"`
+	Rule string `json:"rule,omitempty" json,yaml:"rule,omitempty"`
 }
 
 // Validate validates this io k8s api policy v1beta1 supplemental groups strategy options

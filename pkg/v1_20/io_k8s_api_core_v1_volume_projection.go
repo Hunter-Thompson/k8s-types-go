@@ -19,16 +19,16 @@ import (
 type IoK8sAPICoreV1VolumeProjection struct {
 
 	// information about the configMap data to project
-	ConfigMap *IoK8sAPICoreV1ConfigMapProjection `json:"configMap,omitempty"`
+	ConfigMap *IoK8sAPICoreV1ConfigMapProjection `json:"configMap,omitempty" json,yaml:"configMap,omitempty"`
 
 	// information about the downwardAPI data to project
-	DownwardAPI *IoK8sAPICoreV1DownwardAPIProjection `json:"downwardAPI,omitempty"`
+	DownwardAPI *IoK8sAPICoreV1DownwardAPIProjection `json:"downwardAPI,omitempty" json,yaml:"downwardAPI,omitempty"`
 
 	// information about the secret data to project
-	Secret *IoK8sAPICoreV1SecretProjection `json:"secret,omitempty"`
+	Secret *IoK8sAPICoreV1SecretProjection `json:"secret,omitempty" json,yaml:"secret,omitempty"`
 
 	// information about the serviceAccountToken data to project
-	ServiceAccountToken *IoK8sAPICoreV1ServiceAccountTokenProjection `json:"serviceAccountToken,omitempty"`
+	ServiceAccountToken *IoK8sAPICoreV1ServiceAccountTokenProjection `json:"serviceAccountToken,omitempty" json,yaml:"serviceAccountToken,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 volume projection

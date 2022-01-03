@@ -22,7 +22,7 @@ type IoK8sAPICoreV1NodeSelector struct {
 
 	// Required. A list of node selector terms. The terms are ORed.
 	// Required: true
-	NodeSelectorTerms []*IoK8sAPICoreV1NodeSelectorTerm `json:"nodeSelectorTerms"`
+	NodeSelectorTerms []*IoK8sAPICoreV1NodeSelectorTerm `json:"nodeSelectorTerms" json,yaml:"nodeSelectorTerms"`
 }
 
 // Validate validates this io k8s api core v1 node selector

@@ -20,14 +20,14 @@ import (
 type IoK8sAPICoreV1ResourceFieldSelector struct {
 
 	// Container name: required for volumes, optional for env vars
-	ContainerName string `json:"containerName,omitempty"`
+	ContainerName string `json:"containerName,omitempty" json,yaml:"containerName,omitempty"`
 
 	// Specifies the output format of the exposed resources, defaults to "1"
-	Divisor IoK8sApimachineryPkgAPIResourceQuantity `json:"divisor,omitempty"`
+	Divisor IoK8sApimachineryPkgAPIResourceQuantity `json:"divisor,omitempty" json,yaml:"divisor,omitempty"`
 
 	// Required: resource to select
 	// Required: true
-	Resource *string `json:"resource"`
+	Resource *string `json:"resource" json,yaml:"resource"`
 }
 
 // Validate validates this io k8s api core v1 resource field selector

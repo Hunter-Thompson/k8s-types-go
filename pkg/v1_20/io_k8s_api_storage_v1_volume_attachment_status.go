@@ -20,17 +20,17 @@ import (
 type IoK8sAPIStorageV1VolumeAttachmentStatus struct {
 
 	// The last error encountered during attach operation, if any. This field must only be set by the entity completing the attach operation, i.e. the external-attacher.
-	AttachError *IoK8sAPIStorageV1VolumeError `json:"attachError,omitempty"`
+	AttachError *IoK8sAPIStorageV1VolumeError `json:"attachError,omitempty" json,yaml:"attachError,omitempty"`
 
 	// Indicates the volume is successfully attached. This field must only be set by the entity completing the attach operation, i.e. the external-attacher.
 	// Required: true
-	Attached *bool `json:"attached"`
+	Attached *bool `json:"attached" json,yaml:"attached"`
 
 	// Upon successful attach, this field is populated with any information returned by the attach operation that must be passed into subsequent WaitForAttach or Mount calls. This field must only be set by the entity completing the attach operation, i.e. the external-attacher.
-	AttachmentMetadata map[string]string `json:"attachmentMetadata,omitempty"`
+	AttachmentMetadata map[string]string `json:"attachmentMetadata,omitempty" json,yaml:"attachmentMetadata,omitempty"`
 
 	// The last error encountered during detach operation, if any. This field must only be set by the entity completing the detach operation, i.e. the external-attacher.
-	DetachError *IoK8sAPIStorageV1VolumeError `json:"detachError,omitempty"`
+	DetachError *IoK8sAPIStorageV1VolumeError `json:"detachError,omitempty" json,yaml:"detachError,omitempty"`
 }
 
 // Validate validates this io k8s api storage v1 volume attachment status

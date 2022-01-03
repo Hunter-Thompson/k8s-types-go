@@ -21,19 +21,19 @@ type IoK8sAPICoreV1FlexPersistentVolumeSource struct {
 
 	// Driver is the name of the driver to use for this volume.
 	// Required: true
-	Driver *string `json:"driver"`
+	Driver *string `json:"driver" json,yaml:"driver"`
 
 	// Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". The default filesystem depends on FlexVolume script.
-	FsType string `json:"fsType,omitempty"`
+	FsType string `json:"fsType,omitempty" json,yaml:"fsType,omitempty"`
 
 	// Optional: Extra command options if any.
-	Options map[string]string `json:"options,omitempty"`
+	Options map[string]string `json:"options,omitempty" json,yaml:"options,omitempty"`
 
 	// Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
-	ReadOnly bool `json:"readOnly,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" json,yaml:"readOnly,omitempty"`
 
 	// Optional: SecretRef is reference to the secret object containing sensitive information to pass to the plugin scripts. This may be empty if no secret object is specified. If the secret object contains more than one secret, all secrets are passed to the plugin scripts.
-	SecretRef *IoK8sAPICoreV1SecretReference `json:"secretRef,omitempty"`
+	SecretRef *IoK8sAPICoreV1SecretReference `json:"secretRef,omitempty" json,yaml:"secretRef,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 flex persistent volume source

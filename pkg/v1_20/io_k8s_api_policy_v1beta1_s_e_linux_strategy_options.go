@@ -21,10 +21,10 @@ type IoK8sAPIPolicyV1beta1SELinuxStrategyOptions struct {
 
 	// rule is the strategy that will dictate the allowable labels that may be set.
 	// Required: true
-	Rule *string `json:"rule"`
+	Rule *string `json:"rule" json,yaml:"rule"`
 
 	// seLinuxOptions required to run as; required for MustRunAs More info: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
-	SeLinuxOptions *IoK8sAPICoreV1SELinuxOptions `json:"seLinuxOptions,omitempty"`
+	SeLinuxOptions *IoK8sAPICoreV1SELinuxOptions `json:"seLinuxOptions,omitempty" json,yaml:"seLinuxOptions,omitempty"`
 }
 
 // Validate validates this io k8s api policy v1beta1 s e linux strategy options

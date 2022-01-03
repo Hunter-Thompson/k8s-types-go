@@ -21,11 +21,11 @@ type IoK8sAPIFlowcontrolV1beta1ServiceAccountSubject struct {
 
 	// `name` is the name of matching ServiceAccount objects, or "*" to match regardless of name. Required.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 
 	// `namespace` is the namespace of matching ServiceAccount objects. Required.
 	// Required: true
-	Namespace *string `json:"namespace"`
+	Namespace *string `json:"namespace" json,yaml:"namespace"`
 }
 
 // Validate validates this io k8s api flowcontrol v1beta1 service account subject

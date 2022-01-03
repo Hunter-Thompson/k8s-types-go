@@ -20,15 +20,15 @@ import (
 type IoK8sAPICoreV1TypedLocalObjectReference struct {
 
 	// APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required.
-	APIGroup string `json:"apiGroup,omitempty"`
+	APIGroup string `json:"apiGroup,omitempty" json,yaml:"apiGroup,omitempty"`
 
 	// Kind is the type of resource being referenced
 	// Required: true
-	Kind *string `json:"kind"`
+	Kind *string `json:"kind" json,yaml:"kind"`
 
 	// Name is the name of resource being referenced
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 }
 
 // Validate validates this io k8s api core v1 typed local object reference

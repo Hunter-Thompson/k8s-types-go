@@ -21,11 +21,11 @@ type IoK8sAPICoreV1Sysctl struct {
 
 	// Name of a property to set
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 
 	// Value of a property to set
 	// Required: true
-	Value *string `json:"value"`
+	Value *string `json:"value" json,yaml:"value"`
 }
 
 // Validate validates this io k8s api core v1 sysctl

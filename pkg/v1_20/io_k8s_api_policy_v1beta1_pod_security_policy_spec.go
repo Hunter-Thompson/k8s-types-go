@@ -21,84 +21,84 @@ import (
 type IoK8sAPIPolicyV1beta1PodSecurityPolicySpec struct {
 
 	// allowPrivilegeEscalation determines if a pod can request to allow privilege escalation. If unspecified, defaults to true.
-	AllowPrivilegeEscalation bool `json:"allowPrivilegeEscalation,omitempty"`
+	AllowPrivilegeEscalation bool `json:"allowPrivilegeEscalation,omitempty" json,yaml:"allowPrivilegeEscalation,omitempty"`
 
 	// AllowedCSIDrivers is an allowlist of inline CSI drivers that must be explicitly set to be embedded within a pod spec. An empty value indicates that any CSI driver can be used for inline ephemeral volumes. This is a beta field, and is only honored if the API server enables the CSIInlineVolume feature gate.
-	AllowedCSIDrivers []*IoK8sAPIPolicyV1beta1AllowedCSIDriver `json:"allowedCSIDrivers"`
+	AllowedCSIDrivers []*IoK8sAPIPolicyV1beta1AllowedCSIDriver `json:"allowedCSIDrivers" json,yaml:"allowedCSIDrivers"`
 
 	// allowedCapabilities is a list of capabilities that can be requested to add to the container. Capabilities in this field may be added at the pod author's discretion. You must not list a capability in both allowedCapabilities and requiredDropCapabilities.
-	AllowedCapabilities []string `json:"allowedCapabilities"`
+	AllowedCapabilities []string `json:"allowedCapabilities" json,yaml:"allowedCapabilities"`
 
 	// allowedFlexVolumes is an allowlist of Flexvolumes.  Empty or nil indicates that all Flexvolumes may be used.  This parameter is effective only when the usage of the Flexvolumes is allowed in the "volumes" field.
-	AllowedFlexVolumes []*IoK8sAPIPolicyV1beta1AllowedFlexVolume `json:"allowedFlexVolumes"`
+	AllowedFlexVolumes []*IoK8sAPIPolicyV1beta1AllowedFlexVolume `json:"allowedFlexVolumes" json,yaml:"allowedFlexVolumes"`
 
 	// allowedHostPaths is an allowlist of host paths. Empty indicates that all host paths may be used.
-	AllowedHostPaths []*IoK8sAPIPolicyV1beta1AllowedHostPath `json:"allowedHostPaths"`
+	AllowedHostPaths []*IoK8sAPIPolicyV1beta1AllowedHostPath `json:"allowedHostPaths" json,yaml:"allowedHostPaths"`
 
 	// AllowedProcMountTypes is an allowlist of allowed ProcMountTypes. Empty or nil indicates that only the DefaultProcMountType may be used. This requires the ProcMountType feature flag to be enabled.
-	AllowedProcMountTypes []string `json:"allowedProcMountTypes"`
+	AllowedProcMountTypes []string `json:"allowedProcMountTypes" json,yaml:"allowedProcMountTypes"`
 
 	// allowedUnsafeSysctls is a list of explicitly allowed unsafe sysctls, defaults to none. Each entry is either a plain sysctl name or ends in "*" in which case it is considered as a prefix of allowed sysctls. Single * means all unsafe sysctls are allowed. Kubelet has to allowlist all allowed unsafe sysctls explicitly to avoid rejection.
 	//
 	// Examples: e.g. "foo/*" allows "foo/bar", "foo/baz", etc. e.g. "foo.*" allows "foo.bar", "foo.baz", etc.
-	AllowedUnsafeSysctls []string `json:"allowedUnsafeSysctls"`
+	AllowedUnsafeSysctls []string `json:"allowedUnsafeSysctls" json,yaml:"allowedUnsafeSysctls"`
 
 	// defaultAddCapabilities is the default set of capabilities that will be added to the container unless the pod spec specifically drops the capability.  You may not list a capability in both defaultAddCapabilities and requiredDropCapabilities. Capabilities added here are implicitly allowed, and need not be included in the allowedCapabilities list.
-	DefaultAddCapabilities []string `json:"defaultAddCapabilities"`
+	DefaultAddCapabilities []string `json:"defaultAddCapabilities" json,yaml:"defaultAddCapabilities"`
 
 	// defaultAllowPrivilegeEscalation controls the default setting for whether a process can gain more privileges than its parent process.
-	DefaultAllowPrivilegeEscalation bool `json:"defaultAllowPrivilegeEscalation,omitempty"`
+	DefaultAllowPrivilegeEscalation bool `json:"defaultAllowPrivilegeEscalation,omitempty" json,yaml:"defaultAllowPrivilegeEscalation,omitempty"`
 
 	// forbiddenSysctls is a list of explicitly forbidden sysctls, defaults to none. Each entry is either a plain sysctl name or ends in "*" in which case it is considered as a prefix of forbidden sysctls. Single * means all sysctls are forbidden.
 	//
 	// Examples: e.g. "foo/*" forbids "foo/bar", "foo/baz", etc. e.g. "foo.*" forbids "foo.bar", "foo.baz", etc.
-	ForbiddenSysctls []string `json:"forbiddenSysctls"`
+	ForbiddenSysctls []string `json:"forbiddenSysctls" json,yaml:"forbiddenSysctls"`
 
 	// fsGroup is the strategy that will dictate what fs group is used by the SecurityContext.
 	// Required: true
-	FsGroup *IoK8sAPIPolicyV1beta1FSGroupStrategyOptions `json:"fsGroup"`
+	FsGroup *IoK8sAPIPolicyV1beta1FSGroupStrategyOptions `json:"fsGroup" json,yaml:"fsGroup"`
 
 	// hostIPC determines if the policy allows the use of HostIPC in the pod spec.
-	HostIPC bool `json:"hostIPC,omitempty"`
+	HostIPC bool `json:"hostIPC,omitempty" json,yaml:"hostIPC,omitempty"`
 
 	// hostNetwork determines if the policy allows the use of HostNetwork in the pod spec.
-	HostNetwork bool `json:"hostNetwork,omitempty"`
+	HostNetwork bool `json:"hostNetwork,omitempty" json,yaml:"hostNetwork,omitempty"`
 
 	// hostPID determines if the policy allows the use of HostPID in the pod spec.
-	HostPID bool `json:"hostPID,omitempty"`
+	HostPID bool `json:"hostPID,omitempty" json,yaml:"hostPID,omitempty"`
 
 	// hostPorts determines which host port ranges are allowed to be exposed.
-	HostPorts []*IoK8sAPIPolicyV1beta1HostPortRange `json:"hostPorts"`
+	HostPorts []*IoK8sAPIPolicyV1beta1HostPortRange `json:"hostPorts" json,yaml:"hostPorts"`
 
 	// privileged determines if a pod can request to be run as privileged.
-	Privileged bool `json:"privileged,omitempty"`
+	Privileged bool `json:"privileged,omitempty" json,yaml:"privileged,omitempty"`
 
 	// readOnlyRootFilesystem when set to true will force containers to run with a read only root file system.  If the container specifically requests to run with a non-read only root file system the PSP should deny the pod. If set to false the container may run with a read only root file system if it wishes but it will not be forced to.
-	ReadOnlyRootFilesystem bool `json:"readOnlyRootFilesystem,omitempty"`
+	ReadOnlyRootFilesystem bool `json:"readOnlyRootFilesystem,omitempty" json,yaml:"readOnlyRootFilesystem,omitempty"`
 
 	// requiredDropCapabilities are the capabilities that will be dropped from the container.  These are required to be dropped and cannot be added.
-	RequiredDropCapabilities []string `json:"requiredDropCapabilities"`
+	RequiredDropCapabilities []string `json:"requiredDropCapabilities" json,yaml:"requiredDropCapabilities"`
 
 	// RunAsGroup is the strategy that will dictate the allowable RunAsGroup values that may be set. If this field is omitted, the pod's RunAsGroup can take any value. This field requires the RunAsGroup feature gate to be enabled.
-	RunAsGroup *IoK8sAPIPolicyV1beta1RunAsGroupStrategyOptions `json:"runAsGroup,omitempty"`
+	RunAsGroup *IoK8sAPIPolicyV1beta1RunAsGroupStrategyOptions `json:"runAsGroup,omitempty" json,yaml:"runAsGroup,omitempty"`
 
 	// runAsUser is the strategy that will dictate the allowable RunAsUser values that may be set.
 	// Required: true
-	RunAsUser *IoK8sAPIPolicyV1beta1RunAsUserStrategyOptions `json:"runAsUser"`
+	RunAsUser *IoK8sAPIPolicyV1beta1RunAsUserStrategyOptions `json:"runAsUser" json,yaml:"runAsUser"`
 
 	// runtimeClass is the strategy that will dictate the allowable RuntimeClasses for a pod. If this field is omitted, the pod's runtimeClassName field is unrestricted. Enforcement of this field depends on the RuntimeClass feature gate being enabled.
-	RuntimeClass *IoK8sAPIPolicyV1beta1RuntimeClassStrategyOptions `json:"runtimeClass,omitempty"`
+	RuntimeClass *IoK8sAPIPolicyV1beta1RuntimeClassStrategyOptions `json:"runtimeClass,omitempty" json,yaml:"runtimeClass,omitempty"`
 
 	// seLinux is the strategy that will dictate the allowable labels that may be set.
 	// Required: true
-	SeLinux *IoK8sAPIPolicyV1beta1SELinuxStrategyOptions `json:"seLinux"`
+	SeLinux *IoK8sAPIPolicyV1beta1SELinuxStrategyOptions `json:"seLinux" json,yaml:"seLinux"`
 
 	// supplementalGroups is the strategy that will dictate what supplemental groups are used by the SecurityContext.
 	// Required: true
-	SupplementalGroups *IoK8sAPIPolicyV1beta1SupplementalGroupsStrategyOptions `json:"supplementalGroups"`
+	SupplementalGroups *IoK8sAPIPolicyV1beta1SupplementalGroupsStrategyOptions `json:"supplementalGroups" json,yaml:"supplementalGroups"`
 
 	// volumes is an allowlist of volume plugins. Empty indicates that no volumes may be used. To allow all volumes you may use '*'.
-	Volumes []string `json:"volumes"`
+	Volumes []string `json:"volumes" json,yaml:"volumes"`
 }
 
 // Validate validates this io k8s api policy v1beta1 pod security policy spec

@@ -7,12 +7,9 @@ package v1_20
 
 import (
 	"context"
-	"encoding/json"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // IoK8sAPICoreV1PersistentVolumeStatus PersistentVolumeStatus is the current status of a persistent volume.
@@ -21,85 +18,17 @@ import (
 type IoK8sAPICoreV1PersistentVolumeStatus struct {
 
 	// A human-readable message indicating details about why the volume is in this state.
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// Phase indicates if a volume is available, bound to a claim, or released by a claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase
-	//
-	// Possible enum values:
-	//  - `"Available"` used for PersistentVolumes that are not yet bound Available volumes are held by the binder and matched to PersistentVolumeClaims
-	//  - `"Bound"` used for PersistentVolumes that are bound
-	//  - `"Failed"` used for PersistentVolumes that failed to be correctly recycled or deleted after being released from a claim
-	//  - `"Pending"` used for PersistentVolumes that are not available
-	//  - `"Released"` used for PersistentVolumes where the bound PersistentVolumeClaim was deleted released volumes must be recycled before becoming available again this phase is used by the persistent volume claim binder to signal to another process to reclaim the resource
-	// Enum: [Available Bound Failed Pending Released]
-	Phase string `json:"phase,omitempty"`
+	Phase string `json:"phase,omitempty" json,yaml:"phase,omitempty"`
 
 	// Reason is a brief CamelCase string that describes any failure and is meant for machine parsing and tidy display in the CLI.
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty" json,yaml:"reason,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 persistent volume status
 func (m *IoK8sAPICoreV1PersistentVolumeStatus) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validatePhase(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-var ioK8sApiCoreV1PersistentVolumeStatusTypePhasePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["Available","Bound","Failed","Pending","Released"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		ioK8sApiCoreV1PersistentVolumeStatusTypePhasePropEnum = append(ioK8sApiCoreV1PersistentVolumeStatusTypePhasePropEnum, v)
-	}
-}
-
-const (
-
-	// IoK8sAPICoreV1PersistentVolumeStatusPhaseAvailable captures enum value "Available"
-	IoK8sAPICoreV1PersistentVolumeStatusPhaseAvailable string = "Available"
-
-	// IoK8sAPICoreV1PersistentVolumeStatusPhaseBound captures enum value "Bound"
-	IoK8sAPICoreV1PersistentVolumeStatusPhaseBound string = "Bound"
-
-	// IoK8sAPICoreV1PersistentVolumeStatusPhaseFailed captures enum value "Failed"
-	IoK8sAPICoreV1PersistentVolumeStatusPhaseFailed string = "Failed"
-
-	// IoK8sAPICoreV1PersistentVolumeStatusPhasePending captures enum value "Pending"
-	IoK8sAPICoreV1PersistentVolumeStatusPhasePending string = "Pending"
-
-	// IoK8sAPICoreV1PersistentVolumeStatusPhaseReleased captures enum value "Released"
-	IoK8sAPICoreV1PersistentVolumeStatusPhaseReleased string = "Released"
-)
-
-// prop value enum
-func (m *IoK8sAPICoreV1PersistentVolumeStatus) validatePhaseEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, ioK8sApiCoreV1PersistentVolumeStatusTypePhasePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *IoK8sAPICoreV1PersistentVolumeStatus) validatePhase(formats strfmt.Registry) error {
-	if swag.IsZero(m.Phase) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validatePhaseEnum("phase", "body", m.Phase); err != nil {
-		return err
-	}
-
 	return nil
 }
 

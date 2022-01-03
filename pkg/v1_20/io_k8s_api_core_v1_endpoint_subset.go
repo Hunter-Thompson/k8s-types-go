@@ -27,13 +27,13 @@ import (
 type IoK8sAPICoreV1EndpointSubset struct {
 
 	// IP addresses which offer the related ports that are marked as ready. These endpoints should be considered safe for load balancers and clients to utilize.
-	Addresses []*IoK8sAPICoreV1EndpointAddress `json:"addresses"`
+	Addresses []*IoK8sAPICoreV1EndpointAddress `json:"addresses" json,yaml:"addresses"`
 
 	// IP addresses which offer the related ports but are not currently marked as ready because they have not yet finished starting, have recently failed a readiness check, or have recently failed a liveness check.
-	NotReadyAddresses []*IoK8sAPICoreV1EndpointAddress `json:"notReadyAddresses"`
+	NotReadyAddresses []*IoK8sAPICoreV1EndpointAddress `json:"notReadyAddresses" json,yaml:"notReadyAddresses"`
 
 	// Port numbers available on the related IP addresses.
-	Ports []*IoK8sAPICoreV1EndpointPort `json:"ports"`
+	Ports []*IoK8sAPICoreV1EndpointPort `json:"ports" json,yaml:"ports"`
 }
 
 // Validate validates this io k8s api core v1 endpoint subset

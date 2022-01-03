@@ -42,10 +42,10 @@ type IoK8sAPICertificatesV1CertificateSigningRequestStatus struct {
 	//     -----END CERTIFICATE-----
 	//     )
 	// Format: byte
-	Certificate strfmt.Base64 `json:"certificate,omitempty"`
+	Certificate strfmt.Base64 `json:"certificate,omitempty" json,yaml:"certificate,omitempty"`
 
 	// conditions applied to the request. Known conditions are "Approved", "Denied", and "Failed".
-	Conditions []*IoK8sAPICertificatesV1CertificateSigningRequestCondition `json:"conditions"`
+	Conditions []*IoK8sAPICertificatesV1CertificateSigningRequestCondition `json:"conditions" json,yaml:"conditions"`
 }
 
 // Validate validates this io k8s api certificates v1 certificate signing request status

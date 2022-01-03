@@ -21,11 +21,11 @@ type IoK8sApimachineryPkgApisMetaV1GroupVersionForDiscovery struct {
 
 	// groupVersion specifies the API group and version in the form "group/version"
 	// Required: true
-	GroupVersion *string `json:"groupVersion"`
+	GroupVersion *string `json:"groupVersion" json,yaml:"groupVersion"`
 
 	// version specifies the version in the form of "version". This is to save the clients the trouble of splitting the GroupVersion.
 	// Required: true
-	Version *string `json:"version"`
+	Version *string `json:"version" json,yaml:"version"`
 }
 
 // Validate validates this io k8s apimachinery pkg apis meta v1 group version for discovery

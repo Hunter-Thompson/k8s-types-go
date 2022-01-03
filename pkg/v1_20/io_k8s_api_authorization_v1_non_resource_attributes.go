@@ -18,10 +18,10 @@ import (
 type IoK8sAPIAuthorizationV1NonResourceAttributes struct {
 
 	// Path is the URL path of the request
-	Path string `json:"path,omitempty"`
+	Path string `json:"path,omitempty" json,yaml:"path,omitempty"`
 
 	// Verb is the standard HTTP verb
-	Verb string `json:"verb,omitempty"`
+	Verb string `json:"verb,omitempty" json,yaml:"verb,omitempty"`
 }
 
 // Validate validates this io k8s api authorization v1 non resource attributes

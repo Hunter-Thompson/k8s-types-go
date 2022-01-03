@@ -19,26 +19,26 @@ import (
 // swagger:model io.k8s.api.core.v1.NodeSpec
 type IoK8sAPICoreV1NodeSpec struct {
 
-	// Deprecated. If specified, the source of the node's configuration. The DynamicKubeletConfig feature gate must be enabled for the Kubelet to use this field. This field is deprecated as of 1.22: https://git.k8s.io/enhancements/keps/sig-node/281-dynamic-kubelet-configuration
-	ConfigSource *IoK8sAPICoreV1NodeConfigSource `json:"configSource,omitempty"`
+	// If specified, the source to get node configuration from The DynamicKubeletConfig feature gate must be enabled for the Kubelet to use this field
+	ConfigSource *IoK8sAPICoreV1NodeConfigSource `json:"configSource,omitempty" json,yaml:"configSource,omitempty"`
 
 	// Deprecated. Not all kubelets will set this field. Remove field after 1.13. see: https://issues.k8s.io/61966
-	ExternalID string `json:"externalID,omitempty"`
+	ExternalID string `json:"externalID,omitempty" json,yaml:"externalID,omitempty"`
 
 	// PodCIDR represents the pod IP range assigned to the node.
-	PodCIDR string `json:"podCIDR,omitempty"`
+	PodCIDR string `json:"podCIDR,omitempty" json,yaml:"podCIDR,omitempty"`
 
 	// podCIDRs represents the IP ranges assigned to the node for usage by Pods on that node. If this field is specified, the 0th entry must match the podCIDR field. It may contain at most 1 value for each of IPv4 and IPv6.
-	PodCIDRs []string `json:"podCIDRs"`
+	PodCIDRs []string `json:"podCIDRs" json,yaml:"podCIDRs"`
 
 	// ID of the node assigned by the cloud provider in the format: <ProviderName>://<ProviderSpecificNodeID>
-	ProviderID string `json:"providerID,omitempty"`
+	ProviderID string `json:"providerID,omitempty" json,yaml:"providerID,omitempty"`
 
 	// If specified, the node's taints.
-	Taints []*IoK8sAPICoreV1Taint `json:"taints"`
+	Taints []*IoK8sAPICoreV1Taint `json:"taints" json,yaml:"taints"`
 
 	// Unschedulable controls node schedulability of new pods. By default, node is schedulable. More info: https://kubernetes.io/docs/concepts/nodes/node/#manual-node-administration
-	Unschedulable bool `json:"unschedulable,omitempty"`
+	Unschedulable bool `json:"unschedulable,omitempty" json,yaml:"unschedulable,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 node spec

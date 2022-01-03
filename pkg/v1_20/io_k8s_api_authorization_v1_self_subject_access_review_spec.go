@@ -19,10 +19,10 @@ import (
 type IoK8sAPIAuthorizationV1SelfSubjectAccessReviewSpec struct {
 
 	// NonResourceAttributes describes information for a non-resource access request
-	NonResourceAttributes *IoK8sAPIAuthorizationV1NonResourceAttributes `json:"nonResourceAttributes,omitempty"`
+	NonResourceAttributes *IoK8sAPIAuthorizationV1NonResourceAttributes `json:"nonResourceAttributes,omitempty" json,yaml:"nonResourceAttributes,omitempty"`
 
 	// ResourceAuthorizationAttributes describes information for a resource access request
-	ResourceAttributes *IoK8sAPIAuthorizationV1ResourceAttributes `json:"resourceAttributes,omitempty"`
+	ResourceAttributes *IoK8sAPIAuthorizationV1ResourceAttributes `json:"resourceAttributes,omitempty" json,yaml:"resourceAttributes,omitempty"`
 }
 
 // Validate validates this io k8s api authorization v1 self subject access review spec

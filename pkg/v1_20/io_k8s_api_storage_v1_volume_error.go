@@ -19,11 +19,11 @@ import (
 type IoK8sAPIStorageV1VolumeError struct {
 
 	// String detailing the error encountered during Attach or Detach operation. This string may be logged, so it should not contain sensitive information.
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" json,yaml:"message,omitempty"`
 
 	// Time the error was encountered.
 	// Format: date-time
-	Time IoK8sApimachineryPkgApisMetaV1Time `json:"time,omitempty"`
+	Time IoK8sApimachineryPkgApisMetaV1Time `json:"time,omitempty" json,yaml:"time,omitempty"`
 }
 
 // Validate validates this io k8s api storage v1 volume error

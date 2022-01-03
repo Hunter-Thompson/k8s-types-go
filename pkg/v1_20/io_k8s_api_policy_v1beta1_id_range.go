@@ -21,11 +21,11 @@ type IoK8sAPIPolicyV1beta1IDRange struct {
 
 	// max is the end of the range, inclusive.
 	// Required: true
-	Max *int64 `json:"max"`
+	Max *int64 `json:"max" json,yaml:"max"`
 
 	// min is the start of the range, inclusive.
 	// Required: true
-	Min *int64 `json:"min"`
+	Min *int64 `json:"min" json,yaml:"min"`
 }
 
 // Validate validates this io k8s api policy v1beta1 ID range

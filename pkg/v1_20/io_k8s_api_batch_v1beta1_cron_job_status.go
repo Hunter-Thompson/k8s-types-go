@@ -20,15 +20,11 @@ import (
 type IoK8sAPIBatchV1beta1CronJobStatus struct {
 
 	// A list of pointers to currently running jobs.
-	Active []*IoK8sAPICoreV1ObjectReference `json:"active"`
+	Active []*IoK8sAPICoreV1ObjectReference `json:"active" json,yaml:"active"`
 
 	// Information when was the last time the job was successfully scheduled.
 	// Format: date-time
-	LastScheduleTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastScheduleTime,omitempty"`
-
-	// Information when was the last time the job successfully completed.
-	// Format: date-time
-	LastSuccessfulTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastSuccessfulTime,omitempty"`
+	LastScheduleTime IoK8sApimachineryPkgApisMetaV1Time `json:"lastScheduleTime,omitempty" json,yaml:"lastScheduleTime,omitempty"`
 }
 
 // Validate validates this io k8s api batch v1beta1 cron job status
@@ -40,10 +36,6 @@ func (m *IoK8sAPIBatchV1beta1CronJobStatus) Validate(formats strfmt.Registry) er
 	}
 
 	if err := m.validateLastScheduleTime(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateLastSuccessfulTime(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -96,23 +88,6 @@ func (m *IoK8sAPIBatchV1beta1CronJobStatus) validateLastScheduleTime(formats str
 	return nil
 }
 
-func (m *IoK8sAPIBatchV1beta1CronJobStatus) validateLastSuccessfulTime(formats strfmt.Registry) error {
-	if swag.IsZero(m.LastSuccessfulTime) { // not required
-		return nil
-	}
-
-	if err := m.LastSuccessfulTime.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("lastSuccessfulTime")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("lastSuccessfulTime")
-		}
-		return err
-	}
-
-	return nil
-}
-
 // ContextValidate validate this io k8s api batch v1beta1 cron job status based on the context it is used
 func (m *IoK8sAPIBatchV1beta1CronJobStatus) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -122,10 +97,6 @@ func (m *IoK8sAPIBatchV1beta1CronJobStatus) ContextValidate(ctx context.Context,
 	}
 
 	if err := m.contextValidateLastScheduleTime(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateLastSuccessfulTime(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -162,20 +133,6 @@ func (m *IoK8sAPIBatchV1beta1CronJobStatus) contextValidateLastScheduleTime(ctx 
 			return ve.ValidateName("lastScheduleTime")
 		} else if ce, ok := err.(*errors.CompositeError); ok {
 			return ce.ValidateName("lastScheduleTime")
-		}
-		return err
-	}
-
-	return nil
-}
-
-func (m *IoK8sAPIBatchV1beta1CronJobStatus) contextValidateLastSuccessfulTime(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := m.LastSuccessfulTime.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("lastSuccessfulTime")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("lastSuccessfulTime")
 		}
 		return err
 	}

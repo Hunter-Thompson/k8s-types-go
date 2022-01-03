@@ -21,14 +21,14 @@ type IoK8sAPICoreV1NFSVolumeSource struct {
 
 	// Path that is exported by the NFS server. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs
 	// Required: true
-	Path *string `json:"path"`
+	Path *string `json:"path" json,yaml:"path"`
 
 	// ReadOnly here will force the NFS export to be mounted with read-only permissions. Defaults to false. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs
-	ReadOnly bool `json:"readOnly,omitempty"`
+	ReadOnly bool `json:"readOnly,omitempty" json,yaml:"readOnly,omitempty"`
 
 	// Server is the hostname or IP address of the NFS server. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs
 	// Required: true
-	Server *string `json:"server"`
+	Server *string `json:"server" json,yaml:"server"`
 }
 
 // Validate validates this io k8s api core v1 n f s volume source

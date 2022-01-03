@@ -18,16 +18,16 @@ import (
 type IoK8sAPICoreV1SELinuxOptions struct {
 
 	// Level is SELinux level label that applies to the container.
-	Level string `json:"level,omitempty"`
+	Level string `json:"level,omitempty" json,yaml:"level,omitempty"`
 
 	// Role is a SELinux role label that applies to the container.
-	Role string `json:"role,omitempty"`
+	Role string `json:"role,omitempty" json,yaml:"role,omitempty"`
 
 	// Type is a SELinux type label that applies to the container.
-	Type string `json:"type,omitempty"`
+	Type string `json:"type,omitempty" json,yaml:"type,omitempty"`
 
 	// User is a SELinux user label that applies to the container.
-	User string `json:"user,omitempty"`
+	User string `json:"user,omitempty" json,yaml:"user,omitempty"`
 }
 
 // Validate validates this io k8s api core v1 s e linux options

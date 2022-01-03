@@ -18,7 +18,7 @@ import (
 type IoK8sAPIAppsV1RollingUpdateStatefulSetStrategy struct {
 
 	// Partition indicates the ordinal at which the StatefulSet should be partitioned. Default value is 0.
-	Partition int32 `json:"partition,omitempty"`
+	Partition int32 `json:"partition,omitempty" json,yaml:"partition,omitempty"`
 }
 
 // Validate validates this io k8s api apps v1 rolling update stateful set strategy

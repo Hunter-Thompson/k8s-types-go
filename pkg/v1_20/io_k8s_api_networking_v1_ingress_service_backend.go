@@ -21,10 +21,10 @@ type IoK8sAPINetworkingV1IngressServiceBackend struct {
 
 	// Name is the referenced service. The service must exist in the same namespace as the Ingress object.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" json,yaml:"name"`
 
 	// Port of the referenced service. A port name or port number is required for a IngressServiceBackend.
-	Port *IoK8sAPINetworkingV1ServiceBackendPort `json:"port,omitempty"`
+	Port *IoK8sAPINetworkingV1ServiceBackendPort `json:"port,omitempty" json,yaml:"port,omitempty"`
 }
 
 // Validate validates this io k8s api networking v1 ingress service backend

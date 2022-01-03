@@ -19,15 +19,15 @@ import (
 // swagger:model io.k8s.api.node.v1alpha1.RuntimeClassSpec
 type IoK8sAPINodeV1alpha1RuntimeClassSpec struct {
 
-	// Overhead represents the resource overhead associated with running a pod for a given RuntimeClass. For more details, see https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md This field is beta-level as of Kubernetes v1.18, and is only honored by servers that enable the PodOverhead feature.
-	Overhead *IoK8sAPINodeV1alpha1Overhead `json:"overhead,omitempty"`
+	// Overhead represents the resource overhead associated with running a pod for a given RuntimeClass. For more details, see https://git.k8s.io/enhancements/keps/sig-node/20190226-pod-overhead.md This field is alpha-level as of Kubernetes v1.15, and is only honored by servers that enable the PodOverhead feature.
+	Overhead *IoK8sAPINodeV1alpha1Overhead `json:"overhead,omitempty" json,yaml:"overhead,omitempty"`
 
 	// RuntimeHandler specifies the underlying runtime and configuration that the CRI implementation will use to handle pods of this class. The possible values are specific to the node & CRI configuration.  It is assumed that all handlers are available on every node, and handlers of the same name are equivalent on every node. For example, a handler called "runc" might specify that the runc OCI runtime (using native Linux containers) will be used to run the containers in a pod. The RuntimeHandler must be lowercase, conform to the DNS Label (RFC 1123) requirements, and is immutable.
 	// Required: true
-	RuntimeHandler *string `json:"runtimeHandler"`
+	RuntimeHandler *string `json:"runtimeHandler" json,yaml:"runtimeHandler"`
 
 	// Scheduling holds the scheduling constraints to ensure that pods running with this RuntimeClass are scheduled to nodes that support it. If scheduling is nil, this RuntimeClass is assumed to be supported by all nodes.
-	Scheduling *IoK8sAPINodeV1alpha1Scheduling `json:"scheduling,omitempty"`
+	Scheduling *IoK8sAPINodeV1alpha1Scheduling `json:"scheduling,omitempty" json,yaml:"scheduling,omitempty"`
 }
 
 // Validate validates this io k8s api node v1alpha1 runtime class spec
